@@ -7,17 +7,31 @@ import {
   Link
 } from "react-router-dom";
 import Navbar from './components/Navbar'
+import AuthPage from './pages/AuthPage'
+import './App.css'
+import AccountPage from './pages/AccountPage';
 
 export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className='container'>
+        <div className='container bgcolor'>
+
           <Navbar />
-          <HomePage />
+
+          <Switch>
+            <Route path='/auth'>
+              <AuthPage />
+            </Route>
+            <Route path='/account'>
+              <AccountPage />
+            </Route>
+            <Route path='/'>
+              <HomePage />
+            </Route>
+          </Switch>
 
         </div>
-
       </Router>
 
     )

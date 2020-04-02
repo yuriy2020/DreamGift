@@ -10,17 +10,18 @@ import {
 export default class Navbar extends Component {
     render() {
         return (
-            <div>
-                <nav>
-                    <ul>
+            <div className='row '>
+                {/* color */}
+                <nav className='col s12 purple darken-1'>    
+                    <ul className='col s6 offset-s9'>
                         <li>
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/">Login</Link>
+                            <Link to="/auth/login">Login</Link>
                         </li>
                         <li>
-                            <Link to="/">Sign Up</Link>
+                            <Link to="/auth/signup">Sign Up</Link>
                         </li>
                     </ul>
                 </nav>
