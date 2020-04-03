@@ -5,7 +5,12 @@ import {
   RECEIVE_FETCH_TOSIGNUP,
   CHANGE_MODAL,
   ADD_ACCOUNT_HESHTEGS,
-  SAVE_PRESENT, CHANGE_PRESENT
+  SAVE_PRESENT, CHANGE_PRESENT,
+  USER_NAME,
+  USER_MIDDLE_NAME,
+  USER_FAMILY_NAME,
+  USER_EMAIL,
+  USER_INFO
 } from './action-types';
 
 const initialUserState = {
@@ -14,7 +19,13 @@ const initialUserState = {
   error: '',
   isModalOpen: false,
   accountHeshtegs: [],
-  presents: []
+  presents: [],
+  userName:'Imya',
+  userFamilyName: 'Familiya',
+  userMiddleName: 'Otchestvo',
+  userEmail:"email@yaya",
+  userInfo:"BLABLA",
+
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -52,6 +63,21 @@ export const reducer = (state = initialUserState, action) => {
       return {
         ...state,
         accountHeshtegs: action.heshtegs
+      };
+      case USER_NAME:
+      return {
+        ...state,
+        userName: action.userName
+      }; 
+      case USER_MIDDLE_NAME:
+      return {
+        ...state,
+        userMiddleName: action.userMiddleName
+      }; 
+      case USER_FAMILY_NAME:
+      return {
+        ...state,
+        userFamilyName: action.userFamilyName
       }; 
       case SAVE_PRESENT:
       return {
@@ -63,6 +89,18 @@ export const reducer = (state = initialUserState, action) => {
         ...state,
         presents: action.presents
       };
+      case USER_EMAIL:
+      return {
+        ...state,
+        userEmail: action.userEmail
+      }; 
+      case USER_INFO:
+      return {
+        ...state,
+        userInfo: action.userInfo
+      }; 
+
+
     default:
       return state;
   }
