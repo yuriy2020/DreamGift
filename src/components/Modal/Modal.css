@@ -1,13 +1,20 @@
-#modal {
+#modalWindow {
   position: absolute;
   margin-top: 300px;
-  /* position: fixed; */
   display: block;
   background-color: rgb(247, 247, 247);
   width: 500px;
   height: 200px;
 }
 
-#modal div {
-  padding: 30px;
+button.noActive {
+  background-color: rgb(221, 255, 248);
+  border: none;
+  margin: 5px;
+}
+
+button.active {
+  background-color: rgb(64, 183, 252);
+  border: none;
+  margin: 5px;
 }

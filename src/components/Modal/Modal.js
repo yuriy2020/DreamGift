@@ -8,9 +8,32 @@ class Modal extends React.Component {
     super(props);
 
     this.state = {
-      // answer: ''
+      heshtegs: ['спорт', 'техника', 'косметика', 'настольные игры', 'музыка', 'готовка'],
+      other: ''
     };
   }
+
+  saveHeshtegs = (event) => {
+    console.log(event.target.previousElementSibling.firstChild.children);
+    const activeHeshtegs = event.target.previousElementSibling.firstChild.children;
+    const other = this.state.other.split(/\s/);
+    const hesh = [...other];
+    for (let i = 0; i < activeHeshtegs.length; i++) {
+      if (activeHeshtegs[i].className === 'active') {
+        hesh.push(activeHeshtegs[i].value);
+      }
+      console.log(hesh);
+    }
+
+  };
+
+  changeStatus = (event) => {
+    if (event.target.className === 'noActive') {
+      event.target.className = 'active';
+    } else {
+      event.target.className = 'noActive';
+    }
+  };
 
   handleChange = (event) => {
     this.setState({
@@ -20,14 +43,19 @@ class Modal extends React.Component {
 
   render() {
     return (
-      <div id="modal">
+      <div id="modalWindow">
+        <span>interests</span>
         <div>
-          <span>interests</span>
-          <input type="text" onChange={this.handleChange}/>
-          <button onClick={this.props.changeModal(false)}>
-            Save
-          </button>
+          <div>
+            {this.state.heshtegs.map((item) => (
+              <button className="noActive" onClick={this.changeStatus} value={item}>
+                {item}
+              </button>
+            ))}
+          </div>
+          <input type="text" onChange={this.handleChange} placeholder="other" name="other" />
         </div>
+        <button onClick={this.saveHeshtegs}>Save</button>
       </div>
     );
   }
@@ -35,13 +63,13 @@ class Modal extends React.Component {
 
 // const mapStateToProps = (state) => {
 //   return {
-    
+
 //   };
 // };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeModal: (payload) => dispatch(changeModal(payload)),
+    changeModal: (payload) => dispatch(changeModal(payload))
   };
 };
 

@@ -9,6 +9,7 @@ import AuthPage from './pages/AuthPage'
 import './App.css'
 import AccountPage from './pages/AccountPage';
 import Reseacher from './components/Reseacher/Reseacher';
+import Modal from './components/Modal/Modal'
 
 export default class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ export default class App extends React.Component {
             <Route exact path="/reseach" component={Reseacher} />
           </Switch>
         </div>
+        <Modal />
         </div>
     )
   }
