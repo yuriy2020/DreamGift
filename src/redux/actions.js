@@ -1,4 +1,4 @@
-import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP } from "./action-types";
+import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP, CHANGE_MODAL } from "./action-types";
 
 export const isAuth = (payload) => {
   return {
@@ -30,4 +30,11 @@ export const requestFetchToSignUp = (data) => {
 export const receiveFetchToSignUp = data => {
   return { type: RECEIVE_FETCH_TOSIGNUP, auth: data.auth, err: data.err
    };
+};
+
+export const changeModal = (payload) => {
+  return {
+      type: CHANGE_MODAL,
+      isOpen: payload
+  }
 };

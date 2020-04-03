@@ -2,13 +2,15 @@ import {
   IS_AUTH,
   GET_LOGIN,
   RECEIVE_FETCH_TOLOGIN,
-  RECEIVE_FETCH_TOSIGNUP
+  RECEIVE_FETCH_TOSIGNUP,
+  CHANGE_MODAL
 } from './action-types';
 
 const initialUserState = {
   auth: false,
   login: '',
-  error: ''
+  error: '',
+  isModalOpen: false,
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -35,6 +37,11 @@ export const reducer = (state = initialUserState, action) => {
         auth: action.auth,
         error: action.err,
       };
+      case CHANGE_MODAL:
+      return {
+        ...state,
+        isModalOpen: action.isOpen
+      }; 
     default:
       return state;
   }
