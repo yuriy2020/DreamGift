@@ -6,7 +6,12 @@ export default class Reseacher extends React.Component {
 
     this.state = {
       friendName: '',
-      heshtegs: ''
+      heshtegs: '',
+      text: undefined,
+      arrAmazon: undefined,
+      textAli: undefined,
+      arrAliProd: undefined,
+      newTaskAli: undefined
     };
   }
 
@@ -58,21 +63,90 @@ export default class Reseacher extends React.Component {
     });
   };
 
-  renderHeshtegs = () => {
-    let heshtegs;
-    if (this.state.heshtegs.length) {
-      heshtegs = (
-        <div>
-          {this.state.heshtegs.map((item) => {
-            return <li>{item}</li>;
-          })}
-        </div>
-      );
-    }
-    return heshtegs;
-  };
+  // renderHeshtegs = () => {
+  //   let heshtegs;
+  //   if (this.state.heshtegs.length) {
+  //     heshtegs = (
+  //       <div>
+  //         {this.state.heshtegs.map((item) => {
+  //           return <li>{item}</li>;
+  //         })}
+  //       </div>
+  //     );
+  //   }
+  //   return heshtegs;
+  // };
+
+  takeText = (e) => {
+    this.setState({
+      text: e.target.value,     
+    })
+  }
+
+  async AmazonSearch(t) {
+
+    let url = `https://amazon-price1.p.rapidapi.com/search?keywords=${t}&marketplace=ES`
+    let response = await fetch(url, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "amazon-price1.p.rapidapi.com",
+        "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+      }
+    })
+
+    let result = await response.json();
+    this.setState({
+      arrAmazon: result
+    })
+    console.log(result);
+
+  }
+
+  onlyCateg(name) {
+    const newTasks = this.state.arrAliCat.filter((item) => item.name.includes(name) === true);
+    this.setState({
+      newTaskAli: newTasks[0].id
+    })
+    console.log(newTasks);
+  }
+
+  async category() {
+    let response = await fetch("https://ali-express1.p.rapidapi.com/categories", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "ali-express1.p.rapidapi.com",
+        "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+      }
+    })
+
+    let result = await response.json();
+    this.setState({
+      arrAliCat: result.categories
+    })
+    console.log(result);
+
+  }
+
+  async productOfCategory(id) {
+    let url = `https://ali-express1.p.rapidapi.com/productsByCategory/${id}?from=0`
+    let response = await fetch(url, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "ali-express1.p.rapidapi.com",
+        "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+      }
+    })
+
+    let result = await response.json();
+    this.setState({
+      arrAliProd: result
+    })
+    console.log(result);
+
+  }
 
   render() {
+    const { text, textAli, newTaskAli } = this.state
     return (
       <>
         <div>
@@ -91,7 +165,40 @@ export default class Reseacher extends React.Component {
         </button>
         <br></br>
 
-        {this.renderHeshtegs()}
+        <button onClick={() => this.category()}>category</button>
+        <input onChange={(e) => this.takeTextAli(e)} name="textAli"></input>
+        
+
+        <ul>
+          {this.state.heshtegs ? this.state.heshtegs.map((item, index) => {
+            return <li>{item}
+            <button onClick={() => this.AmazonSearch(item)}> Искать на Амазон</button>
+            <button onClick={() => {return this.onlyCateg(item), this.productOfCategory(newTaskAli)}}>Искать на али</button></li>
+          }) : null
+          }
+        </ul>
+{/* 
+        <input onChange={(e) => this.takeText(e)} name="text"></input>
+        <button onClick={() => this.AmazonSearch(text)}>AmazonSearch</button> */}
+
+        <ul>
+          {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
+            return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a></li>;
+          }) : null
+          }
+        </ul>
+
+        <ul>
+          {this.state.arrAliProd ? this.state.arrAliProd.data.items.map((item, index) => {
+            return <li>{item.productElements.title.title}<img src={item.productElements.image.imgUrl} />{item.productElements.price.sell_price.formatedAmount}<a href={item.
+action}>Перейти на товар</a></li>;
+          }) : null
+          }
+        </ul>
+
+
+{/* 
+        {this.renderHeshtegs()} */}
       </>
     );
   }
