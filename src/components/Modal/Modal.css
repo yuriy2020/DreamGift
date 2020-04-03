@@ -1,9 +1,9 @@
 #modalWindow {
-  position: absolute;
+  position: fixed;
   display: block;
   background-color: rgb(247, 247, 247);
   margin-top: 400px;
-  margin-left: 100px;
+  margin-left: 300px;
   width: 500px;
   height: 200px;
 }

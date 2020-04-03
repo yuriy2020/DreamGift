@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import foto from '../images/logo.png'
+import Presents from '../components/Presents/Presents';
 const userName = 'Авоськиин Иван Ашанович'
 
 const hashtags = ['лопата', 'аптека', 'хештеги']
@@ -125,6 +126,7 @@ class AccountPage extends Component {
                         </div>
                     </form>
                 </div> : null}
+                <Presents />
             </div>
         )
     }
