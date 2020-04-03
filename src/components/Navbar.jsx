@@ -36,9 +36,9 @@ class Navbar extends React.Component {
   render() {
     if (!this.props.auth) {
       return (
-        <div>
-          <nav>
-            <ul>
+        <div className='row'>
+          <nav className='col s12'>
+            <ul className='col s6 offset-s9'>
               <li>
                 <Link to="/">Home</Link>
               </li>

@@ -14,6 +14,7 @@ export default class App extends React.Component {
     return (
         <div className='container'>
           <Navbar />
+          <AccountPage />
           <div>
           <Switch>
             <Route exact path="/" component={HomePage} />
