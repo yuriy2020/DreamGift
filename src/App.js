@@ -15,13 +15,13 @@ export default class App extends React.Component {
     return (
         <div className='container'>
           <Navbar />
-          <AccountPage />
           <div>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/signup" render={(props) => <Signup {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/reseach" component={Reseacher} />
+            <Route exact path="/account" component={AccountPage} />
           </Switch>
         </div>
         </div>

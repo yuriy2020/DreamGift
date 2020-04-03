@@ -27,11 +27,11 @@ export default class AccountPage extends Component {
                     <div className="col s4">
                         <div className="card">
                             <div className="card-image waves-effect waves-block waves-light">
-                                <img className="activator" src={foto} />
+                                <img className="activator" src={foto} alt=''/>
                             </div>
                             <div className="card-content">
                                 <span className="card-title activator grey-text text-darken-4">About me</span>
-                                <p><a href="#">This is a link</a></p>
+                                <p><a href="/about">This is a link</a></p>
                             </div>
                             <div className="card-reveal">
                                 <span className="card-title grey-text text-darken-4">About me<i className="material-icons right">close</i>
@@ -61,7 +61,7 @@ export default class AccountPage extends Component {
                     {hashtags.map(tag => {
                         return (
                             <div className="chip">
-                                <a href="#">
+                                <a href="/user/tags">
                                     {tag}
                                 </a>
                             </div>
