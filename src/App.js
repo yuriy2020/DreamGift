@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import AuthPage from './pages/AuthPage'
 import './App.css'
 import AccountPage from './pages/AccountPage';
+import Reseacher from './components/Reseacher/Reseacher';
 
 export default class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ export default class App extends React.Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/signup" render={(props) => <Signup {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
+            <Route exact path="/reseach" component={Reseacher} />
           </Switch>
         </div>
         </div>

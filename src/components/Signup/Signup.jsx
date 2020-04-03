@@ -5,6 +5,7 @@ import {
   isAuth,
   getLogin,
   requestFetchToSignUp,
+  changeModal
 } from '../../redux/actions';
 
 class Signup extends React.Component {
@@ -40,15 +41,13 @@ class Signup extends React.Component {
         <input type="email" placeholder="email" name="email" />
         <input type="password" placeholder="password" name="password" />
         <button
-          onClick={() =>
+          onClick={() => {
             this.props.requestFetchToSignUp({
               login: this.state.login,
               email: this.state.email,
               password: this.state.password
-            })
-          }
-          outline
-          color="secondary"
+            });
+          }}
         >
           Sign up
         </button>
@@ -69,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
     isAuth: (payload) => dispatch(isAuth(payload)),
     getLogin: (payload) => dispatch(getLogin(payload)),
     requestFetchToSignUp: (payload) => dispatch(requestFetchToSignUp(payload)),
+    changeModal: (payload) => dispatch(changeModal(payload)),
   };
 };
 

@@ -61,7 +61,10 @@ class Navbar extends React.Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
-              <Link>{this.props.login}</Link>
+              <Link to='/'>{this.props.login}</Link>
+              </li>
+              <li>
+              <Link to='/reseach'>reseach</Link>
               </li>
               <li>
                 <Link onClick={() => this.logOut()}>Log out</Link>

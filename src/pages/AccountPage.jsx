@@ -16,7 +16,6 @@ export default class AccountPage extends Component {
                         
                     </div>
                     
-
                 </div>
             </div>
         )

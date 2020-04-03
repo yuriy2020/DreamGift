@@ -1,0 +1,13 @@
+#modal {
+  position: absolute;
+  margin-top: 300px;
+  /* position: fixed; */
+  display: block;
+  background-color: rgb(247, 247, 247);
+  width: 500px;
+  height: 200px;
+}
+
+#modal div {
+  padding: 30px;
+}
