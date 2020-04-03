@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import foto from '../images/logo.png'
 import Presents from '../components/Presents/Presents';
 const userName = 'Авоськиин Иван Ашанович'
-<<<<<<< HEAD
-const userInfo = 'I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.';
-=======
->>>>>>> 3359b8434bda43a32db50cc7e023a509e42d18bf
 
 const hashtags = ['лопата', 'аптека', 'хештеги']
 
