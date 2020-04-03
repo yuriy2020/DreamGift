@@ -1,7 +1,7 @@
 import React from 'react';
 import './Modal.css';
 import { connect } from 'react-redux';
-import { changeModal } from '../../redux/actions';
+import { changeModal, addHeshtegs } from '../../redux/actions';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -13,18 +13,25 @@ class Modal extends React.Component {
     };
   }
 
-  saveHeshtegs = (event) => {
+  saveHeshtegs = async (event) => {
     console.log(event.target.previousElementSibling.firstChild.children);
     const activeHeshtegs = event.target.previousElementSibling.firstChild.children;
     const other = this.state.other.split(/\s/);
-    const hesh = [...other];
+    const hesh = this.state.other.length ? [...other] : [];
     for (let i = 0; i < activeHeshtegs.length; i++) {
       if (activeHeshtegs[i].className === 'active') {
         hesh.push(activeHeshtegs[i].value);
       }
-      console.log(hesh);
     }
-
+    this.props.addHeshtegs(hesh);
+    this.props.changeModal(false);
+    await fetch('/savetegs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({
+        heshtegs: hesh, login: this.props.login
+      })
+    });
   };
 
   changeStatus = (event) => {
@@ -61,16 +68,17 @@ class Modal extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-
-//   };
-// };
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    changeModal: (payload) => dispatch(changeModal(payload))
+  login: state.login
   };
 };
 
-export default connect(null, mapDispatchToProps)(Modal);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeModal: (payload) => dispatch(changeModal(payload)),
+    addHeshtegs: (payload) => dispatch(addHeshtegs(payload))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
