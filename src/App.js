@@ -22,6 +22,7 @@ export default class App extends React.Component {
             <Route exact path="/signup" render={(props) => <Signup {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/reseach" component={Reseacher} />
+            <Route exact path="/account" component={AccountPage} />
           </Switch>
         </div>
         <Modal />
