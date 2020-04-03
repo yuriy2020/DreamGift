@@ -63,4 +63,9 @@ router.get('/check', (req, res) => {
   }
 });
 
+router.post('/savetegs', async (req, res) => {
+await User.updateOne({login: req.body.login}, {heshtegs: req.body.heshtegs});
+res.json();
+});
+
 module.exports = router;

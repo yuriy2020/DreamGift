@@ -25,7 +25,7 @@ class Login extends React.Component {
   logIn() {
     this.props.getLogin(this.state.login);
     localStorage.setItem('login', this.state.login);
-    this.props.history.push('/');
+    this.props.history.push('/account');
   }
 
   renderError() {
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     isAuth: (payload) => dispatch(isAuth(payload)),
     getLogin: (payload) => dispatch(getLogin(payload)),
-    requestFetchToLogin: (payload) => dispatch(requestFetchToLogin(payload))
+    requestFetchToLogin: (payload) => dispatch(requestFetchToLogin(payload)),
   };
 };
 

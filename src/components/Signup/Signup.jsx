@@ -28,12 +28,13 @@ class Signup extends React.Component {
   signUp() {
     this.props.getLogin(this.state.login);
     localStorage.setItem('login', this.state.login);
-    this.props.history.push('/');
+    this.props.history.push('/account');
   }
 
   render() {
     if (this.props.auth) {
       this.signUp();
+      this.props.changeModal(true);
     }
     return (
       <div onChange={this.handleChange}>

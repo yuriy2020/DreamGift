@@ -9,12 +9,22 @@ import AuthPage from './pages/AuthPage'
 import './App.css'
 import AccountPage from './pages/AccountPage';
 import Reseacher from './components/Reseacher/Reseacher';
+import Modal from './components/Modal/Modal'
+import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+class App extends React.Component {
+
+isModal() {
+  if (this.props.isModalOpen) {
+    return <Modal />
+  }
+}
+
   render() {
     return (
         <div className='container'>
           <Navbar />
+          {this.isModal()}
           <div>
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -23,8 +33,16 @@ export default class App extends React.Component {
             <Route exact path="/reseach" component={Reseacher} />
             <Route exact path="/account" component={AccountPage} />
           </Switch>
-        </div>
+        </div>       
         </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+  isModalOpen: state.isModalOpen
+  };
+};
+
+export default connect(mapStateToProps)(App);

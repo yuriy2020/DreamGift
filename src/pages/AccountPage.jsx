@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux';
 import foto from '../images/logo.png'
 const userName = 'Авоськиин Иван Ашанович'
 const userInfo = 'I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.'
 const hashtags = ['лопата', 'аптека', 'хештеги']
 
 
-export default class AccountPage extends Component {
+class AccountPage extends Component {
 
     state = {
         edit: false
@@ -58,7 +58,8 @@ export default class AccountPage extends Component {
                 </div>
                 <div>
                     {/* Hashtags */}
-                    {hashtags.map(tag => {
+                    {this.props.accountHeshtegs.length ? 
+                    this.props.accountHeshtegs.map(tag => {
                         return (
                             <div className="chip">
                                 <a href="/user/tags">
@@ -66,7 +67,8 @@ export default class AccountPage extends Component {
                                 </a>
                             </div>
                         )
-                    })}
+                    }) : <></>
+                    }
                 </div>
                 {/* Edit USer Form */}
                 {this.state.edit ? <div>
@@ -107,3 +109,11 @@ export default class AccountPage extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    accountHeshtegs: state.accountHeshtegs,
+  };
+};
+
+export default connect(mapStateToProps)(AccountPage);
