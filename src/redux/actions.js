@@ -1,4 +1,4 @@
-import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP, CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS } from "./action-types";
+import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP, CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS , USER_NAME, USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO} from "./action-types";
 
 export const isAuth = (payload) => {
   return {
@@ -43,5 +43,36 @@ export const addHeshtegs = (payload) => {
   return {
       type: ADD_ACCOUNT_HESHTEGS,
       heshtegs: payload
+  }
+};
+
+export const userName = (payload) => {
+  return {
+      type: USER_NAME,
+      userName: payload
+  }
+};
+export const userMiddleName = (payload) => {
+  return {
+      type: USER_MIDDLE_NAME,
+      userMiddleName: payload
+  }
+};
+export const userFamilyName = (payload) => {
+  return {
+      type: USER_FAMILY_NAME,
+      userFamilyName: payload
+  }
+};
+export const userEmail = (payload) => {
+  return {
+      type: USER_EMAIL,
+      userEmail: payload
+  }
+};
+export const userInfo = (payload) => {
+  return {
+      type: USER_INFO,
+      userInfo: payload
   }
 };
