@@ -3,18 +3,33 @@ import { connect } from 'react-redux';
 import foto from '../images/logo.png'
 import Presents from '../components/Presents/Presents';
 const userName = 'Авоськиин Иван Ашанович'
+<<<<<<< HEAD
 const userInfo = 'I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.';
+=======
+>>>>>>> 3359b8434bda43a32db50cc7e023a509e42d18bf
 
+const hashtags = ['лопата', 'аптека', 'хештеги']
 
 class AccountPage extends Component {
 
     state = {
-        edit: false
+        edit: false,
+        userFamilyName: "Avoskin",
+        userName: "Ivan",
+        userMiddleName: "Ashan",
+        userEmail: "",
+        userInfo: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos aspernatur cumque animi cu"
     }
 
     editUserInfo = () => {
         this.setState({
             edit: !this.state.edit
+        })
+    }
+
+    changeUserInfo = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
         })
     }
 
@@ -24,19 +39,20 @@ class AccountPage extends Component {
             <div>
                 <div className="row">
                     {/* userFoto */}
-                    <div className="col s4">
+                    <div className="col s5">
                         <div className="card">
                             <div className="card-image waves-effect waves-block waves-light">
-                                <img className="activator" src={foto} alt=''/>
+                                <img className="activator" src={foto} alt='' />
                             </div>
                             <div className="card-content">
-                                <span className="card-title activator grey-text text-darken-4">About me</span>
-                                <p><a href="/about">This is a link</a></p>
+                                <span className="card-title activator grey-text text-darken-4">{this.state.userName}</span>
+                                <p><a href="/about">More info...</a></p>
                             </div>
                             <div className="card-reveal">
-                                <span className="card-title grey-text text-darken-4">About me<i className="material-icons right">close</i>
+                                <span className="card-title grey-text text-darken-4">{this.state.userInfo}<i className="material-icons right">close</i>
                                 </span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                <p>{this.state.userInfo}</p>
+
                             </div>
                         </div>
                     </div>
@@ -44,16 +60,18 @@ class AccountPage extends Component {
                     <div className="col s6">
                         <div className="card-panel teal">
                             <span className="white-text">
-                                <h3>{userName}</h3>
-                                {userInfo}
+                                <h4>{this.state.userName} {this.state.userMiddleName} {this.state.userFamilyName}</h4>
+                                <p>Email: {this.state.userEmail}</p>
+                                <hr />
+                                <p>{this.state.userInfo}</p>
                             </span>
                         </div>
                     </div>
                     {/* Edit  */}
-                    <div className="col s2">
-                        <button className="btn" onClick={() => this.editUserInfo()}>
-                            EDIT
-                    </button>
+                    <div className="col s1">
+                        <button className="waves-effect waves-light btn-large" onClick={() => this.editUserInfo()}>
+                            <i class="material-icons">brush</i>
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -70,36 +88,43 @@ class AccountPage extends Component {
                     }) : <></>
                     }
                 </div>
-                {/* Edit USer Form */}
+                {/* Edit User Form */}
                 {this.state.edit ? <div>
+                    {console.log(this.props)}
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s4">
-                                <input id="first_name" type="text" className="validate" />
+                                <input id="first_name" type="text" className="validate" name="userFamilyName"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="first_name">Фамилия</label>
                             </div>
                             <div className="input-field col s4">
-                                <input id="last_name" type="text" className="validate" />
+                                <input id="last_name" type="text" className="validate" name="userName"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="last_name">Имя</label>
                             </div>
                             <div className="input-field col s4">
-                                <input id="middle_name" type="text" className="validate" />
+                                <input id="middle_name" type="text" className="validate" name="userMiddleName"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="middle_name">Отчество</label>
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="about_user" type="text" className="validate" />
+                                <input id="about_user" type="text" className="validate" name="userInfo"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="about_user">Обо мне</label>
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="email" type="email" className="validate" />
+                                <input id="email" type="email" className="validate" name="userEmail"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="email">Email</label>
                             </div>
-                            <div className="input-field col s6">
-                                <input id="password" type="password" className="validate" />
+                            <div className="input-field col s5">
+                                <input id="password" type="password" className="validate" name="userPassword"
+                                    onChange={(event) => this.changeUserInfo(event)} />
                                 <label for="password">Password</label>
                             </div>
                         </div>
