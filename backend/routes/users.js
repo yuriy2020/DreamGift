@@ -68,4 +68,11 @@ await User.updateOne({login: req.body.login}, {heshtegs: req.body.heshtegs});
 res.json();
 });
 
+router.post('/savepresents', async (req, res) => {
+  console.log(req.body);
+  await User.updateOne({login: req.body.login}, {presents: req.body.presents});
+  res.json();
+  });
+  
+
 module.exports = router;

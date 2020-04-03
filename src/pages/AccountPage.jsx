@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import foto from '../images/logo.png'
+import Presents from '../components/Presents/Presents';
 const userName = 'Авоськиин Иван Ашанович'
-const userInfo = 'I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.'
-const hashtags = ['лопата', 'аптека', 'хештеги']
+const userInfo = 'I am a very simple card. I am good at containing small bits of information.I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.';
 
 
 class AccountPage extends Component {
@@ -105,6 +105,7 @@ class AccountPage extends Component {
                         </div>
                     </form>
                 </div> : null}
+                <Presents />
             </div>
         )
     }

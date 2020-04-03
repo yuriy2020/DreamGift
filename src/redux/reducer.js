@@ -4,7 +4,8 @@ import {
   RECEIVE_FETCH_TOLOGIN,
   RECEIVE_FETCH_TOSIGNUP,
   CHANGE_MODAL,
-  ADD_ACCOUNT_HESHTEGS
+  ADD_ACCOUNT_HESHTEGS,
+  SAVE_PRESENT, CHANGE_PRESENT
 } from './action-types';
 
 const initialUserState = {
@@ -12,7 +13,8 @@ const initialUserState = {
   login: '',
   error: '',
   isModalOpen: false,
-  accountHeshtegs: []
+  accountHeshtegs: [],
+  presents: []
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -32,7 +34,8 @@ export const reducer = (state = initialUserState, action) => {
         ...state,
         auth: action.auth,
         error: action.err,
-        accountHeshtegs: action.accountHeshtegs
+        accountHeshtegs: action.accountHeshtegs,
+        presents: action.presents
       };
       case RECEIVE_FETCH_TOSIGNUP:
       return {
@@ -50,6 +53,16 @@ export const reducer = (state = initialUserState, action) => {
         ...state,
         accountHeshtegs: action.heshtegs
       }; 
+      case SAVE_PRESENT:
+      return {
+        ...state,
+        presents: [...state.presents, action.present]
+      };
+    case CHANGE_PRESENT:
+      return {
+        ...state,
+        presents: action.presents
+      };
     default:
       return state;
   }
