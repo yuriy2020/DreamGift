@@ -1,5 +1,7 @@
 
-import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP, CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS ,  SAVE_PRESENT, CHANGE_PRESENT, USER_NAME, USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO} from "./action-types";
+import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP,
+   CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS ,  SAVE_PRESENT, CHANGE_PRESENT, USER_NAME, 
+   USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO, REQUEST_FETCH_TOCHANGEINFO, RECEIVE_FETCH_TOCHANGEINFO} from "./action-types";
 
 export const isAuth = (payload) => {
   return {
@@ -20,7 +22,7 @@ export const requestFetchToLogin = (data) => {
 };
 
 export const receiveFetchToLogin = data => {
-  return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents
+  return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents, user: data.user
    };
 };
 
@@ -89,4 +91,13 @@ export const userInfo = (payload) => {
       type: USER_INFO,
       userInfo: payload
   }
+};
+
+export const requestFetchToChangeInfo = (data) => {
+  return { type: REQUEST_FETCH_TOCHANGEINFO, data };
+};
+
+export const receiveFetchToChangeInfo = data => {
+  return { type: RECEIVE_FETCH_TOCHANGEINFO, data
+   };
 };

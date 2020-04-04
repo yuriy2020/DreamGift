@@ -51,7 +51,7 @@ class Modal extends React.Component {
   render() {
     return (
       <div id="modalWindow">
-        <span>interests</span>
+        <span>Добавь свои интересы</span>
         <div>
           <div>
             {this.state.heshtegs.map((item) => (
@@ -62,7 +62,7 @@ class Modal extends React.Component {
           </div>
           <input type="text" onChange={this.handleChange} placeholder="other" name="other" />
         </div>
-        <button onClick={this.saveHeshtegs}>Save</button>
+        <button onClick={this.saveHeshtegs}>Сохранить</button>
       </div>
     );
   }

@@ -67,7 +67,7 @@ class Navbar extends React.Component {
               <Link to='/reseach'>reseach</Link>
               </li>
               <li>
-                <Link to='/' onClick={() => this.props.logOut()}>Log out</Link>
+                <Link to='/' onClick={() => this.logOut()}>Log out</Link>
               </li>
             </ul>
           </nav>
