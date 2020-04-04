@@ -114,7 +114,7 @@ class AccountPage extends Component {
             this.props.accountHeshtegs.map((tag) => {
               return (
                 <div className="chip">
-                  <a href="/user/tags">{tag}</a>
+                  <a href={`/user/${tag}`}>{tag}</a>
                 </div>
               );
             })
