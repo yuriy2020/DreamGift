@@ -5,12 +5,14 @@ import {
   RECEIVE_FETCH_TOSIGNUP,
   CHANGE_MODAL,
   ADD_ACCOUNT_HESHTEGS,
-  SAVE_PRESENT, CHANGE_PRESENT,
+  SAVE_PRESENT,
+  CHANGE_PRESENT,
   USER_NAME,
   USER_MIDDLE_NAME,
   USER_FAMILY_NAME,
   USER_EMAIL,
-  USER_INFO
+  USER_INFO,
+  RECEIVE_FETCH_TOCHANGEINFO,
 } from './action-types';
 
 const initialUserState = {
@@ -20,12 +22,11 @@ const initialUserState = {
   isModalOpen: false,
   accountHeshtegs: [],
   presents: [],
-  userName:'Imya',
-  userFamilyName: 'Familiya',
-  userMiddleName: 'Otchestvo',
-  userEmail:"email@yaya",
-  userInfo:"BLABLA",
-
+  userName: '',
+  userFamilyName: '',
+  userMiddleName: '',
+  userEmail: '',
+  userInfo: '',
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -33,12 +34,12 @@ export const reducer = (state = initialUserState, action) => {
     case IS_AUTH:
       return {
         ...state,
-        auth: action.isAuth
+        auth: action.isAuth,
       };
     case GET_LOGIN:
       return {
         ...state,
-        login: action.login
+        login: action.login,
       };
     case RECEIVE_FETCH_TOLOGIN:
       return {
@@ -46,61 +47,68 @@ export const reducer = (state = initialUserState, action) => {
         auth: action.auth,
         error: action.err,
         accountHeshtegs: action.accountHeshtegs,
-        presents: action.presents
+        presents: action.presents,
+        userName: action.user.userName,
+        userFamilyName: action.user.userFamilyName,
+        userMiddleName: action.user.userMiddleName,
+        userEmail: action.user.userEmail,
+        userInfo: action.user.userInfo,
       };
-      case RECEIVE_FETCH_TOSIGNUP:
+    case RECEIVE_FETCH_TOSIGNUP:
       return {
         ...state,
         auth: action.auth,
         error: action.err,
       };
-      case CHANGE_MODAL:
+    case CHANGE_MODAL:
       return {
         ...state,
-        isModalOpen: action.isOpen
-      }; 
-      case ADD_ACCOUNT_HESHTEGS:
-      return {
-        ...state,
-        accountHeshtegs: action.heshtegs
+        isModalOpen: action.isOpen,
       };
-      case USER_NAME:
+    case ADD_ACCOUNT_HESHTEGS:
       return {
         ...state,
-        userName: action.userName
-      }; 
-      case USER_MIDDLE_NAME:
+        accountHeshtegs: action.heshtegs,
+      };
+    case USER_NAME:
       return {
         ...state,
-        userMiddleName: action.userMiddleName
-      }; 
-      case USER_FAMILY_NAME:
+        userName: action.userName,
+      };
+    case USER_MIDDLE_NAME:
       return {
         ...state,
-        userFamilyName: action.userFamilyName
-      }; 
-      case SAVE_PRESENT:
+        userMiddleName: action.userMiddleName,
+      };
+    case USER_FAMILY_NAME:
       return {
         ...state,
-        presents: [...state.presents, action.present]
+        userFamilyName: action.userFamilyName,
+      };
+    case SAVE_PRESENT:
+      return {
+        ...state,
+        presents: [...state.presents, action.present],
       };
     case CHANGE_PRESENT:
       return {
         ...state,
-        presents: action.presents
+        presents: action.presents,
       };
-      case USER_EMAIL:
+    case USER_EMAIL:
       return {
         ...state,
-        userEmail: action.userEmail
-      }; 
-      case USER_INFO:
+        userEmail: action.userEmail,
+      };
+    case USER_INFO:
       return {
         ...state,
-        userInfo: action.userInfo
-      }; 
-
-
+        userInfo: action.userInfo,
+      };
+    case RECEIVE_FETCH_TOCHANGEINFO:
+      return {
+        ...state,
+      };
     default:
       return state;
   }

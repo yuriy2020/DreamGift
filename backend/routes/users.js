@@ -7,23 +7,23 @@ const router = express.Router();
 
 router.post('/signup', async (req, res, next) => {
   console.log(req.body);
-  
+
   try {
     const { login, email, password } = req.body;
     const user = new User({
       login,
       email,
-      password: await bcrypt.hash(password, saltRounds)
+      password: await bcrypt.hash(password, saltRounds),
     });
     await user.save();
     req.session.user = user;
     res.json({ user, auth: true });
   } catch (error) {
-    res.json({err: error});
+    res.json({ err: error });
   }
 });
 
-router.post('/login', async function(req, res) {
+router.post('/login', async function (req, res) {
   try {
     const { login, password } = req.body;
     const user = await User.findOne({ login });
@@ -64,15 +64,29 @@ router.get('/check', (req, res) => {
 });
 
 router.post('/savetegs', async (req, res) => {
-await User.updateOne({login: req.body.login}, {heshtegs: req.body.heshtegs});
-res.json();
+  await User.updateOne({ login: req.body.login }, { heshtegs: req.body.heshtegs });
+  res.json();
 });
 
 router.post('/savepresents', async (req, res) => {
-  console.log(req.body);
-  await User.updateOne({login: req.body.login}, {presents: req.body.presents});
+  await User.updateOne({ login: req.body.login }, { presents: req.body.presents });
   res.json();
-  });
+});
+
+router.post('/changeinfo', async (req, res) => {
+  console.log(req.body);
   
+  const entries = Object.entries(req.body);
+  console.log(entries);
+  
+  for (const [key, value] of entries) {
+    if (key !== 'login' && value.length) {
+      console.log(key, value);
+      
+      await User.updateOne({ login: req.body.login }, { [key]: value });
+    }
+  } 
+  res.json();
+});
 
 module.exports = router;

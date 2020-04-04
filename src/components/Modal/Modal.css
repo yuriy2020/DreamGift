@@ -1,11 +1,19 @@
 #modalWindow {
   position: fixed;
-  display: block;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
   background-color: rgb(247, 247, 247);
   margin-top: 400px;
   margin-left: 300px;
   width: 500px;
-  height: 200px;
+  height: 300px;
+}
+
+#modalWindow span {
+  margin-bottom: 10px;
 }
 
 button.noActive {
