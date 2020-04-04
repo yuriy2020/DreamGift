@@ -11,8 +11,13 @@ export default class Reseacher extends React.Component {
       arrAmazon: undefined,
       textAli: undefined,
       arrAliProd: undefined,
-      newTaskAli: undefined
+      newTaskAli: undefined,
+      arrAliCat: undefined
     };
+  }
+
+  componentDidMount() {
+    this.category()
   }
 
   async getHeshtegs() {
@@ -52,7 +57,10 @@ export default class Reseacher extends React.Component {
     //   }
     //   return item;
     // });
-    const all = ['лопата', 'фонарь', 'cапоги']
+
+    
+
+    const all = ['лопата', 'фонарь', 'cапоги', 'Dress']
     this.setState({
       heshtegs: all
     });
@@ -103,11 +111,12 @@ export default class Reseacher extends React.Component {
 
   }
 
-  onlyCateg(name) {
+  async onlyCateg(name) {
     const newTasks = this.state.arrAliCat.filter((item) => item.name.includes(name) === true);
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       newTaskAli: newTasks[0].id
-    })
+    }),  async () => await this.productOfCategory(this.state.newTaskAli))
     console.log(newTasks);
   }
 
@@ -129,21 +138,23 @@ export default class Reseacher extends React.Component {
   }
 
   async productOfCategory(id) {
-    let url = `https://ali-express1.p.rapidapi.com/productsByCategory/${id}?from=0`
-    let response = await fetch(url, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "ali-express1.p.rapidapi.com",
-        "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
-      }
-    })
-
-    let result = await response.json();
-    this.setState({
-      arrAliProd: result
-    })
-    console.log(result);
-
+    if(id) {
+      let url = `https://ali-express1.p.rapidapi.com/productsByCategory/${id}?from=0`
+      let response = await fetch(url, {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "ali-express1.p.rapidapi.com",
+          "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+        }
+      })
+  
+      let result = await response.json();
+      this.setState({
+        arrAliProd: result
+      })
+      console.log(result);
+    }
+  
   }
 
   render() {
@@ -165,16 +176,14 @@ export default class Reseacher extends React.Component {
           Искать
         </button>
         <br></br>
-
-        <button onClick={() => this.category()}>category</button>
-        <input onChange={(e) => this.takeTextAli(e)} name="textAli"></input>
-        
+       
 
         <ul>
           {this.state.heshtegs ? this.state.heshtegs.map((item, index) => {
             return <li>{item}
             <button onClick={() => this.AmazonSearch(item)}> Искать на Амазон</button>
-            <button onClick={() => {return this.onlyCateg(item), this.productOfCategory(newTaskAli)}}>Искать на али</button></li>
+            <button onClick={() => this.onlyCateg(item)}>Искать на али</button>
+           </li>
           }) : null
           }
         </ul>
@@ -190,7 +199,7 @@ export default class Reseacher extends React.Component {
         </ul>
 
         <ul>
-          {this.state.arrAliProd ? this.state.arrAliProd.data.items.map((item, index) => {
+          {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {
             return <li>{item.productElements.title.title}<img src={item.productElements.image.imgUrl} />{item.productElements.price.sell_price.formatedAmount}<a href={item.
 action}>Перейти на товар</a></li>;
           }) : null
