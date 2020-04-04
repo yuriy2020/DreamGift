@@ -7,10 +7,12 @@ module.exports = function(app) {
   const FileStore = require("session-file-store")(session);
   const { cookiesCleaner } = require("./auth");
   const dbConnection = require("./db-connect");
+  const cors = require('cors')
 
   app.use(morgan("dev"));
 
   // Body POST запросов.
+  app.use(cors())
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 

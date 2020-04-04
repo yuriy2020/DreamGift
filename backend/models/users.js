@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
   userFamilyName: { type: String },
   userMiddleName: { type: String },
   userEmail: { type: String },
-  userInfo: { type: String }
+  userInfo: { type: String },
+  userAvatar:{type:String, default:'defaultAVA.png'}
 });
 
 module.exports = mongoose.model('users', userSchema);

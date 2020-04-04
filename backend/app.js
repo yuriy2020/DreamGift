@@ -11,6 +11,7 @@ useMiddleware(app);
 // Подключаем импортированные маршруты с определенным url префиксом.
 app.use("/", indexRouter);
 app.use("/", usersRouter);
+app.use("/", require('./routes/userFoto'));
 
 useErrorHandlers(app);
 
