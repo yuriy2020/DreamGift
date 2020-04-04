@@ -1,7 +1,9 @@
 
 import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP,
    CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS ,  SAVE_PRESENT, CHANGE_PRESENT, USER_NAME, 
-   USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO, REQUEST_FETCH_TOCHANGEINFO, RECEIVE_FETCH_TOCHANGEINFO} from "./action-types";
+   USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO, REQUEST_FETCH_TOCHANGEINFO, RECEIVE_FETCH_TOCHANGEINFO,
+   USER_AVATAR
+  } from "./action-types";
 
 export const isAuth = (payload) => {
   return {
@@ -100,4 +102,11 @@ export const requestFetchToChangeInfo = (data) => {
 export const receiveFetchToChangeInfo = data => {
   return { type: RECEIVE_FETCH_TOCHANGEINFO, data
    };
+};
+
+export const userAvatar = (payload) => {
+  return {
+      type: USER_AVATAR,
+      userAvatar: payload
+  }
 };

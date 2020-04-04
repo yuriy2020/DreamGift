@@ -7,10 +7,13 @@ import {
   userEmail,
   userInfo,
   requestFetchToChangeInfo,
-  changeModal
+  changeModal,
+  userAvatar
 } from '../redux/actions';
-import foto from '../images/logo.png';
+
 import Presents from '../components/Presents/Presents';
+import UserFoto from '../components/UserFoto/UserFoto';
+
 
 class AccountPage extends Component {
   state = {
@@ -20,6 +23,7 @@ class AccountPage extends Component {
     userMiddleName: this.props.userMiddleName,
     userEmail: this.props.userEmail,
     userInfo: this.props.userInfo,
+    userAvatar: this.props.userAvatar
   };
 
   toggleUserEdit = () => {
@@ -36,12 +40,13 @@ class AccountPage extends Component {
 
   changeReduxStateAndDB = (event) => {
     event.preventDefault();
-    const { userName, userFamilyName, userMiddleName, userEmail, userInfo } = this.state;
+    const { userName, userFamilyName, userMiddleName, userEmail, userInfo, userAvatar } = this.state;
     this.props.userNameFunc(userName);
     this.props.userMiddleNameFunc(userMiddleName);
     this.props.userFamilyNameFunc(userFamilyName);
     this.props.userEmailFunc(userEmail);
     this.props.userInfoFunc(userInfo);
+    this.props.userAvatarFunc(userAvatar)
     this.props.requestFetchToChangeInfo({
       login: this.props.login,
       userName,
@@ -53,7 +58,9 @@ class AccountPage extends Component {
   };
 
   render() {
-    console.log(this.props);
+    let foto;
+    this.props.userAvatar ? foto = this.props.userAvatar : foto = 'https://i.ytimg.com/vi/fUWrhetZh9M/maxresdefault.jpg'
+
     return (
       <div>
         <div className="row">
@@ -67,9 +74,9 @@ class AccountPage extends Component {
                 <span className="card-title activator grey-text text-darken-4">
                   {this.props.userName}
                 </span>
-                <p>
-                  <a href="/about">More info...</a>
-                </p>
+
+                <UserFoto />
+
               </div>
               <div className="card-reveal">
                 <span className="card-title grey-text text-darken-4">
@@ -112,16 +119,15 @@ class AccountPage extends Component {
               );
             })
           ) : (
-            <></>
-          )}
+              <></>
+            )}
           <button className="waves-effect waves-light btn" onClick={() => this.props.changeModal(true)}>
-              <i className="material-icons">brush</i>
-            </button>
+            <i className="material-icons">brush</i>
+          </button>
         </div>
         {/* Edit User Form */}
         {this.state.edit ? (
           <div>
-            {console.log(this.props)}
             <form className="col s12" onSubmit={this.changeReduxStateAndDB}>
               <div className="row">
                 <div className="input-field col s4">
@@ -204,6 +210,7 @@ const mapStateToProps = (state) => {
     userFamilyName: state.userFamilyName,
     userEmail: state.userEmail,
     userInfo: state.userInfo,
+    userAvatar: state.userAvatar
   };
 };
 
@@ -216,6 +223,7 @@ const mapDispatchToProps = (dispatch) => {
     userInfoFunc: (payload) => dispatch(userInfo(payload)),
     requestFetchToChangeInfo: (payload) => dispatch(requestFetchToChangeInfo(payload)),
     changeModal: (payload) => dispatch(changeModal(payload)),
+    userAvatarFunc: (payload) => dispatch(userAvatar(payload)),
   };
 };
 
