@@ -7,14 +7,13 @@ const DIR = './public/images/';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    
     cb(null, DIR)
   },
   filename: async (req, file, cb) => {
     const fileName = file.originalname.toLowerCase().split(' ').join('-');
 
     cb(null, file.originalname)
-  
-    await User.findOneAndUpdate({login}, { userAvatar: fileName })
   }
 })
 let upload = multer({
@@ -29,8 +28,11 @@ let upload = multer({
   }
 });
 
-router.post('/user/profile/edit/img/', upload.single('profileImg'), async (req, res, next) => {
+router.post('/user/profile/edit/img/:login', upload.single('profileImg'), async (req, res, next) => {
+
+  const { login } = req.params;
   const { filename } = req.file;
+  await User.findOneAndUpdate({ login }, { userAvatar: filename })
   res.json({ filename })
 })
 

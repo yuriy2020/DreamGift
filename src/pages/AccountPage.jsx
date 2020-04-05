@@ -59,7 +59,10 @@ class AccountPage extends Component {
 
   render() {
     let foto;
-    this.props.userAvatar ? foto = this.props.userAvatar : foto = 'https://i.ytimg.com/vi/fUWrhetZh9M/maxresdefault.jpg'
+    const avatar = localStorage.getItem('avatar');
+    console.log(avatar, 'avataaaaaaaaaaaaaaaaaaaaar');
+    
+    this.props.userAvatar ? foto = avatar: foto = 'http://localhost:5000/images/present.png'
 
     return (
       <div>

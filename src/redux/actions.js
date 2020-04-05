@@ -24,7 +24,9 @@ export const requestFetchToLogin = (data) => {
 };
 
 export const receiveFetchToLogin = data => {
-  return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents, user: data.user
+  const avatar = localStorage.getItem('avatar');
+  return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents, user: data.user,
+    avatar
    };
 };
 

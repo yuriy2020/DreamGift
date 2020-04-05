@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isAuth, getLogin } from '../redux/actions';
+import { isAuth, getLogin, userAvatar } from '../redux/actions';
 
 class Navbar extends React.Component {
   async sessionChecker() {
@@ -14,6 +14,8 @@ class Navbar extends React.Component {
       this.props.isAuth(true);
       const login = localStorage.getItem('login');
       this.props.getLogin(login);
+      const img = localStorage.getItem('avatar');
+     await this.props.userAvatarFunc(img)
     }
   }
 
@@ -86,7 +88,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     isAuth: (payload) => dispatch(isAuth(payload)),
-    getLogin: (payload) => dispatch(getLogin(payload))
+    getLogin: (payload) => dispatch(getLogin(payload)),
+    userAvatarFunc: (payload) => dispatch(userAvatar(payload)),
   };
 };
 
