@@ -14,8 +14,6 @@ class Navbar extends React.Component {
       this.props.isAuth(true);
       const login = localStorage.getItem('login');
       this.props.getLogin(login);
-      const img = localStorage.getItem('avatar');
-     await this.props.userAvatarFunc(img)
     }
   }
 
