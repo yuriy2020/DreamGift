@@ -55,6 +55,7 @@ export const reducer = (state = initialUserState, action) => {
         userMiddleName: action.user.userMiddleName,
         userEmail: action.user.userEmail,
         userInfo: action.user.userInfo,
+        userAvatar: action.user.userAvatar
       };
     case RECEIVE_FETCH_TOSIGNUP:
       return {

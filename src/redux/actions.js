@@ -24,6 +24,7 @@ export const requestFetchToLogin = (data) => {
 };
 
 export const receiveFetchToLogin = data => {
+  localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
   return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents, user: data.user
    };
 };

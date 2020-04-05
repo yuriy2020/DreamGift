@@ -8,23 +8,28 @@ import {
   userInfo,
   requestFetchToChangeInfo,
   changeModal,
-  userAvatar
+  userAvatar,
 } from '../redux/actions';
 
 import Presents from '../components/Presents/Presents';
 import UserFoto from '../components/UserFoto/UserFoto';
 
-
 class AccountPage extends Component {
   state = {
+    isAvatar: '',
     edit: false,
     userName: this.props.userName,
     userFamilyName: this.props.userFamilyName,
     userMiddleName: this.props.userMiddleName,
     userEmail: this.props.userEmail,
     userInfo: this.props.userInfo,
-    userAvatar: this.props.userAvatar
+    userAvatar: this.props.userAvatar,
   };
+
+  componentDidMount() {
+    const img = localStorage.getItem('avatar');
+    this.props.userAvatarFunc(img);
+  }
 
   toggleUserEdit = () => {
     this.setState({
@@ -40,13 +45,20 @@ class AccountPage extends Component {
 
   changeReduxStateAndDB = (event) => {
     event.preventDefault();
-    const { userName, userFamilyName, userMiddleName, userEmail, userInfo, userAvatar } = this.state;
+    const {
+      userName,
+      userFamilyName,
+      userMiddleName,
+      userEmail,
+      userInfo,
+      userAvatar,
+    } = this.state;
     this.props.userNameFunc(userName);
     this.props.userMiddleNameFunc(userMiddleName);
     this.props.userFamilyNameFunc(userFamilyName);
     this.props.userEmailFunc(userEmail);
     this.props.userInfoFunc(userInfo);
-    this.props.userAvatarFunc(userAvatar)
+    this.props.userAvatarFunc(userAvatar);
     this.props.requestFetchToChangeInfo({
       login: this.props.login,
       userName,
@@ -59,7 +71,8 @@ class AccountPage extends Component {
 
   render() {
     let foto;
-    this.props.userAvatar ? foto = this.props.userAvatar : foto = 'https://i.ytimg.com/vi/fUWrhetZh9M/maxresdefault.jpg'
+    const avatar = localStorage.getItem('avatar');
+     foto = avatar ? avatar : 'http://localhost:5000/images/present.png'
 
     return (
       <div>
@@ -68,7 +81,7 @@ class AccountPage extends Component {
           <div className="col s5">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={foto} alt="" />
+                <img className="activator" src={foto} alt="http://localhost:5000/images/present.png" />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
@@ -76,7 +89,6 @@ class AccountPage extends Component {
                 </span>
 
                 <UserFoto />
-
               </div>
               <div className="card-reveal">
                 <span className="card-title grey-text text-darken-4">
@@ -119,9 +131,12 @@ class AccountPage extends Component {
               );
             })
           ) : (
-              <></>
-            )}
-          <button className="waves-effect waves-light btn" onClick={() => this.props.changeModal(true)}>
+            <></>
+          )}
+          <button
+            className="waves-effect waves-light btn"
+            onClick={() => this.props.changeModal(true)}
+          >
             <i className="material-icons">brush</i>
           </button>
         </div>
@@ -210,7 +225,7 @@ const mapStateToProps = (state) => {
     userFamilyName: state.userFamilyName,
     userEmail: state.userEmail,
     userInfo: state.userInfo,
-    userAvatar: state.userAvatar
+    userAvatar: state.userAvatar,
   };
 };
 
