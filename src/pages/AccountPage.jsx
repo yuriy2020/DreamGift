@@ -10,7 +10,7 @@ import {
   changeModal,
   userAvatar,
   addHeshtegs,
-  changePresent
+  changePresent,
 } from '../redux/actions';
 
 import Presents from '../components/Presents/Presents';
@@ -46,7 +46,9 @@ class AccountPage extends Component {
     this.props.userEmailFunc(userEmail);
     this.props.userInfoFunc(userInfo);
     const presents = localStorage.getItem('presents');
-    this.props.changePresent(JSON.parse(presents));
+    if (presents.length) {
+      this.props.changePresent(JSON.parse(presents));
+    }
   }
 
   toggleUserEdit = () => {
@@ -105,7 +107,7 @@ class AccountPage extends Component {
   render() {
     let foto;
     const avatar = localStorage.getItem('avatar');
-    foto = avatar ? avatar : 'http://localhost:5000/images/present.png';
+    foto = avatar ? avatar : 'http://localhost:5000/images/avatarka.png';
 
     return (
       <div>
