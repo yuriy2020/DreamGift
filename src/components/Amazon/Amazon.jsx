@@ -10,7 +10,7 @@ class Amazon extends React.Component {
     this.state = {
       arr: [],
       text: "",
-      arrAmazon: undefined,
+      arrAmazon: [],
       present: '',
       href: ''
     };
@@ -65,7 +65,7 @@ componentDidMount () {
       <div>!!!!!!!!!!!!!!!!!!</div>
       
         <ul>
-          {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
+          {this.state.arrAmazon.length ? this.state.arrAmazon.map((item, index) => {
             return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a>
             <button onClick={()=>{this.addPresent(item.title, item.detailPageURL )}}>Добавить в мои подарки</button></li>;
           }) : null

@@ -10,6 +10,7 @@ import {
   changeModal,
   userAvatar,
   addHeshtegs,
+  changePresent
 } from '../redux/actions';
 
 import Presents from '../components/Presents/Presents';
@@ -44,6 +45,8 @@ class AccountPage extends Component {
     this.props.userFamilyNameFunc(userFamilyName);
     this.props.userEmailFunc(userEmail);
     this.props.userInfoFunc(userInfo);
+    const presents = localStorage.getItem('presents');
+    this.props.changePresent(JSON.parse(presents));
   }
 
   toggleUserEdit = () => {
@@ -274,6 +277,7 @@ const mapDispatchToProps = (dispatch) => {
     changeModal: (payload) => dispatch(changeModal(payload)),
     userAvatarFunc: (payload) => dispatch(userAvatar(payload)),
     addHeshtegs: (payload) => dispatch(addHeshtegs(payload)),
+    changePresent: (payload) => dispatch(changePresent(payload)),
   };
 };
 

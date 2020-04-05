@@ -31,6 +31,7 @@ class Presents extends React.Component {
         present: '',
         href: ''
       });
+      localStorage.setItem('presents', JSON.stringify(this.props.presents));
     }
   }
 

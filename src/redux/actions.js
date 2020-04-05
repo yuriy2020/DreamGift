@@ -45,6 +45,8 @@ export const receiveFetchToLogin = (data) => {
   localStorage.setItem('userMiddleName', data.user.userMiddleName);
   localStorage.setItem('userEmail', data.user.userEmail);
   localStorage.setItem('userInfo', data.user.userInfo);
+  localStorage.setItem('presents', JSON.stringify(data.user.presents));
+
   return {
     type: RECEIVE_FETCH_TOLOGIN,
     auth: data.auth,
