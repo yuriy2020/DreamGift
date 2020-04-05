@@ -28,7 +28,7 @@ class Signup extends React.Component {
   signUp() {
     this.props.getLogin(this.state.login);
     localStorage.setItem('login', this.state.login);
-    this.props.history.push('/account');
+    this.props.history.push('/');
   }
 
   render() {

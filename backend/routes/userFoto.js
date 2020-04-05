@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   filename: async (req, file, cb) => {
     const fileName = file.originalname.toLowerCase().split(' ').join('-');
 
-    cb(null, file.originalname)
+    cb(null, fileName)
   }
 })
 let upload = multer({
@@ -32,7 +32,8 @@ router.post('/user/profile/edit/img/:login', upload.single('profileImg'), async 
 
   const { login } = req.params;
   const { filename } = req.file;
-  await User.findOneAndUpdate({ login }, { userAvatar: filename })
+  console.log(filename)
+  await User.findOneAndUpdate({ login }, { userAvatar: filename.toLowerCase() })
   res.json({ filename })
 })
 
