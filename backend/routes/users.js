@@ -69,6 +69,10 @@ router.post('/savetegs', async (req, res) => {
 });
 
 router.post('/savepresents', async (req, res) => {
+  // let user = await User.findOne({ login: req.body.login });
+  // user.presents.push({ presents: req.body.presents });
+  // user.save();
+
   await User.updateOne({ login: req.body.login }, { presents: req.body.presents });
   res.json();
 });
