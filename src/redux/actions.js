@@ -38,13 +38,29 @@ export const requestFetchToLogin = (data) => {
 };
 
 export const receiveFetchToLogin = (data) => {
-  localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
-  localStorage.setItem('heshtegs', data.user.heshtegs);
-  localStorage.setItem('userName', data.user.userName);
-  localStorage.setItem('userFamilyName', data.user.userFamilyName);
-  localStorage.setItem('userMiddleName', data.user.userMiddleName);
-  localStorage.setItem('userEmail', data.user.userEmail);
-  localStorage.setItem('userInfo', data.user.userInfo);
+  if (data.user.userAvatar) {
+    localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
+  }
+  if (data.user.heshtegs) {
+    localStorage.setItem('heshtegs', data.user.heshtegs);
+  }
+  if (data.user.userName) {
+    localStorage.setItem('userName', data.user.userName);
+  }
+  if (data.user.userFamilyName) {
+    localStorage.setItem('userFamilyName', data.user.userFamilyName);
+  }
+  if (data.user.userMiddleName) {
+    localStorage.setItem('userMiddleName', data.user.userMiddleName);
+  }
+  if (data.user.userEmail) {
+    localStorage.setItem('userEmail', data.user.userEmail);
+  }
+  if (data.user.userInfo) {
+    localStorage.setItem('userInfo', data.user.userInfo);
+  }
+  localStorage.setItem('presents', JSON.stringify(data.user.presents));
+
   return {
     type: RECEIVE_FETCH_TOLOGIN,
     auth: data.auth,
