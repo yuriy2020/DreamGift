@@ -1,113 +1,137 @@
-
-import { IS_AUTH, GET_LOGIN, REQUEST_FETCH_TOLOGIN, RECEIVE_FETCH_TOLOGIN, REQUEST_FETCH_TOSIGNUP, RECEIVE_FETCH_TOSIGNUP,
-   CHANGE_MODAL, ADD_ACCOUNT_HESHTEGS ,  SAVE_PRESENT, CHANGE_PRESENT, USER_NAME, 
-   USER_MIDDLE_NAME,USER_FAMILY_NAME,USER_EMAIL,USER_INFO, REQUEST_FETCH_TOCHANGEINFO, RECEIVE_FETCH_TOCHANGEINFO,
-   USER_AVATAR
-  } from "./action-types";
+import {
+  IS_AUTH,
+  GET_LOGIN,
+  REQUEST_FETCH_TOLOGIN,
+  RECEIVE_FETCH_TOLOGIN,
+  REQUEST_FETCH_TOSIGNUP,
+  RECEIVE_FETCH_TOSIGNUP,
+  CHANGE_MODAL,
+  ADD_ACCOUNT_HESHTEGS,
+  SAVE_PRESENT,
+  CHANGE_PRESENT,
+  USER_NAME,
+  USER_MIDDLE_NAME,
+  USER_FAMILY_NAME,
+  USER_EMAIL,
+  USER_INFO,
+  REQUEST_FETCH_TOCHANGEINFO,
+  RECEIVE_FETCH_TOCHANGEINFO,
+  USER_AVATAR,
+} from './action-types';
 
 export const isAuth = (payload) => {
   return {
-      type: IS_AUTH,
-      isAuth: payload
-  }
+    type: IS_AUTH,
+    isAuth: payload,
+  };
 };
 
 export const getLogin = (payload) => {
   return {
-      type: GET_LOGIN,
-      login: payload
-  }
+    type: GET_LOGIN,
+    login: payload,
+  };
 };
 
 export const requestFetchToLogin = (data) => {
   return { type: REQUEST_FETCH_TOLOGIN, data };
 };
 
-export const receiveFetchToLogin = data => {
+export const receiveFetchToLogin = (data) => {
   localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
-  return { type: RECEIVE_FETCH_TOLOGIN, auth: data.auth, err: data.err, accountHeshtegs: data.user.heshtegs, presents: data.user.presents, user: data.user
-   };
+  localStorage.setItem('heshtegs', data.user.heshtegs);
+  localStorage.setItem('userName', data.user.userName);
+  localStorage.setItem('userFamilyName', data.user.userFamilyName);
+  localStorage.setItem('userMiddleName', data.user.userMiddleName);
+  localStorage.setItem('userEmail', data.user.userEmail);
+  localStorage.setItem('userInfo', data.user.userInfo);
+  return {
+    type: RECEIVE_FETCH_TOLOGIN,
+    auth: data.auth,
+    err: data.err,
+    accountHeshtegs: data.user.heshtegs,
+    presents: data.user.presents,
+    user: data.user,
+  };
 };
 
 export const requestFetchToSignUp = (data) => {
   return { type: REQUEST_FETCH_TOSIGNUP, data };
 };
 
-export const receiveFetchToSignUp = data => {
-  return { type: RECEIVE_FETCH_TOSIGNUP, auth: data.auth, err: data.err
-   };
+export const receiveFetchToSignUp = (data) => {
+  return { type: RECEIVE_FETCH_TOSIGNUP, auth: data.auth, err: data.err };
 };
 
 export const changeModal = (payload) => {
   return {
-      type: CHANGE_MODAL,
-      isOpen: payload
-  }
+    type: CHANGE_MODAL,
+    isOpen: payload,
+  };
 };
 
 export const addHeshtegs = (payload) => {
   return {
-      type: ADD_ACCOUNT_HESHTEGS,
-      heshtegs: payload
-  }
+    type: ADD_ACCOUNT_HESHTEGS,
+    heshtegs: payload,
+  };
 };
 
 export const savePresent = (payload) => {
   return {
-      type: SAVE_PRESENT,
-      present: payload
-  }
+    type: SAVE_PRESENT,
+    present: payload,
+  };
 };
 
 export const changePresent = (payload) => {
   return {
-      type: CHANGE_PRESENT,
-      presents: payload
-  }
+    type: CHANGE_PRESENT,
+    presents: payload,
+  };
 };
 export const userName = (payload) => {
   return {
-      type: USER_NAME,
-      userName: payload
-  }
+    type: USER_NAME,
+    userName: payload,
+  };
 };
 export const userMiddleName = (payload) => {
   return {
-      type: USER_MIDDLE_NAME,
-      userMiddleName: payload
-  }
+    type: USER_MIDDLE_NAME,
+    userMiddleName: payload,
+  };
 };
 export const userFamilyName = (payload) => {
   return {
-      type: USER_FAMILY_NAME,
-      userFamilyName: payload
-  }
+    type: USER_FAMILY_NAME,
+    userFamilyName: payload,
+  };
 };
 export const userEmail = (payload) => {
   return {
-      type: USER_EMAIL,
-      userEmail: payload
-  }
+    type: USER_EMAIL,
+    userEmail: payload,
+  };
 };
 export const userInfo = (payload) => {
   return {
-      type: USER_INFO,
-      userInfo: payload
-  }
+    type: USER_INFO,
+    userInfo: payload,
+  };
 };
 
 export const requestFetchToChangeInfo = (data) => {
   return { type: REQUEST_FETCH_TOCHANGEINFO, data };
 };
 
-export const receiveFetchToChangeInfo = data => {
-  return { type: RECEIVE_FETCH_TOCHANGEINFO, data
-   };
+export const receiveFetchToChangeInfo = (data) => {
+  return { type: RECEIVE_FETCH_TOCHANGEINFO, data };
 };
 
 export const userAvatar = (payload) => {
   return {
-      type: USER_AVATAR,
-      userAvatar: payload
-  }
+    type: USER_AVATAR,
+    userAvatar: payload,
+  };
 };

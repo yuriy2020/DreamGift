@@ -9,6 +9,7 @@ import {
   requestFetchToChangeInfo,
   changeModal,
   userAvatar,
+  addHeshtegs,
 } from '../redux/actions';
 
 import Presents from '../components/Presents/Presents';
@@ -29,6 +30,20 @@ class AccountPage extends Component {
   componentDidMount() {
     const img = localStorage.getItem('avatar');
     this.props.userAvatarFunc(img);
+    const heshtegs = localStorage.getItem('heshtegs');
+    if (heshtegs.length) {
+      this.props.addHeshtegs(heshtegs.split(','));
+    }
+    const userName = localStorage.getItem('userName');
+    const userFamilyName = localStorage.getItem('userFamilyName');
+    const userMiddleName = localStorage.getItem('userMiddleName');
+    const userEmail = localStorage.getItem('userEmail');
+    const userInfo = localStorage.getItem('userInfo');
+    this.props.userNameFunc(userName);
+    this.props.userMiddleNameFunc(userMiddleName);
+    this.props.userFamilyNameFunc(userFamilyName);
+    this.props.userEmailFunc(userEmail);
+    this.props.userInfoFunc(userInfo);
   }
 
   toggleUserEdit = () => {
@@ -53,11 +68,26 @@ class AccountPage extends Component {
       userInfo,
       userAvatar,
     } = this.state;
-    this.props.userNameFunc(userName);
-    this.props.userMiddleNameFunc(userMiddleName);
-    this.props.userFamilyNameFunc(userFamilyName);
-    this.props.userEmailFunc(userEmail);
-    this.props.userInfoFunc(userInfo);
+    if (userName.length) {
+      this.props.userNameFunc(userName);
+      localStorage.setItem('userName', userName);
+    }
+    if (userMiddleName.length) {
+      this.props.userMiddleNameFunc(userMiddleName);
+      localStorage.setItem('userMiddleName', userMiddleName);
+    }
+    if (userFamilyName.length) {
+      this.props.userFamilyNameFunc(userFamilyName);
+      localStorage.setItem('userFamilyName', userFamilyName);
+    }
+    if (userEmail.length) {
+      this.props.userEmailFunc(userEmail);
+      localStorage.setItem('userEmail', userEmail);
+    }
+    if (userInfo.length) {
+      this.props.userInfoFunc(userInfo);
+      localStorage.setItem('userInfo', userInfo);
+    }
     this.props.userAvatarFunc(userAvatar);
     this.props.requestFetchToChangeInfo({
       login: this.props.login,
@@ -72,7 +102,7 @@ class AccountPage extends Component {
   render() {
     let foto;
     const avatar = localStorage.getItem('avatar');
-     foto = avatar ? avatar : 'http://localhost:5000/images/present.png'
+    foto = avatar ? avatar : 'http://localhost:5000/images/present.png';
 
     return (
       <div>
@@ -81,7 +111,11 @@ class AccountPage extends Component {
           <div className="col s5">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={foto} alt="http://localhost:5000/images/present.png" />
+                <img
+                  className="activator"
+                  src={foto}
+                  alt="http://localhost:5000/images/present.png"
+                />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
@@ -239,6 +273,7 @@ const mapDispatchToProps = (dispatch) => {
     requestFetchToChangeInfo: (payload) => dispatch(requestFetchToChangeInfo(payload)),
     changeModal: (payload) => dispatch(changeModal(payload)),
     userAvatarFunc: (payload) => dispatch(userAvatar(payload)),
+    addHeshtegs: (payload) => dispatch(addHeshtegs(payload)),
   };
 };
 

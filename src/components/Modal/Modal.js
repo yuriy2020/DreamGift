@@ -24,6 +24,7 @@ class Modal extends React.Component {
       }
     }
     this.props.addHeshtegs(hesh);
+    localStorage.setItem('heshtegs', hesh);
     this.props.changeModal(false);
     await fetch('/savetegs', {
       method: 'POST',
