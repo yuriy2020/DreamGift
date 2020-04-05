@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { savePresent, changePresent } from '../../redux/actions';
+import { v4 as uuidv4 } from 'uuid';
 
 class Amazon extends React.Component {
   constructor(props) {
@@ -8,14 +10,16 @@ class Amazon extends React.Component {
     this.state = {
       arr: [],
       text: "",
-      arrAmazon: undefined
+      arrAmazon: undefined,
+      present: '',
+      href: ''
     };
   }
+
 
 componentDidMount () {
   this.AmazonSearch(this.props.id)
 }
-
 
   async AmazonSearch(t) {
 
@@ -37,6 +41,21 @@ componentDidMount () {
   }
 
 
+  async addPresent(titlePresent, urlPresent) {
+   
+      await this.props.savePresent({ value: titlePresent, id: uuidv4(), href: urlPresent });
+      await fetch('/savepresents', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset = utf-8' },
+        body: JSON.stringify({ presents: this.props.presents, login: this.props.login })
+      });
+      this.setState({
+        present: '',
+        href: ''
+      });
+    
+  }
+
 
   render() {
    
@@ -47,7 +66,8 @@ componentDidMount () {
       
         <ul>
           {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
-            return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a></li>;
+            return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a>
+            <button onClick={()=>{this.addPresent(item.title, item.detailPageURL )}}>Добавить в мои подарки</button></li>;
           }) : null
           }
         </ul>
@@ -57,4 +77,21 @@ componentDidMount () {
   }
 }
 
-export default Amazon;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    savePresent: (payload) => dispatch(savePresent(payload)),
+    changePresent: (payload) => dispatch(changePresent(payload))
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    presents: state.presents,
+    login: state.login
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Amazon);
+
+
+// export default Amazon;
