@@ -16,6 +16,7 @@ import UserFoto from '../components/UserFoto/UserFoto';
 
 class AccountPage extends Component {
   state = {
+    isAvatar: '',
     edit: false,
     userName: this.props.userName,
     userFamilyName: this.props.userFamilyName,
@@ -71,9 +72,7 @@ class AccountPage extends Component {
   render() {
     let foto;
     const avatar = localStorage.getItem('avatar');
-    console.log(avatar, 'avataaaaaaaaaaaaaaaaaaaaar');
-
-    this.props.userAvatar ? (foto = avatar) : (foto = 'http://localhost:5000/images/present.png');
+     foto = avatar ? avatar : 'http://localhost:5000/images/present.png'
 
     return (
       <div>
@@ -82,7 +81,7 @@ class AccountPage extends Component {
           <div className="col s5">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={foto} alt="" />
+                <img className="activator" src={foto} alt="http://localhost:5000/images/present.png" />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">

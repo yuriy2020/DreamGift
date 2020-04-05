@@ -30,6 +30,7 @@ class Navbar extends React.Component {
     if (json.res === true) {
       this.props.isAuth(false);
     }
+    localStorage.clear();
   }
 
   render() {
