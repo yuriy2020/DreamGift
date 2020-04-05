@@ -46,7 +46,7 @@ class AccountPage extends Component {
     this.props.userEmailFunc(userEmail);
     this.props.userInfoFunc(userInfo);
     const presents = localStorage.getItem('presents');
-    if (presents.length) {
+    if (presents) {
       this.props.changePresent(JSON.parse(presents));
     }
   }

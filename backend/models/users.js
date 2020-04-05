@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   userMiddleName: { type: String },
   userEmail: { type: String },
   userInfo: { type: String },
-  userAvatar:{type:String, default:'defaultAVA.png'},
+  userAvatar:{type:String },
   userPhoto: {type: Array}
 });
 
