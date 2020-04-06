@@ -38,19 +38,22 @@ class Presents extends React.Component {
   render() {
     return (
       <>
-     <h3>Wishlist</h3><br></br>
-      <div>
-        <input onChange={this.handleChange} value={this.state.present} name="present" type="text" placeholder='название подарка'/><br></br>
-        <input onChange={this.handleChange} value={this.state.href} name="href" placeholder='ссылка'/>
-        <button
-          onClick={() => {
-            this.addPresent();
-          }}
-        >
-          Добавить подарок
+        
+        {/* <div className="row">
+          <div className='col s5'> */}
+            <h5>Wishlist</h5><br></br>
+            <input onChange={this.handleChange} value={this.state.present} name="present" type="text" placeholder='название подарка' /><br></br>
+            <input onChange={this.handleChange} value={this.state.href} name="href" placeholder='ссылка' />
+            <button className="btn-small"
+              onClick={() => {
+                this.addPresent();
+              }}
+            >
+              Добавить подарок
         </button>
-        <List />
-      </div>
+            <List />
+          {/* </div> */}
+        {/* </div> */}
       </>
     );
   }

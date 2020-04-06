@@ -26,55 +26,64 @@ class Task extends React.Component {
     })
   };
 
-returnList = () => {
-  this.setState({
-    change: false
-  })
-}
+  returnList = () => {
+    this.setState({
+      change: false
+    })
+  }
 
-async deletePresent(id) {
-  const newPresents = this.props.presents.filter((item) => item.id !== id);
-  await this.props.changePresent(newPresents);
-  await fetch('/savepresents', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset = utf-8' },
-    body: JSON.stringify({ presents: newPresents, login: this.props.login })
-  });
-  localStorage.setItem('presents', JSON.stringify(newPresents));
-};
+  async deletePresent(id) {
+    const newPresents = this.props.presents.filter((item) => item.id !== id);
+    await this.props.changePresent(newPresents);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: newPresents, login: this.props.login })
+    });
+    localStorage.setItem('presents', JSON.stringify(newPresents));
+  };
 
-async changePresent(oldName, newName) {
-  const newPresents = this.props.presents.slice();
-  newPresents.map((item) => {
-    if (item.value === oldName) {
-      item.value = newName
-    };
-    if (item.href === oldName) {
-      item.href = newName
-    }
-  });
-  this.props.changePresent(newPresents);
-  await fetch('/savepresents', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset = utf-8' },
-    body: JSON.stringify({ presents: newPresents, login: this.props.login })
-  });
-  localStorage.setItem('presents', JSON.stringify(this.props.presents));
-}
+  async changePresent(oldName, newName) {
+    const newPresents = this.props.presents.slice();
+    newPresents.map((item) => {
+      if (item.value === oldName) {
+        item.value = newName
+      };
+      if (item.href === oldName) {
+        item.href = newName
+      }
+    });
+    this.props.changePresent(newPresents);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: newPresents, login: this.props.login })
+    });
+    localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  }
 
   render() {
     if (!this.state.change) {
       return (
         <>
-          <li id={this.props.id} key={this.props.id}>
-            {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
-          </li>
-          <button id={this.props.id} onClick={() => { return this.deletePresent(this.props.id) }}>
-            Удалить подарок
-          </button>
-          <button id={this.props.id} onClick={() => { return this.changeName() }}>
-            Изменить подарок
-          </button>
+          <div className='row'>
+            <div className='col s10'>
+              <li id={this.props.id} key={this.props.id}>
+                {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
+              </li>
+            </div>
+            <div className='col s1'>
+              <button id={this.props.id} onClick={() => { return this.changeName() }} className='btn-small'>
+                <i class="small material-icons">create</i>
+              </button>
+            </div>
+            <div className='col s1'>
+              <button id={this.props.id} onClick={() => { return this.deletePresent(this.props.id) }}
+                className='btn-small'><i class="small material-icons">delete</i>
+
+              </button>
+            </div>
+          </div>
         </>
       );
     } else {
@@ -82,10 +91,10 @@ async changePresent(oldName, newName) {
         <>
           <li id={this.props.id} key={this.props.id}>
           </li>
-          <input type="text" name='newName' onChange={this.handleChange} placeholder={this.props.name}/>
-          <input type="text" name='newHref' onChange={this.handleChange} placeholder={this.props.href}/>
-          <button id={this.props.id} onClick={() => {this.changePresent(this.props.name, this.state.newName); this.changePresent(this.props.href, this.state.newHref); this.returnList()}}>
-          Сохранить
+          <input type="text" name='newName' onChange={this.handleChange} placeholder={this.props.name} />
+          <input type="text" name='newHref' onChange={this.handleChange} placeholder={this.props.href} />
+          <button id={this.props.id} onClick={() => { this.changePresent(this.props.name, this.state.newName); this.changePresent(this.props.href, this.state.newHref); this.returnList() }}>
+            Сохранить
           </button>
         </>
       )

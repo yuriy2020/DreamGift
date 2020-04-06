@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './css/AccountPage.css'
 import {
   userName,
   userFamilyName,
@@ -113,9 +114,9 @@ class AccountPage extends Component {
       <div>
         <div className="row">
           {/* userFoto */}
-          <div className="col s5">
+          <div className="col s6">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image waves-effect waves-block waves-light img_crop">
                 <img
                   className="activator"
                   src={foto}
@@ -150,14 +151,26 @@ class AccountPage extends Component {
                 <hr />
                 <p>{this.props.userInfo}</p>
               </span>
+
+ {/* Edit icon  */}
+            
+              <button className="waves-effect waves-light btn teal darken-4 " onClick={() => this.toggleUserEdit()}>
+                <i className="material-icons">brush</i>
+              </button>
+          
             </div>
+
           </div>
-          {/* Edit  */}
-          <div className="col s1">
-            <button className="waves-effect waves-light btn" onClick={() => this.toggleUserEdit()}>
-              <i className="material-icons">brush</i>
-            </button>
+
+          <div className="col s6">
+            <Presents />
           </div>
+          <div className='col s1'>
+
+           
+
+          </div>
+
         </div>
         <div>
           {/* Hashtags */}
@@ -170,8 +183,8 @@ class AccountPage extends Component {
               );
             })
           ) : (
-            <></>
-          )}
+              <></>
+            )}
           <button
             className="waves-effect waves-light btn"
             onClick={() => this.props.changeModal(true)}
@@ -249,7 +262,10 @@ class AccountPage extends Component {
             </form>
           </div>
         ) : null}
-        <Presents />
+
+
+
+
       </div>
     );
   }
