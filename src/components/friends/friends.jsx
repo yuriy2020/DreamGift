@@ -1,0 +1,71 @@
+import React from 'react';
+
+export default class Friends extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      login: undefined,
+      friendName: '',
+      userName: undefined
+
+    };
+  }
+
+  componentDidMount() {
+    this.friend()
+  }
+
+  login = (event) => {
+    this.setState({
+     login: event.target.value
+    });
+  };
+
+  async friend() {
+     let response = await fetch('/friendsSearch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      // body: JSON.stringify({ login: this.state.login })
+    });
+
+    let result = await response.json();
+    this.setState({
+      friendName: result
+    })
+    console.log(result);
+
+  }
+
+  searchFromList () {
+    let newarr = this.state.friendName.slice()
+    const res = newarr.filter((item) => item.login === this.state.login);
+    console.log(res);
+     if (res.length > 0) {  this.setState({
+      userName: res[0].login
+    })} else {
+      {  this.setState({
+        userName: "Нет такой буквы !"
+      })} 
+    }
+  
+   
+  }
+
+  render() {
+  const {login} = this.state
+    return (
+      <>
+<input onChange={(e) => this.login(e)} name='login' placeholder='Введите логин'></input>
+<button onClick={() => this.searchFromList()}>Search</button>
+    <div>{this.state.userName}</div>
+<ul>
+          {this.state.friendName.length ? this.state.friendName.map((item, index) => {
+            return <li>   <a href={`/${item.login}`}>Пользователь: {item.login}</a>
+           </li>;
+          }) : null
+          }
+        </ul>
+      </>
+    );
+      }}

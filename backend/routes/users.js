@@ -93,4 +93,11 @@ router.post('/changeinfo', async (req, res) => {
   res.json();
 });
 
+router.post('/friendsSearch', async (req, res) => {
+  let user = await User.find();
+  
+
+  res.json(user);
+});
+
 module.exports = router;
