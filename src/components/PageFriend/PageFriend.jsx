@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class PageFriend extends Component {
   state = {
-
     isAvatar: '',
     edit: false,
     userName: undefined,
@@ -11,29 +10,34 @@ class PageFriend extends Component {
     userEmail: undefined,
     userInfo: undefined,
     userAvatar: undefined,
+    login: '',
+    accountHeshtegs: '',
+    presents: []
   };
 
   async searchFriend(id) {
-    if(id) {
-      let url = `/page/${id}`
+    if (id) {
+      let url = `/page/${id}`;
       let response = await fetch(url, {
         method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      body: JSON.stringify({ login: id })
-      })
-  
+        headers: { 'Content-Type': 'application/json; charset = utf-8' },
+        body: JSON.stringify({ login: id }),
+      });
       let result = await response.json();
       this.setState({
         isAvatar: '',
         edit: false,
-        userName: result.userName,
-        userFamilyName: result.userFamilyName,
-        userMiddleName: result.userMiddleName,
-        userEmail: result.userEmail,
-        userInfo: result.userInfo,
-        userAvatar: result.userAvatar,
-      })
-      console.log(result);
+        userName: result.user.userName,
+        userFamilyName: result.user.userFamilyName,
+        userMiddleName: result.user.userMiddleName,
+        userEmail: result.user.userEmail,
+        userInfo: result.user.userInfo,
+        userAvatar: result.user.userAvatar,
+        login: result.user.login,
+        accountHeshtegs: result.user.heshtegs,
+        presents: result.user.presents,
+      });
+      console.log(result, 'resuult');
     }
   }
 
@@ -42,75 +46,72 @@ class PageFriend extends Component {
   }
 
   render() {
-
+    let foto;
+    const avatar = this.state.userAvatar;
+    foto = avatar
+      ? `http://localhost:5000/images/${avatar}`
+      : 'http://localhost:5000/images/avatarka.png';
     return (
       <>
-      <div>azaza</div>
-
-      <div className="row">
+        <div>azaza</div>
+        <div className="row">
           {/* userFoto */}
           <div className="col s6">
             <div className="card">
-              {/* <div className="card-image waves-effect waves-block waves-light img_crop">
-                <img
-                  className="activator"
-                  src={foto}
-                  alt="http://localhost:5000/images/present.png"
-                />
-              </div> */}
-              <div className="card-content">
-                <span className="card-title activator grey-text text-darken-4">
-                  {this.props.userName}
-                </span>
-
-                {/* <UserFoto /> */}
-              </div>
-              <div className="card-reveal">
-                <span className="card-title grey-text text-darken-4">
-                  {this.props.userInfo}
-                  <i className="material-icons right">close</i>
-                </span>
-                <p>{this.props.userInfo}</p>
+              <div className="card-image waves-effect waves-block waves-light img_crop">
+                <img className="activator" src={foto} alt="Photo" />
               </div>
             </div>
           </div>
-          {/* userInfo */}
-          <div className="col s6">
-            <div className="card-panel teal">
-              <span className="white-text">
-                <h4>
-                  {this.props.userName} {this.props.userMiddleName} {this.props.userFamilyName}
-                </h4>
-                <p>Login: {this.props.login}</p>
-                <p>Email: {this.props.userEmail}</p>
-                <hr />
-                <p>{this.props.userInfo}</p>
-              </span>
-
- {/* Edit icon  */}
-            
-              <button className="waves-effect waves-light btn teal darken-4 " onClick={() => this.toggleUserEdit()}>
-                <i className="material-icons">brush</i>
-              </button>
-          
-            </div>
-
-          </div>
-
-          <div className="col s6">
-            {/* <Presents /> */}
-          </div>
-          <div className='col s1'>
-
-           
-
-          </div>
-
         </div>
-      
-     
+        {/* userInfo */}
+        <div className="col s6">
+          <div className="card-panel teal">
+            <span className="white-text">
+              <h4>
+                {this.state.userName} {this.state.userMiddleName} {this.state.userFamilyName}
+              </h4>
+              <p>Login: {this.state.login}</p>
+              <p>Email: {this.state.userEmail}</p>
+              <hr />
+              <p>{this.state.userInfo}</p>
+            </span>
+          </div>
+        </div>
+
+        {/* Hashtags */}
+        <div>
+          {this.state.accountHeshtegs.length ? (
+            this.state.accountHeshtegs.map((tag) => {
+              return (
+                <div className="chip">
+                  <a href={`/user/${tag}`}>{tag}</a>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
+        {/* Presents */}
+        <div>
+          <h3>Wishlist</h3>
+          {this.state.presents.length ? (
+            this.state.presents.map((item) => {
+              return (<>
+                <div>
+                  <strong><span>{item.value}</span></strong><br></br>
+                  <a href={`${item.href}`}>{item.href}</a>
+                </div> <br></br></>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </div>
       </>
-    )}
+    );
+  }
 }
 
 export default PageFriend;

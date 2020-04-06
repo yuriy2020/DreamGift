@@ -54,7 +54,6 @@ export default class Friends extends React.Component {
 
   render() {
 
-=======
     const { login } = this.state;
 
     return (
@@ -68,7 +67,7 @@ export default class Friends extends React.Component {
                 return (
                   <li>
                     {' '}
-                    <a href={`/${item.login}`}>Пользователь: {item.login}</a>
+                    <a href={`/page/${item.login}`} id={item.login}>Пользователь: {item.login}</a>
                   </li>
                 );
               })
