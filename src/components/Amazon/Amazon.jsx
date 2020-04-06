@@ -18,7 +18,9 @@ class Amazon extends React.Component {
 
 
 componentDidMount () {
-  this.AmazonSearch(this.props.id)
+  this.AmazonSearch(this.props.id);
+  const presents = localStorage.getItem('presents');
+  this.props.changePresent(JSON.parse(presents));
 }
 
   async AmazonSearch(t) {
@@ -53,6 +55,7 @@ componentDidMount () {
         present: '',
         href: ''
       });
+      localStorage.setItem('presents', JSON.stringify(this.props.presents));
     
   }
 

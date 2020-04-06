@@ -15,7 +15,7 @@ class List extends React.Component {
                       </>);
               })
           ) : (
-              <div>Add present</div>
+              <div></div>
               )}
       </ul>
     );

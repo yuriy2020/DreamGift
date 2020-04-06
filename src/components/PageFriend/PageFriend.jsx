@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  userName,
-  userFamilyName,
-  userMiddleName,
-  userEmail,
-  userInfo,
-  requestFetchToChangeInfo,
-  changeModal,
-  userAvatar,
-  addHeshtegs,
-  changePresent,
-} from '/home/evgeniy/finalProject/DreamGift/src/redux/actions';
 
-import Presents from '../Presents/Presents';
-import UserFoto from '../UserFoto/UserFoto';
 
 class PageFriend extends Component {
   state = {
+    friendInfo: undefined,
     isAvatar: '',
     edit: false,
     userName: this.props.userName,
@@ -29,25 +15,33 @@ class PageFriend extends Component {
   };
 
   componentDidMount() {
-    const img = localStorage.getItem('avatar');
-    const heshtegs = localStorage.getItem('heshtegs');
-    const userName = localStorage.getItem('userName');
-    const userFamilyName = localStorage.getItem('userFamilyName');
-    const userMiddleName = localStorage.getItem('userMiddleName');
-    const userEmail = localStorage.getItem('userEmail');
-    const userInfo = localStorage.getItem('userInfo');
-    const presents = localStorage.getItem('presents');
+    this.searchFriend(this.props.id)
     }
   
+    async searchFriend(id) {
+      if(id) {
+        let url = `/page//${id}`
+        let response = await fetch(url, {
+          "method": "GET",
+          "headers": {
+            "x-rapidapi-host": "ali-express1.p.rapidapi.com",
+            "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+          }
+        })
+    
+        let result = await response.json();
+        this.setState({
+          friendInfo: result
+        })
+        console.log(result);
+      }
+    
+    }
 
 
 
   render() {
-    let login = this.props.login
-    let foto;
-    const avatar = localStorage.getItem('avatar');
-    foto = avatar ? avatar : 'http://localhost:5000/images/avatarka.png';
-
+   
     return (
       <div>
         <div className="row">
@@ -125,18 +119,6 @@ class PageFriend extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    accountHeshtegs: state.accountHeshtegs,
-    // login: state.login,
-    userName: state.userName,
-    userMiddleName: state.userMiddleName,
-    userFamilyName: state.userFamilyName,
-    userEmail: state.userEmail,
-    userInfo: state.userInfo,
-    userAvatar: state.userAvatar,
-  };
-};
 
 
-export default connect(mapStateToProps)(PageFriend);
+export default PageFriend;
