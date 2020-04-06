@@ -14,29 +14,32 @@ class PageFriend extends Component {
     userAvatar: this.props.userAvatar,
   };
 
+  async searchFriend(id) {
+    if(id) {
+      let url = `/page//${id}`
+      let response = await fetch(url, {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "ali-express1.p.rapidapi.com",
+          "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
+        }
+      })
+  
+      let result = await response.json();
+      this.setState({
+        friendInfo: result
+      })
+      console.log(result);
+    }
+  }
+
   componentDidMount() {
     this.searchFriend(this.props.id)
     }
   
-    async searchFriend(id) {
-      if(id) {
-        let url = `/page//${id}`
-        let response = await fetch(url, {
-          "method": "GET",
-          "headers": {
-            "x-rapidapi-host": "ali-express1.p.rapidapi.com",
-            "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
-          }
-        })
     
-        let result = await response.json();
-        this.setState({
-          friendInfo: result
-        })
-        console.log(result);
-      }
     
-    }
+    
 
 
 
