@@ -7,23 +7,22 @@ export default class Friends extends React.Component {
     this.state = {
       login: undefined,
       friendName: '',
-      userName: undefined
-
+      userName: undefined,
     };
   }
 
   componentDidMount() {
-    this.friend()
+    this.friend();
   }
 
   login = (event) => {
     this.setState({
-     login: event.target.value
+      login: event.target.value,
     });
   };
 
   async friend() {
-     let response = await fetch('/friendsSearch', {
+    let response = await fetch('/friendsSearch', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
       body: JSON.stringify({ login: this.state.login })
@@ -34,37 +33,48 @@ export default class Friends extends React.Component {
       friendName: result.users
     })
     console.log(result, "jkhkjhkjhkjh");
-
   }
 
-  searchFromList () {
-    let newarr = this.state.friendName.slice()
+  searchFromList() {
+    let newarr = this.state.friendName.slice();
     const res = newarr.filter((item) => item.login === this.state.login);
     console.log(res);
-     if (res.length > 0) {  this.setState({
-      userName: res[0].login
-    })} else {
-      {  this.setState({
-        userName: "Нет такой буквы !"
-      })} 
+    if (res.length > 0) {
+      this.setState({
+        userName: res[0].login,
+      });
+    } else {
+      {
+        this.setState({
+          userName: 'Нет такой буквы !',
+        });
+      }
     }
-  
-   
   }
 
   render() {
+
+=======
+    const { login } = this.state;
+
     return (
       <>
-<input onChange={(e) => this.login(e)} name='login' placeholder='Введите логин'></input>
-<button onClick={() => this.searchFromList()}>Search</button>
-    <div>{this.state.userName}</div>
-<ul>
-          {this.state.friendName.length ? this.state.friendName.map((item, index) => {
-            return <li>   <a href={`/${item.login}`}>Пользователь: {item.login}</a>
-           </li>;
-          }) : null
-          }
+        <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
+        <button onClick={() => this.searchFromList()}>Search</button>
+        <div>{this.state.userName}</div>
+        <ul>
+          {this.state.friendName.length
+            ? this.state.friendName.map((item, index) => {
+                return (
+                  <li>
+                    {' '}
+                    <a href={`/${item.login}`}>Пользователь: {item.login}</a>
+                  </li>
+                );
+              })
+            : null}
         </ul>
       </>
     );
-      }}
+  }
+}

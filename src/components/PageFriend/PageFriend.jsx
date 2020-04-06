@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-
 class PageFriend extends Component {
   state = {
+
     isAvatar: '',
     edit: false,
     userName: undefined,
@@ -38,16 +38,11 @@ class PageFriend extends Component {
   }
 
   componentDidMount() {
-    this.searchFriend(this.props.id)
-    }
-  
-    
-    
-    
-
-
+    this.searchFriend(this.props.id);
+  }
 
   render() {
+
     return (
       <>
       <div>azaza</div>
@@ -117,7 +112,5 @@ class PageFriend extends Component {
       </>
     )}
 }
-
-
 
 export default PageFriend;
