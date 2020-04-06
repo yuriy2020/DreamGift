@@ -25,14 +25,14 @@ export default class Friends extends React.Component {
     let response = await fetch('/friendsSearch', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      // body: JSON.stringify({ login: this.state.login })
+      body: JSON.stringify({ login: this.state.login })
     });
 
     let result = await response.json();
     this.setState({
-      friendName: result,
-    });
-    console.log(result);
+      friendName: result.users
+    })
+    console.log(result, "jkhkjhkjhkjh");
   }
 
   searchFromList() {
@@ -53,7 +53,10 @@ export default class Friends extends React.Component {
   }
 
   render() {
+
+=======
     const { login } = this.state;
+
     return (
       <>
         <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>

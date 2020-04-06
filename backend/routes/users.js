@@ -90,13 +90,12 @@ router.post('/changeinfo', async (req, res) => {
 });
 
 router.post('/friendsSearch', async (req, res) => {
-  let user = await User.find();
-  res.json(user);
-});
+  let users = await User.find();
+  res.json({users});})
 
-router.get('/page/:login', async (req, res) => {
+router.post('/page/:login', async (req, res) => {
   const user = await User.findOne({ login: req.params.login });
-  res.json({ user });
+  res.json({user});
 });
 
 module.exports = router;
