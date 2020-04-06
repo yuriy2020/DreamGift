@@ -3,31 +3,35 @@ import React, { Component } from 'react';
 
 class PageFriend extends Component {
   state = {
-    friendInfo: undefined,
     isAvatar: '',
     edit: false,
-    userName: this.props.userName,
-    userFamilyName: this.props.userFamilyName,
-    userMiddleName: this.props.userMiddleName,
-    userEmail: this.props.userEmail,
-    userInfo: this.props.userInfo,
-    userAvatar: this.props.userAvatar,
+    userName: undefined,
+    userFamilyName: undefined,
+    userMiddleName: undefined,
+    userEmail: undefined,
+    userInfo: undefined,
+    userAvatar: undefined,
   };
 
   async searchFriend(id) {
     if(id) {
-      let url = `/page//${id}`
+      let url = `/page/${id}`
       let response = await fetch(url, {
-        "method": "GET",
-        "headers": {
-          "x-rapidapi-host": "ali-express1.p.rapidapi.com",
-          "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
-        }
+        method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ login: id })
       })
   
       let result = await response.json();
       this.setState({
-        friendInfo: result
+        isAvatar: '',
+        edit: false,
+        userName: result.userName,
+        userFamilyName: result.userFamilyName,
+        userMiddleName: result.userMiddleName,
+        userEmail: result.userEmail,
+        userInfo: result.userInfo,
+        userAvatar: result.userAvatar,
       })
       console.log(result);
     }
@@ -44,26 +48,27 @@ class PageFriend extends Component {
 
 
   render() {
-   
     return (
-      <div>
-        <div className="row">
+      <>
+      <div>azaza</div>
+
+      <div className="row">
           {/* userFoto */}
-          <div className="col s5">
+          <div className="col s6">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              {/* <div className="card-image waves-effect waves-block waves-light img_crop">
                 <img
                   className="activator"
                   src={foto}
                   alt="http://localhost:5000/images/present.png"
                 />
-              </div>
+              </div> */}
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
                   {this.props.userName}
                 </span>
 
-                <UserFoto />
+                {/* <UserFoto /> */}
               </div>
               <div className="card-reveal">
                 <span className="card-title grey-text text-darken-4">
@@ -81,45 +86,36 @@ class PageFriend extends Component {
                 <h4>
                   {this.props.userName} {this.props.userMiddleName} {this.props.userFamilyName}
                 </h4>
-                <p>Login: {login}</p>
+                <p>Login: {this.props.login}</p>
                 <p>Email: {this.props.userEmail}</p>
                 <hr />
                 <p>{this.props.userInfo}</p>
               </span>
+
+ {/* Edit icon  */}
+            
+              <button className="waves-effect waves-light btn teal darken-4 " onClick={() => this.toggleUserEdit()}>
+                <i className="material-icons">brush</i>
+              </button>
+          
             </div>
+
           </div>
-          {/* Edit  */}
-          <div className="col s1">
-            <button className="waves-effect waves-light btn" onClick={() => this.toggleUserEdit()}>
-              <i className="material-icons">brush</i>
-            </button>
+
+          <div className="col s6">
+            {/* <Presents /> */}
           </div>
+          <div className='col s1'>
+
+           
+
+          </div>
+
         </div>
-        <div>
-          {/* Hashtags */}
-          {this.props.accountHeshtegs.length ? (
-            this.props.accountHeshtegs.map((tag) => {
-              return (
-                <div className="chip">
-                  <a href={`/user/${tag}`}>{tag}</a>
-                </div>
-              );
-            })
-          ) : (
-            <></>
-          )}
-          <button
-            className="waves-effect waves-light btn"
-            onClick={() => this.props.changeModal(true)}
-          >
-            <i className="material-icons">brush</i>
-          </button>
-        </div>
-        {/* Edit User Form */}
-        <Presents />
-      </div>
-    );
-  }
+      
+     
+      </>
+    )}
 }
 
 
