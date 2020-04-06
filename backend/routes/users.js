@@ -75,31 +75,28 @@ router.post('/savepresents', async (req, res) => {
 
 router.post('/changeinfo', async (req, res) => {
   console.log(req.body);
-  
+
   const entries = Object.entries(req.body);
   console.log(entries);
-  
+
   for (const [key, value] of entries) {
     if (key !== 'login' && value.length) {
       console.log(key, value);
-      
+
       await User.updateOne({ login: req.body.login }, { [key]: value });
     }
-  } 
+  }
   res.json();
 });
 
-<<<<<<< HEAD
 router.post('/friendsSearch', async (req, res) => {
   let user = await User.find();
-  
-
   res.json(user);
-=======
+});
+
 router.get('/page/:login', async (req, res) => {
   const user = await User.findOne({ login: req.params.login });
-  res.json({user});
->>>>>>> ec11fd53082f55105a1d381b35002ad3470b4b74
+  res.json({ user });
 });
 
 module.exports = router;
