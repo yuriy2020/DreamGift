@@ -40,7 +40,7 @@ async deletePresent(id) {
     headers: { 'Content-Type': 'application/json; charset = utf-8' },
     body: JSON.stringify({ presents: newPresents, login: this.props.login })
   });
-  localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  localStorage.setItem('presents', JSON.stringify(newPresents));
 };
 
 async changePresent(oldName, newName) {
