@@ -89,9 +89,17 @@ router.post('/changeinfo', async (req, res) => {
   res.json();
 });
 
+<<<<<<< HEAD
+router.post('/friendsSearch', async (req, res) => {
+  let user = await User.find();
+  
+
+  res.json(user);
+=======
 router.get('/page/:login', async (req, res) => {
   const user = await User.findOne({ login: req.params.login });
   res.json({user});
+>>>>>>> ec11fd53082f55105a1d381b35002ad3470b4b74
 });
 
 module.exports = router;

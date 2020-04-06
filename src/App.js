@@ -12,6 +12,7 @@ import Reseacher from './components/Reseacher/Reseacher';
 import Modal from './components/Modal/Modal'
 import { connect } from 'react-redux';
 import Amazon from '../src/components/Amazon/Amazon'
+import PageFriend from './components/PageFriend/PageFriend';
 
 class App extends React.Component {
 
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route exact path="/reseach" component={Reseacher} />
             <Route exact path="/account" component={AccountPage} />
             <Route path="/user/:id" render={(props) => <Amazon {...props} id={props.match.params.id} />} />
+            <Route path="/:id" render={(props) => <PageFriend {...props} id={props.match.params.id} />} />
           </Switch>
         </div>
       </div>
