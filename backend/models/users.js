@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   userEmail: { type: String },
   userInfo: { type: String },
   userAvatar:{type:String },
-  userPhoto: {type: Array}
+  friends: { type: Array },
 });
 
 module.exports = mongoose.model('users', userSchema);
