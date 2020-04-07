@@ -91,11 +91,34 @@ router.post('/changeinfo', async (req, res) => {
 
 router.post('/friendsSearch', async (req, res) => {
   let users = await User.find();
-  res.json({users});})
+  res.json({ users });
+})
+
+router.post('/addFriend', async (req, res) => {
+  // let user = await User.findOne ({login: req.params.login});
+  // user.friends.push({friends: req.body.friend})
+console.log(req.session.user.login, req.body.friend);
+
+  await User.update(
+    { login: req.session.user.login }, 
+    { $push: { friends: req.body.friend } },
+  );
+
+  res.json({ user });
+})
+
+router.post('/onlyMyFriend', async (req, res) => {
+  let users = await User.findOne({login: req.session.user.login});
+  console.log(users);
+  
+  let myFriend = users.friends
+  res.json({ myFriend });
+})
+
 
 router.post('/page/:login', async (req, res) => {
   const user = await User.findOne({ login: req.params.login });
-  res.json({user});
+  res.json({ user });
 });
 
 module.exports = router;
