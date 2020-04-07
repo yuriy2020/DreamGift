@@ -10,7 +10,8 @@ class Task extends React.Component {
     this.state = {
       change: false,
       newName: '',
-      newHref: ''
+      newHref: '',
+      message: ""
     };
   }
 
@@ -46,6 +47,9 @@ class Task extends React.Component {
       body: JSON.stringify({ presents: givePresent, login: this.props.login })
     });
     localStorage.setItem('presents', JSON.stringify(this.props.presents));
+    this.setState({
+      message: "Этот подарок выбран !"
+    })
   }
 
   async deletePresent(id) {
@@ -57,6 +61,7 @@ class Task extends React.Component {
       body: JSON.stringify({ presents: newPresents, login: this.props.login })
     });
     localStorage.setItem('presents', JSON.stringify(newPresents));
+  
   };
 
   async changePresent(oldName, newName) {
@@ -86,6 +91,7 @@ class Task extends React.Component {
             <div className='col s10'>
               <li id={this.props.id} key={this.props.id}>
                 {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
+                {this.state.message}
               </li>
             </div>
             <div className='col s1'>
