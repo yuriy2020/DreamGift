@@ -136,6 +136,7 @@ export default class Friends extends React.Component {
                 return (
                   <li>
                     <a href={`/page/${item}`} id={item}>
+                    <i class="material-icons">face</i>
                       Пользователь: {item}
                     </a>
                     <button onClick={this.deleteFriend}>Удалить из друзей</button>

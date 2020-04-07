@@ -32,6 +32,22 @@ class Task extends React.Component {
     })
   }
 
+  async givePresent(id) {
+    const givePresent = this.props.presents.slice();
+    givePresent.map((item) => {
+      if (item.status === false) {
+        item.status = true
+      };
+    });
+    this.props.changePresent(givePresent);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: givePresent, login: this.props.login })
+    });
+    localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  }
+
   async deletePresent(id) {
     const newPresents = this.props.presents.filter((item) => item.id !== id);
     await this.props.changePresent(newPresents);
@@ -71,6 +87,11 @@ class Task extends React.Component {
               <li id={this.props.id} key={this.props.id}>
                 {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
               </li>
+            </div>
+            <div className='col s1'>
+              <button id={this.props.id} onClick={() => { return this.givePresent(this.props.id) }} className='btn-small'>
+              <i class="small material-icons">done</i>
+              </button>
             </div>
             <div className='col s1'>
               <button id={this.props.id} onClick={() => { return this.changeName() }} className='btn-small'>

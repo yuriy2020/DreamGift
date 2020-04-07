@@ -21,7 +21,7 @@ class Presents extends React.Component {
 
   async addPresent() {
     if (this.state.present.length) {
-      await this.props.savePresent({ value: this.state.present, id: uuidv4(), href: this.state.href });
+      await this.props.savePresent({ value: this.state.present, id: uuidv4(), href: this.state.href, status: false });
       await fetch('/savepresents', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset = utf-8' },
