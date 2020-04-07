@@ -17,6 +17,7 @@ import {
   REQUEST_FETCH_TOCHANGEINFO,
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
+  FRIEND_PAGE
 } from './action-types';
 
 export const isAuth = (payload) => {
@@ -151,3 +152,4 @@ export const userAvatar = (payload) => {
     userAvatar: payload,
   };
 };
+
