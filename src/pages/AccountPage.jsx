@@ -165,11 +165,6 @@ class AccountPage extends Component {
           <div className="col s6">
             <Presents />
           </div>
-          <div className='col s1'>
-
-           
-
-          </div>
 
         </div>
         <div>
@@ -186,7 +181,7 @@ class AccountPage extends Component {
               <></>
             )}
           <button
-            className="waves-effect waves-light btn"
+            className="waves-effect waves-light btn "
             onClick={() => this.props.changeModal(true)}
           >
             <i className="material-icons">brush</i>

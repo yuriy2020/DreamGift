@@ -53,7 +53,6 @@ class PageFriend extends Component {
       : 'http://localhost:5000/images/avatarka.png';
     return (
       <>
-        <div>azaza</div>
         <div className="row">
           {/* userFoto */}
           <div className="col s6">
@@ -90,8 +89,8 @@ class PageFriend extends Component {
               );
             })
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </div>
         {/* Presents */}
         <div>
@@ -105,9 +104,8 @@ class PageFriend extends Component {
                 </div> <br></br></>
               );
             })
-          ) : (
-            <></>
-          )}
+          ) : null
+          }
         </div>
       </>
     );

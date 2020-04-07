@@ -17,11 +17,11 @@ class Amazon extends React.Component {
   }
 
 
-componentDidMount () {
-  this.AmazonSearch(this.props.id);
-  const presents = localStorage.getItem('presents');
-  this.props.changePresent(JSON.parse(presents));
-}
+  componentDidMount() {
+    this.AmazonSearch(this.props.id);
+    const presents = localStorage.getItem('presents');
+    this.props.changePresent(JSON.parse(presents));
+  }
 
   async AmazonSearch(t) {
 
@@ -44,38 +44,39 @@ componentDidMount () {
 
 
   async addPresent(titlePresent, urlPresent) {
-   
-      await this.props.savePresent({ value: titlePresent, id: uuidv4(), href: urlPresent });
-      await fetch('/savepresents', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset = utf-8' },
-        body: JSON.stringify({ presents: this.props.presents, login: this.props.login })
-      });
-      this.setState({
-        present: '',
-        href: ''
-      });
-      localStorage.setItem('presents', JSON.stringify(this.props.presents));
-    
+
+    await this.props.savePresent({ value: titlePresent, id: uuidv4(), href: urlPresent });
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: this.props.presents, login: this.props.login })
+    });
+    this.setState({
+      present: '',
+      href: ''
+    });
+    localStorage.setItem('presents', JSON.stringify(this.props.presents));
+
   }
 
 
   render() {
-   
-    const { text, textAli} = this.state
-    return (
-      <>
-      <div>!!!!!!!!!!!!!!!!!!</div>
-      
-        <ul>
-          {this.state.arrAmazon.length ? this.state.arrAmazon.map((item, index) => {
-            return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a>
-            <button onClick={()=>{this.addPresent(item.title, item.detailPageURL )}}>Добавить в мои подарки</button></li>;
-          }) : null
-          }
-        </ul>
 
-      </>
+    const { text, textAli } = this.state
+    return (
+      <div className="row">
+
+        {this.state.arrAmazon.length ? this.state.arrAmazon.map((item, index) => {
+          return (
+            <div className="col s3" style={{marginTop:10}}>
+              <img src={item.imageUrl} />
+              <p style={{ whiteSpace: "nowrap", overflow:"hidden" }}>{item.title}</p>
+              <button className="btn-small" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
+            </div>
+          )
+        }) : null
+        }
+      </div>
     );
   }
 }
