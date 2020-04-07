@@ -1,0 +1,13 @@
+#myfriendsContainer {
+  border: 1px solid rgb(65, 174, 207);
+  padding: 5%;
+}
+
+#myfriendsContainer p {
+  margin-left: 40%;
+  font-size: large;
+}
+
+#myfriendsContainer ul li {
+  margin-bottom: 10px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './friends.css';
 
 export default class Friends extends React.Component {
   constructor(props) {
@@ -84,8 +85,7 @@ export default class Friends extends React.Component {
       arrPeople.includes(this.state.userName)
     ) {
       res = <button onClick={() => this.addFriend(this.state.userName)}>Добавить</button>;
-    } 
-    else if (this.state.userName === login) {
+    } else if (this.state.userName === login) {
       res = <span> Это вы</span>;
     } else {
       res = <></>;
@@ -106,7 +106,9 @@ export default class Friends extends React.Component {
     return (
       <>
         <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
-        <button className="btn" onClick={() => this.searchFromList()}>Search</button>
+        <button className="btn" onClick={() => this.searchFromList()}>
+          Search
+        </button>
         <div>
           <a href={`/page/${this.state.userName}`} id={this.state.userName}>
             {this.state.userName}
@@ -118,32 +120,41 @@ export default class Friends extends React.Component {
         <ul>
           {this.state.friendName.length
             ? this.state.friendName.map((item, index) => {
+                const photo = item.userAvatar
+                  ? `http://localhost:5000/images/${item.userAvatar}`
+                  : 'http://localhost:5000/images/avatarka.png';
                 return (
                   <li>
-                    <a href={`/page/${item.login}`} id={item.login}> 
-                    <i class="material-icons">face</i>
-                    Пользователь: {item.login}
+                    <a href={`/page/${item.login}`} id={item.login}>
+                      <img src={photo} alt="image" width="30px" height="30px" />
+                      Пользователь: {item.login}
                     </a>
                   </li>
                 );
               })
             : null}
         </ul>
-        <p> Мои друзья:</p>
-        <ul>
-          {this.state.onlyMyfriends.length
-            ? this.state.onlyMyfriends.map((item, index) => {
-                return (
-                  <li>
-                    <a href={`/page/${item}`} id={item}>
-                      Пользователь: {item}
-                    </a>
-                    <button onClick={this.deleteFriend}>Удалить из друзей</button>
-                  </li>
-                );
-              })
-            : null}
-        </ul>
+        <div id="myfriendsContainer">
+          <p> Мои друзья:</p>
+          <ul>
+            {this.state.onlyMyfriends.length
+              ? this.state.onlyMyfriends.map((item, index) => {
+                  const photo = item.userAvatar
+                    ? `http://localhost:5000/images/${item.userAvatar}`
+                    : 'http://localhost:5000/images/avatarka.png';
+                  return (
+                    <li>
+                      <img src={photo} alt="image" width="30px" height="30px" />
+                      <a href={`/page/${item}`} id={item}>
+                        Пользователь: {item}
+                      </a>
+                      <button onClick={this.deleteFriend}>Удалить из друзей</button>
+                    </li>
+                  );
+                })
+              : null}
+          </ul>
+        </div>
       </>
     );
   }
