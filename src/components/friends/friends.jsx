@@ -8,16 +8,14 @@ export default class Friends extends React.Component {
       login: undefined,
       friendName: '',
       userName: undefined,
-      onlyMyfriends: ''
+      onlyMyfriends: '',
     };
   }
 
   componentDidMount() {
     this.friend();
-    this.onlyMyFriend()
+    this.onlyMyFriend();
   }
-
-
 
   login = (event) => {
     this.setState({
@@ -29,14 +27,13 @@ export default class Friends extends React.Component {
     let response = await fetch('/friendsSearch', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      body: JSON.stringify({ login: this.state.login })
+      body: JSON.stringify({ login: this.state.login }),
     });
 
     let result = await response.json();
     this.setState({
-      friendName: result.users
-    })
-    console.log(result, "jkhkjhkjhkjh");
+      friendName: result.users,
+    });
   }
 
   async onlyMyFriend() {
@@ -44,30 +41,23 @@ export default class Friends extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
     });
-
     let result = await response.json();
     this.setState({
-      onlyMyfriends: result.myFriend
-    })
-    console.log(result, "jkhkjhkjhkjh");
+      onlyMyfriends: result.myFriend,
+    });
   }
 
   searchFromList() {
     let newarr = this.state.friendName.slice();
-    console.log(newarr, 'kkkkkkk');
-    
     const res = newarr.filter((item) => item.login === this.state.login);
-    console.log(res, 'rrrrrrr');
     if (res.length > 0) {
       this.setState({
-        userName: res[0].login
+        userName: res[0].login,
       });
     } else {
-      {
-        this.setState({
-          userName: 'Нет такой буквы !',
-        });
-      }
+      this.setState({
+        userName: 'Нет такого пользователя !',
+      });
     }
   }
 
@@ -75,25 +65,54 @@ export default class Friends extends React.Component {
     await fetch('/addFriend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      body: JSON.stringify({friend: friend })
-    }); 
-    
+      body: JSON.stringify({ friend: friend }),
+    });
   }
- 
+
+  renderButton() {
+    const login = localStorage.getItem('login');
+    let arrPeople = [];
+    if (this.state.friendName) {
+      this.state.friendName.map((item) => {
+        arrPeople.push(item.login);
+      });
+    }
+    let res;
+    if (
+      this.state.userName &&
+      this.state.userName !== login &&
+      arrPeople.includes(this.state.userName)
+    ) {
+      res = <button onClick={() => this.addFriend(this.state.userName)}>Добавить</button>;
+    } 
+    else if (this.state.userName === login) {
+      res = <span> Это вы</span>;
+    } else {
+      res = <></>;
+    }
+    return res;
+  }
+
+  async deleteFriend(event) {
+    const login = event.target.previousElementSibling.id;
+    await fetch('/removeFriend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ login }),
+    });
+  }
 
   render() {
-
-    const { userName } = this.state;
-
     return (
       <>
         <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
         <button className="btn" onClick={() => this.searchFromList()}>Search</button>
         <div>
+          <a href={`/page/${this.state.userName}`} id={this.state.userName}>
+            {this.state.userName}
+          </a>
 
-        <a href={`/page/${this.state.userName}`} id={this.state.userName}>{this.state.userName}</a>
-        
-        <button className="btn" onClick={() => this.addFriend(userName)}>Добавить</button>
+          {this.renderButton()}
         </div>
         <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
         <ul>
@@ -110,13 +129,16 @@ export default class Friends extends React.Component {
               })
             : null}
         </ul>
-        <p> !!!! Добавленные друзья пользователя !!!!</p>
+        <p> Мои друзья:</p>
         <ul>
           {this.state.onlyMyfriends.length
             ? this.state.onlyMyfriends.map((item, index) => {
                 return (
                   <li>
-                     <a href={`/page/${item}`} id={item}>Пользователь: {item}</a>
+                    <a href={`/page/${item}`} id={item}>
+                      Пользователь: {item}
+                    </a>
+                    <button onClick={this.deleteFriend}>Удалить из друзей</button>
                   </li>
                 );
               })

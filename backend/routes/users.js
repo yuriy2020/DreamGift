@@ -91,38 +91,34 @@ router.post('/changeinfo', async (req, res) => {
 
 router.post('/friendsSearch', async (req, res) => {
   if (req.session.user) {
-  let users = await User.find();
-  res.json({ users });
+    let users = await User.find();
+    res.json({ users });
   }
-})
+});
 
 router.post('/addFriend', async (req, res) => {
-  let user = await User.findOne({login: req.session.user.login});
-
-  let foundUser = user.friends.find((element) => element === req.body.friend)
-
-console.log(foundUser, req.session.user.login, 'neeeeews');
-
-
-if (foundUser === undefined && foundUser != req.session.user.login) { await User.update(
-  { login: req.session.user.login }, 
-  { $push: { friends: req.body.friend } },
-); 
-
-res.json({ user });} else {
+  let user = await User.findOne({ login: req.session.user.login });
+  let foundUser = user.friends.find((element) => element === req.body.friend);
+  if (foundUser === undefined) {
+    await User.updateOne({ login: req.session.user.login }, { $push: { friends: req.body.friend } });
+  }
   res.json({ user });
-}
- 
-})
+});
+
+router.post('/removeFriend', async (req, res) => {
+  let user = await User.findOne({ login: req.session.user.login });
+  const index = user.friends.indexOf(req.body.login);
+  const newFriends = user.friends.slice();
+  newFriends.splice(index, 1);
+  await User.updateOne({ login: req.session.user.login }, { friends: newFriends });
+  res.json({ newFriends });
+});
 
 router.post('/onlyMyFriend', async (req, res) => {
-  let users = await User.findOne({login: req.session.user.login});
-  // console.log(users);
-  
-  let myFriend = users.friends
+  let users = await User.findOne({ login: req.session.user.login });
+  let myFriend = users.friends;
   res.json({ myFriend });
-})
-
+});
 
 router.post('/page/:login', async (req, res) => {
   const user = await User.findOne({ login: req.params.login });
