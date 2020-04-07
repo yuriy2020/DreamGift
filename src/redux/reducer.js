@@ -14,6 +14,7 @@ import {
   USER_INFO,
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
+  USER_DATES
 } from './action-types';
 
 const initialUserState = {
@@ -29,6 +30,7 @@ const initialUserState = {
   userEmail: '',
   userInfo: '',
   userAvatar:'',
+  userDates:[],
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -116,6 +118,11 @@ export const reducer = (state = initialUserState, action) => {
       return {
         ...state,
         userAvatar:action.userAvatar
+      };
+      case USER_DATES:
+      return {
+        ...state,
+        userDates: [...state.userDates, action.userDates],
       };
     default:
       return state;

@@ -242,9 +242,6 @@ class AccountPage extends Component {
           </div>
         ) : null}
 
-
-
-
       </div>
     );
   }

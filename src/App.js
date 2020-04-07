@@ -29,7 +29,7 @@ class App extends React.Component {
         {this.isModal()}
         <div>
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/" component={HomePage}/>
             <Route exact path="/signup" render={(props) => <Signup {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/reseach" component={Reseacher} />

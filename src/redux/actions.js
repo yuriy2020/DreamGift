@@ -17,7 +17,8 @@ import {
   REQUEST_FETCH_TOCHANGEINFO,
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
-  FRIEND_PAGE
+  FRIEND_PAGE,
+  USER_DATES
 } from './action-types';
 
 export const isAuth = (payload) => {
@@ -150,6 +151,13 @@ export const userAvatar = (payload) => {
   return {
     type: USER_AVATAR,
     userAvatar: payload,
+  };
+};
+
+export const userDates = (payload) => {
+  return {
+    type: USER_DATES,
+    userDates: payload,
   };
 };
 
