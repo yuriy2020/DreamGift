@@ -19,7 +19,7 @@ class Modal extends React.Component {
     const other = this.state.other.split(/\s/);
     const hesh = this.state.other.length ? [...other] : [];
     for (let i = 0; i < activeHeshtegs.length; i++) {
-      if (activeHeshtegs[i].className === 'active') {
+      if (activeHeshtegs[i].className === 'btn') {
         hesh.push(activeHeshtegs[i].value);
       }
     }
@@ -36,10 +36,10 @@ class Modal extends React.Component {
   };
 
   changeStatus = (event) => {
-    if (event.target.className === 'noActive') {
-      event.target.className = 'active';
+    if (event.target.className === 'btn blue lighten-3') {
+      event.target.className = 'btn';
     } else {
-      event.target.className = 'noActive';
+      event.target.className = 'btn blue lighten-3';
     }
   };
 
@@ -56,14 +56,14 @@ class Modal extends React.Component {
         <div>
           <div>
             {this.state.heshtegs.map((item) => (
-              <button className="noActive" onClick={this.changeStatus} value={item}>
+              <button className="btn blue lighten-3" onClick={this.changeStatus} value={item}>
                 {item}
               </button>
             ))}
           </div>
           <input type="text" onChange={this.handleChange} placeholder="other" name="other" />
         </div>
-        <button onClick={this.saveHeshtegs}>Сохранить</button>
+        <button className="btn-small" onClick={this.saveHeshtegs}>Сохранить</button>
       </div>
     );
   }
