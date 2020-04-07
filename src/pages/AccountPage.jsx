@@ -34,7 +34,7 @@ class AccountPage extends Component {
     const img = localStorage.getItem('avatar');
     this.props.userAvatarFunc(img);
     const heshtegs = localStorage.getItem('heshtegs');
-    if (heshtegs.length) {
+    if (heshtegs && heshtegs.length) {
       this.props.addHeshtegs(heshtegs.split(','));
     }
     const userName = localStorage.getItem('userName');

@@ -42,6 +42,7 @@ export default class Friends extends React.Component {
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
     });
     let result = await response.json();
+    localStorage.setItem('friends', result.myFriend);
     this.setState({
       onlyMyfriends: result.myFriend,
     });
@@ -71,6 +72,7 @@ export default class Friends extends React.Component {
     this.setState({
       onlyMyfriends: json.friends,
     });
+    localStorage.setItem('friends', json.friends);
   }
 
   renderButton() {
@@ -110,6 +112,7 @@ export default class Friends extends React.Component {
     this.setState({
       onlyMyfriends: json.newFriends,
     });
+    localStorage.setItem('friends', json.newFriends);
   }
 
   render() {
