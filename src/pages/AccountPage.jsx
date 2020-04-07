@@ -16,6 +16,7 @@ import {
 
 import Presents from '../components/Presents/Presents';
 import UserFoto from '../components/UserFoto/UserFoto';
+import Hashtags from '../components/HashTags/Hashtags';
 
 class AccountPage extends Component {
   state = {
@@ -129,7 +130,10 @@ class AccountPage extends Component {
                 </span>
 
                 <UserFoto />
+                <Hashtags />
+                
               </div>
+
               <div className="card-reveal">
                 <span className="card-title grey-text text-darken-4">
                   {this.props.userInfo}
@@ -152,12 +156,12 @@ class AccountPage extends Component {
                 <p>{this.props.userInfo}</p>
               </span>
 
- {/* Edit icon  */}
-            
+              {/* Edit icon  */}
+
               <button className="waves-effect waves-light btn teal darken-4 " onClick={() => this.toggleUserEdit()}>
                 <i className="material-icons">brush</i>
               </button>
-          
+
             </div>
 
           </div>
@@ -165,28 +169,8 @@ class AccountPage extends Component {
           <div className="col s6">
             <Presents />
           </div>
+        </div>
 
-        </div>
-        <div>
-          {/* Hashtags */}
-          {this.props.accountHeshtegs.length ? (
-            this.props.accountHeshtegs.map((tag) => {
-              return (
-                <div className="chip">
-                  <a href={`/user/${tag}`}>{tag}</a>
-                </div>
-              );
-            })
-          ) : (
-              <></>
-            )}
-          <button
-            className="waves-effect waves-light btn "
-            onClick={() => this.props.changeModal(true)}
-          >
-            <i className="material-icons">brush</i>
-          </button>
-        </div>
         {/* Edit User Form */}
         {this.state.edit ? (
           <div>

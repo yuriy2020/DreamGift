@@ -5,9 +5,16 @@ import Friends from '../components/friends/friends'
 export default class HomePage extends Component {
     render() {
         return (
-            <div>
-                <img src={logo} alt=""/>
-                <Friends />
+            <div className='row'>
+                <div className="col s5">
+                    <Friends />
+                </div>
+                <div className="col s6 ">
+                    <img src={logo} alt="" />
+
+                </div>
+
+
             </div>
         )
     }
