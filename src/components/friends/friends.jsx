@@ -53,12 +53,14 @@ export default class Friends extends React.Component {
   }
 
   searchFromList() {
-    let newarr = this.state.onlyMyfriends.slice();
+    let newarr = this.state.friendName.slice();
+    console.log(newarr, 'kkkkkkk');
+    
     const res = newarr.filter((item) => item.login === this.state.login);
-    console.log(res);
+    console.log(res, 'rrrrrrr');
     if (res.length > 0) {
       this.setState({
-        userName: res[0].login,
+        userName: res[0].login
       });
     } else {
       {
@@ -73,7 +75,7 @@ export default class Friends extends React.Component {
     await fetch('/addFriend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      body: JSON.stringify({ login: this.state.login, friend: friend })
+      body: JSON.stringify({friend: friend })
     }); 
     
   }
@@ -81,13 +83,19 @@ export default class Friends extends React.Component {
 
   render() {
 
-    const { login } = this.state;
+    const { userName } = this.state;
 
     return (
       <>
         <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
         <button onClick={() => this.searchFromList()}>Search</button>
-        <div>{this.state.userName}</div>
+        <div>
+
+        <a href={`/page/${this.state.userName}`} id={this.state.userName}>{this.state.userName}</a>
+        
+        <button onClick={() => this.addFriend(userName)}>Добавить</button>
+        </div>
+        <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
         <ul>
           {this.state.friendName.length
             ? this.state.friendName.map((item, index) => {
@@ -95,18 +103,18 @@ export default class Friends extends React.Component {
                   <li>
                     {' '}
                     <a href={`/page/${item.login}`} id={item.login}>Пользователь: {item.login}</a>
-                    <button onClick={() => this.addFriend(item.login)}>Добавить</button>
                   </li>
                 );
               })
             : null}
         </ul>
+        <p> !!!! Добавленные друзья пользователя !!!!</p>
         <ul>
           {this.state.onlyMyfriends.length
             ? this.state.onlyMyfriends.map((item, index) => {
                 return (
                   <li>
-                    {item}
+                     <a href={`/page/${item}`} id={item}>Пользователь: {item}</a>
                   </li>
                 );
               })
