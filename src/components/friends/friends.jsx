@@ -8,12 +8,16 @@ export default class Friends extends React.Component {
       login: undefined,
       friendName: '',
       userName: undefined,
+      onlyMyfriends: ''
     };
   }
 
   componentDidMount() {
     this.friend();
+    this.onlyMyFriend()
   }
+
+
 
   login = (event) => {
     this.setState({
@@ -35,8 +39,21 @@ export default class Friends extends React.Component {
     console.log(result, "jkhkjhkjhkjh");
   }
 
+  async onlyMyFriend() {
+    let response = await fetch('/onlyMyFriend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+    });
+
+    let result = await response.json();
+    this.setState({
+      onlyMyfriends: result.myFriend
+    })
+    console.log(result, "jkhkjhkjhkjh");
+  }
+
   searchFromList() {
-    let newarr = this.state.friendName.slice();
+    let newarr = this.state.onlyMyfriends.slice();
     const res = newarr.filter((item) => item.login === this.state.login);
     console.log(res);
     if (res.length > 0) {
@@ -51,6 +68,16 @@ export default class Friends extends React.Component {
       }
     }
   }
+
+  async addFriend(friend) {
+    await fetch('/addFriend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ login: this.state.login, friend: friend })
+    }); 
+    
+  }
+ 
 
   render() {
 
@@ -68,6 +95,18 @@ export default class Friends extends React.Component {
                   <li>
                     {' '}
                     <a href={`/page/${item.login}`} id={item.login}>Пользователь: {item.login}</a>
+                    <button onClick={() => this.addFriend(item.login)}>Добавить</button>
+                  </li>
+                );
+              })
+            : null}
+        </ul>
+        <ul>
+          {this.state.onlyMyfriends.length
+            ? this.state.onlyMyfriends.map((item, index) => {
+                return (
+                  <li>
+                    {item}
                   </li>
                 );
               })
