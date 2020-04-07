@@ -101,8 +101,9 @@ router.post('/addFriend', async (req, res) => {
   let foundUser = user.friends.find((element) => element === req.body.friend);
   if (foundUser === undefined) {
     await User.updateOne({ login: req.session.user.login }, { $push: { friends: req.body.friend } });
-  }
-  res.json({ user });
+  };
+  const updatedUser = await User.findOne({ login: req.session.user.login });
+  res.json({ friends: updatedUser.friends });
 });
 
 router.post('/removeFriend', async (req, res) => {

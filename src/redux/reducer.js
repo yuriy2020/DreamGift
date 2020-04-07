@@ -29,6 +29,7 @@ const initialUserState = {
   userEmail: '',
   userInfo: '',
   userAvatar:'',
+  friends: []
 };
 
 export const reducer = (state = initialUserState, action) => {
