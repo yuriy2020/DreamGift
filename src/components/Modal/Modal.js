@@ -8,7 +8,7 @@ class Modal extends React.Component {
     super(props);
 
     this.state = {
-      heshtegs: ['спорт', 'техника', 'косметика', 'настольные игры', 'музыка', 'готовка'],
+      heshtegs: ['toothbrush', 'dron', 'pillow', 'laptop', 'headphones', 'игрушки'],
       other: ''
     };
   }
@@ -21,7 +21,7 @@ class Modal extends React.Component {
     for (let i = 0; i < activeHeshtegs.length; i++) {
       if (activeHeshtegs[i].className === 'btn') {
         hesh.push(activeHeshtegs[i].value);
-      }
+      } 
     }
     this.props.addHeshtegs(hesh);
     localStorage.setItem('heshtegs', hesh);
