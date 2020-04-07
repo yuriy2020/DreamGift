@@ -13,7 +13,7 @@ import {
   USER_EMAIL,
   USER_INFO,
   RECEIVE_FETCH_TOCHANGEINFO,
-  USER_AVATAR
+  USER_AVATAR,
 } from './action-types';
 
 const initialUserState = {

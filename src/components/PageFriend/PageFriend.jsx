@@ -24,7 +24,7 @@ class PageFriend extends Component {
         body: JSON.stringify({ login: id }),
       });
       let result = await response.json();
-      this.setState({
+      await this.setState({
         isAvatar: '',
         edit: false,
         userName: result.user.userName,
@@ -37,6 +37,7 @@ class PageFriend extends Component {
         accountHeshtegs: result.user.heshtegs,
         presents: result.user.presents,
       });
+      localStorage.setItem('friendPhoto', this.state.userAvatar);
       console.log(result, 'resuult');
     }
   }
@@ -47,10 +48,8 @@ class PageFriend extends Component {
 
   render() {
     let foto;
-    const avatar = this.state.userAvatar;
-    foto = avatar
-      ? `http://localhost:5000/images/${avatar}`
-      : 'http://localhost:5000/images/avatarka.png';
+    const avatar = localStorage.getItem('friendPhoto');
+    foto = (avatar && avatar !== 'undefined') ? `/images/${avatar}` : 'http://localhost:5000/images/avatarka.png';
     return (
       <>
         <div>azaza</div>
