@@ -88,12 +88,12 @@ export default class Friends extends React.Component {
     return (
       <>
         <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
-        <button onClick={() => this.searchFromList()}>Search</button>
+        <button className="btn" onClick={() => this.searchFromList()}>Search</button>
         <div>
 
         <a href={`/page/${this.state.userName}`} id={this.state.userName}>{this.state.userName}</a>
         
-        <button onClick={() => this.addFriend(userName)}>Добавить</button>
+        <button className="btn" onClick={() => this.addFriend(userName)}>Добавить</button>
         </div>
         <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
         <ul>
@@ -101,8 +101,10 @@ export default class Friends extends React.Component {
             ? this.state.friendName.map((item, index) => {
                 return (
                   <li>
-                    {' '}
-                    <a href={`/page/${item.login}`} id={item.login}>Пользователь: {item.login}</a>
+                    <a href={`/page/${item.login}`} id={item.login}> 
+                    <i class="material-icons">face</i>
+                    Пользователь: {item.login}
+                    </a>
                   </li>
                 );
               })
