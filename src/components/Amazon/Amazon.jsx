@@ -59,19 +59,19 @@ class Amazon extends React.Component {
 
   }
 
-
   render() {
 
     const { text, textAli } = this.state
     return (
       <div className="row">
-
         {this.state.arrAmazon.length ? this.state.arrAmazon.map((item, index) => {
           return (
-            <div className="col s3" style={{marginTop:10}}>
-              <img src={item.imageUrl} />
-              <p style={{ whiteSpace: "nowrap", overflow:"hidden" }}>{item.title}</p>
-              <button className="btn-small" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
+            <div className="col s3" style={{ marginTop: 10 }}>
+              <a href={item.detailPageURL} target='blank' title="Перейти на Amazon">
+                <img src={item.imageUrl} />
+              </a>
+              <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
+              <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
             </div>
           )
         }) : null
