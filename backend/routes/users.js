@@ -95,17 +95,12 @@ router.post('/friendsSearch', async (req, res) => {
 })
 
 router.post('/addFriend', async (req, res) => {
-  // let user = await User.findOne ({login: req.params.login});
-  // user.friends.push({friends: req.body.friend})
-console.log(req.session.user.login, req.body.friend);
-
-  await User.update(
+  const user = await User.updateOne(
     { login: req.session.user.login }, 
     { $push: { friends: req.body.friend } },
   );
-
   res.json({ user });
-})
+});
 
 router.post('/onlyMyFriend', async (req, res) => {
   let users = await User.findOne({login: req.session.user.login});
