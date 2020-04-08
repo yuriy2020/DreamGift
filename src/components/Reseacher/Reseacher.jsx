@@ -35,8 +35,6 @@ export default class Reseacher extends React.Component {
     //   }
     // );
     // const json = await response.json();
-    // console.log(json.edges);
-
     // const text = json.edges.map((item) => {
     //   if (item.node.edge_media_to_caption.edges.length) {
     //     return item.node.edge_media_to_caption.edges[0].node.text;
@@ -110,7 +108,6 @@ export default class Reseacher extends React.Component {
     this.setState({
       arrAmazon: result
     })
-    console.log(result);
   }
 
   async onlyCateg(name) {
@@ -118,8 +115,7 @@ export default class Reseacher extends React.Component {
     this.setState(prevState => ({
       ...prevState,
       newTaskAli: newTasks[0].id
-    }), async () => await this.productOfCategory(this.state.newTaskAli))
-    console.log(newTasks);
+    }),  async () => await this.productOfCategory(this.state.newTaskAli))
   }
 
   async category() {
@@ -135,8 +131,6 @@ export default class Reseacher extends React.Component {
     this.setState({
       arrAliCat: result.categories
     })
-    console.log(result);
-
   }
 
   async productOfCategory(id) {
@@ -154,7 +148,6 @@ export default class Reseacher extends React.Component {
       this.setState({
         arrAliProd: result
       })
-      console.log(result);
     }
 
   }

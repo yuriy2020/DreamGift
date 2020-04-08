@@ -6,8 +6,6 @@ const saltRounds = 10;
 const router = express.Router();
 
 router.post('/signup', async (req, res, next) => {
-  console.log(req.body);
-
   try {
     const { login, email, password } = req.body;
     const user = new User({
@@ -74,15 +72,9 @@ router.post('/savepresents', async (req, res) => {
 });
 
 router.post('/changeinfo', async (req, res) => {
-  console.log(req.body);
-
   const entries = Object.entries(req.body);
-  console.log(entries);
-
   for (const [key, value] of entries) {
-    if (key !== 'login' && value.length) {
-      console.log(key, value);
-
+    if (key !== 'login' && value && value.length ) {
       await User.updateOne({ login: req.body.login }, { [key]: value });
     }
   }
