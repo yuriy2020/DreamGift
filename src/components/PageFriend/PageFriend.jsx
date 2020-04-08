@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import '/home/evgeniy/finalProject/DreamGift/src/components/Presents/components/list/components/Present/Present.css';
+import { connect } from 'react-redux';
+import { changePresent } from '/home/evgeniy/finalProject/DreamGift/src/redux/actions';
 
 class PageFriend extends Component {
   state = {
@@ -13,6 +16,7 @@ class PageFriend extends Component {
     login: '',
     accountHeshtegs: '',
     presents: [],
+    message: "Dobavlen",
     status: '',
   };
 
@@ -100,7 +104,82 @@ class PageFriend extends Component {
     });
   }
 
+  async unGivePresent(id) {
+    const givePresent = this.state.presents.slice();
+
+    console.log(givePresent,'do');
+    
+   givePresent.map((item) => {
+    console.log(this.props.login, 'log', item.friend, 'fr');
+     
+    if (item.id === id && item.friend === this.props.login) {
+   
+   if (item.status === true){
+    item.status = false;
+    item.friend  = "" }
+    }
+
+
+    
+  return item
+  });
+  
+    this.props.changePresent(givePresent);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: givePresent, login: this.state.login })
+    });
+    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  }
+
+  async givePresent(id) {
+    const givePresent = this.state.presents.slice();
+
+    console.log(givePresent,'do');
+    
+   givePresent.map((item) => {
+     
+    if (item.id === id) {
+   
+   if (item.status === false){
+    item.status = true;
+    item.friend  = this.props.login }
+   }
+
+    
+  return item
+  });
+    this.props.changePresent(givePresent);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: givePresent, login: this.state.login })
+    });
+    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  }
+
+getStatus (item) {
+  console.log(item.status, 'statuuuuuus');
+  
+if (item.status === true) {
+  return (<>подарок выбран пользователем {item.friend}
+     <div className='col s1'>
+              <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }} 
+              className='btn-small'>
+              <i class="small material-icons">done</i>
+              </button>
+            </div></>)
+} else {return (<>   <div className='col s1'>
+<button id={item.id} onClick={() => { return this.givePresent(item.id) }} 
+className='btn-small'>
+<i class="small material-icons">done</i>
+</button>
+</div></>)}
+}
+
   render() {
+    let {login, message} = this.state
     let foto;
     const avatar = this.state.userAvatar;
     console.log(avatar, 'avatar in render');
@@ -153,26 +232,38 @@ class PageFriend extends Component {
         {/* Presents */}
         <div>
           <h3>Wishlist</h3>
-          {this.state.presents.length
-            ? this.state.presents.map((item) => {
-                return (
-                  <>
-                    <div>
-                      <strong>
-                        <span>{item.value}</span>
-                      </strong>
-                      <br></br>
-                      <a href={`${item.href}`}>{item.href}</a>
-                    </div>{' '}
-                    <br></br>
-                  </>
-                );
-              })
-            : null}
+          {this.state.presents.length ? (
+            this.state.presents.map((item) => {
+              return (<>
+                <div>
+                  <strong><span>{item.value}</span></strong><br></br>
+                  <a href={`${item.href}`}>{item.href}</a>               
+                </div> <br></br>
+             
+            {this.getStatus(item)}
+                </>
+              );
+            })
+          ) : null
+          }
         </div>
       </>
     );
   }
 }
 
-export default PageFriend;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changePresent: (payload) => dispatch(changePresent(payload)),
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    login: state.login
+  };
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageFriend);
