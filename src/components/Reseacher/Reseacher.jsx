@@ -58,9 +58,9 @@ export default class Reseacher extends React.Component {
     //   return item;
     // });
 
-    
 
-    const all = ['лопата', 'фонарь', 'cапоги', 'Dress']
+
+    const all = ['кружка', 'носки', 'джинсы', 'Dress']
     this.setState({
       heshtegs: all
     });
@@ -88,7 +88,7 @@ export default class Reseacher extends React.Component {
 
   takeText = (e) => {
     this.setState({
-      text: e.target.value,     
+      text: e.target.value,
     })
   }
 
@@ -108,7 +108,6 @@ export default class Reseacher extends React.Component {
       arrAmazon: result
     })
     console.log(result);
-
   }
 
   async onlyCateg(name) {
@@ -116,7 +115,7 @@ export default class Reseacher extends React.Component {
     this.setState(prevState => ({
       ...prevState,
       newTaskAli: newTasks[0].id
-    }),  async () => await this.productOfCategory(this.state.newTaskAli))
+    }), async () => await this.productOfCategory(this.state.newTaskAli))
     console.log(newTasks);
   }
 
@@ -138,7 +137,7 @@ export default class Reseacher extends React.Component {
   }
 
   async productOfCategory(id) {
-    if(id) {
+    if (id) {
       let url = `https://ali-express1.p.rapidapi.com/productsByCategory/${id}?from=0`
       let response = await fetch(url, {
         "method": "GET",
@@ -147,14 +146,14 @@ export default class Reseacher extends React.Component {
           "x-rapidapi-key": "5034190542mshce3429305e9c4d0p1c67f2jsn699c5a3523b3"
         }
       })
-  
+
       let result = await response.json();
       this.setState({
         arrAliProd: result
       })
       console.log(result);
     }
-  
+
   }
 
   render() {
@@ -162,32 +161,57 @@ export default class Reseacher extends React.Component {
     return (
       <>
         <div>
-          Если твоего друга еще нет в нашем приложении, мы можем определить его интересы по профилю
-          в Instagram и помочь тебе с поиском подарка. Тебе нужно всего лишь вписать ник друга, все
-          остальное мы сделаем сами ;)
+          <blockquote>
+            <strong>
+              Если твоего друга еще нет в нашем приложении, мы можем определить его интересы по профилю
+              в Instagram и помочь тебе с поиском подарка.
+              </strong>
+            <br />
+            <strong>
+              Тебе нужно всего лишь вписать ник друга, все
+              остальное мы сделаем сами ;)
+            </strong>
+          </blockquote>
+
         </div>
         <br></br>
-        <input placeholder="username Instagram" name="friendName" onChange={this.handleChange} />
-        <button
-          onClick={() => {
-            this.getHeshtegs();
-          }}
-        >
-          Искать
+        <div className='row'>
+          <div className='col s9'>
+            <input placeholder="username Instagram" name="friendName" onChange={this.handleChange} />
+          </div>
+          <div className='col s3'>
+            <button className='btn'
+              onClick={() => {
+                this.getHeshtegs();
+              }}
+            >
+              Искать
         </button>
+          </div>
+        </div>
         <br></br>
-       
-
         <ul>
+         
           {this.state.heshtegs ? this.state.heshtegs.map((item, index) => {
-            return <li>{item}
-            <button onClick={() => this.AmazonSearch(item)}> Искать на Амазон</button>
-            <button onClick={() => this.onlyCateg(item)}>Искать на али</button>
-           </li>
+            return (
+              <div>
+                <li>
+                  <div className='row'>
+                    <div className='col s4 push-s2' >
+                      {item}
+                    </div>
+                    <div className='col s4' >
+                      <button className="btn-small col pull-s1" onClick={() => this.onlyCateg(item)}>Искать на али</button>
+                      <button className="btn-small" onClick={() => this.AmazonSearch(item)}> Искать на Амазон</button>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            )
           }) : null
           }
         </ul>
-{/* 
+        {/* 
         <input onChange={(e) => this.takeText(e)} name="text"></input>
         <button onClick={() => this.AmazonSearch(text)}>AmazonSearch</button> */}
 
@@ -201,13 +225,13 @@ export default class Reseacher extends React.Component {
         <ul>
           {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {
             return <li>{item.productElements.title.title}<img src={item.productElements.image.imgUrl} />{item.productElements.price.sell_price.formatedAmount}<a href={item.
-action}>Перейти на товар</a></li>;
+              action}>Перейти на товар</a></li>;
           }) : null
           }
         </ul>
 
 
-{/* 
+        {/* 
         {this.renderHeshtegs()} */}
       </>
     );

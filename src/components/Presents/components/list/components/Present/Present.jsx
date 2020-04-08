@@ -88,7 +88,7 @@ class Task extends React.Component {
       return (
         <>
           <div className='row'>
-            <div className='col s10'>
+            <div className='col s9'>
               <li id={this.props.id} key={this.props.id}>
                 {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
                 {this.state.message}

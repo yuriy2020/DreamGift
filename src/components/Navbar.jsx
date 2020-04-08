@@ -58,13 +58,13 @@ class Navbar extends React.Component {
         <nav className='col s12'>
           <ul className='col s6 offset-s9'>
               <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
               <Link to='/account'>{this.props.login}</Link>
               </li>
               <li>
-              <Link to='/reseach'>reseach</Link>
+                <Link to="/">My Friends</Link>
+              </li>
+              <li>
+              <Link to='/reseach'>Insta</Link>
               </li>
               <li>
                 <Link to='/' onClick={() => this.logOut()}>Log out</Link>
