@@ -18,7 +18,10 @@ export default class Reseacher extends React.Component {
 
   componentDidMount() {
     this.category()
+    
   }
+
+
 
   async getHeshtegs() {
     // const response = await fetch(
@@ -60,7 +63,7 @@ export default class Reseacher extends React.Component {
 
     
 
-    const all = ['лопата', 'фонарь', 'cапоги', 'Dress']
+    const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
     this.setState({
       heshtegs: all
     });
@@ -191,12 +194,27 @@ export default class Reseacher extends React.Component {
         <input onChange={(e) => this.takeText(e)} name="text"></input>
         <button onClick={() => this.AmazonSearch(text)}>AmazonSearch</button> */}
 
-        <ul>
+        {/* <ul>
           {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
             return <li>{item.title}<img src={item.imageUrl} /><a href={item.detailPageURL}>Перейти на Амазон</a></li>;
           }) : null
           }
-        </ul>
+        </ul> */}
+
+        <div className="row">
+        {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
+          return (
+            <div className="col s3" style={{ marginTop: 10 }}>
+              <a href={item.detailPageURL} target='blank' title="Перейти на Amazon">
+                <img src={item.imageUrl} />
+              </a>
+              <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
+              <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
+            </div>
+          )
+        }) : null
+        }
+      </div>
 
         <ul>
           {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {

@@ -16,11 +16,8 @@ class PageFriend extends Component {
     login: '',
     accountHeshtegs: '',
     presents: [],
-<<<<<<< HEAD
-    message: ""
-=======
+    message: "Dobavlen",
     status: '',
->>>>>>> b3093b051288f077dd7400dc86f18ef3b862fca6
   };
 
   async searchFriend(id) {
@@ -114,28 +111,41 @@ class PageFriend extends Component {
 
     const givePresent = this.state.presents.slice();
 
-    console.log(givePresent,'sdfsdfsdf');
+    console.log(givePresent,'do');
     
-    givePresent.map((item) => {
-    if (item.id === id && item.status === true) {
-      item.status = false
-    } else {
-      item.status = true
+   givePresent.map((item) => {
+     
+      
+    if (item.id === id) {
+   console.log('111');
+   if (item.status === false){
+      item.status = true }
+      else {item.status = false}
+      
     } 
+
+    
+  return item
   });
     this.props.changePresent(givePresent);
     await fetch('/savepresents', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
-      body: JSON.stringify({ presents: givePresent, login: this.props.login })
+      body: JSON.stringify({ presents: givePresent, login: this.state.login })
     });
-    localStorage.setItem('presents', JSON.stringify(this.props.presents));
-    this.setState({
-      message: "Этот подарок выбран !"
-    })
+    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
   }
 
+getStatus (item) {
+  console.log(item.status, 'statuuuuuus');
+  
+if (item.status === true) {
+  return (<>подарок выбран!</>)
+} else {return (<>azazazaza</>)}
+}
+
   render() {
+    let {login, message} = this.state
     let foto;
     const avatar = this.state.userAvatar;
     console.log(avatar, 'avatar in render');
@@ -201,7 +211,7 @@ class PageFriend extends Component {
               <i class="small material-icons">done</i>
               </button>
             </div>
-            {this.state.message}
+            {this.getStatus(item)}
                 </>
               );
             })

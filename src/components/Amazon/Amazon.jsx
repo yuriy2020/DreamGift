@@ -96,6 +96,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Amazon);
-
-
-// export default Amazon;

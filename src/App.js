@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import Amazon from '../src/components/Amazon/Amazon'
 import PageFriend from './components/PageFriend/PageFriend';
 
+
 class App extends React.Component {
 
   isModal() {
@@ -34,8 +35,8 @@ class App extends React.Component {
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/reseach" component={Reseacher} />
             <Route exact path="/account" component={AccountPage} />
-            <Route path="/user/:id" render={(props) => <Amazon {...props} id={props.match.params.id} />} />
-            <Route path="/page/:id" render={(props) => <PageFriend {...props} id={props.match.params.id} />} />
+            <Route exact path="/user/:id" render={(props) => <Amazon {...props} id={props.match.params.id} />} />
+            <Route exact path="/page/:id" render={(props) => <PageFriend {...props} id={props.match.params.id} />} />
           </Switch>
         </div>
       </div>

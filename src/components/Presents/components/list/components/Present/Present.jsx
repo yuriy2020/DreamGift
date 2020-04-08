@@ -38,7 +38,7 @@ class Task extends React.Component {
     givePresent.map((item) => {
       if (item.status === false) {
         item.status = true
-      } else  {
+      } else {
         item.status = false
       };
     });
@@ -63,7 +63,7 @@ class Task extends React.Component {
       body: JSON.stringify({ presents: newPresents, login: this.props.login })
     });
     localStorage.setItem('presents', JSON.stringify(newPresents));
-  
+
   };
 
   async changePresent(oldName, newName) {
@@ -95,11 +95,6 @@ class Task extends React.Component {
                 {this.props.name} <br></br> <a href={this.props.href}>{this.props.href}</a>
                 {this.state.message}
               </li>
-            </div>
-            <div className='col s1'>
-              <button id={this.props.id} onClick={() => { return this.givePresent(this.props.id) }} className='btn-small'>
-              <i class="small material-icons">done</i>
-              </button>
             </div>
             <div className='col s1'>
               <button id={this.props.id} onClick={() => { return this.changeName() }} className='btn-small'>
