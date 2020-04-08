@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import '/home/evgeniy/finalProject/DreamGift/src/components/Presents/components/list/components/Present/Present.css';
+import { connect } from 'react-redux';
+import { changePresent } from '/home/evgeniy/finalProject/DreamGift/src/redux/actions';
 
 class PageFriend extends Component {
   state = {
@@ -12,7 +15,8 @@ class PageFriend extends Component {
     userAvatar: undefined,
     login: '',
     accountHeshtegs: '',
-    presents: []
+    presents: [],
+    message: ""
   };
 
   async searchFriend(id) {
@@ -48,6 +52,34 @@ class PageFriend extends Component {
         presents: result.user.presents,
       }),  localStorage.setItem('friendPhoto', this.state.userAvatar));
     });
+  }
+
+  async givePresent(id) {
+    // const proverka = this.state.presents.filter((item) => item.id === id);
+    // if(proverka.id === id && proverka.status)
+    
+
+    const givePresent = this.state.presents.slice();
+
+    console.log(givePresent,'sdfsdfsdf');
+    
+    givePresent.map((item) => {
+    if (item.id === id && item.status === true) {
+      item.status = false
+    } else {
+      item.status = true
+    } 
+  });
+    this.props.changePresent(givePresent);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: givePresent, login: this.props.login })
+    });
+    localStorage.setItem('presents', JSON.stringify(this.props.presents));
+    this.setState({
+      message: "Этот подарок выбран !"
+    })
   }
 
   render() {
@@ -104,8 +136,16 @@ class PageFriend extends Component {
               return (<>
                 <div>
                   <strong><span>{item.value}</span></strong><br></br>
-                  <a href={`${item.href}`}>{item.href}</a>
-                </div> <br></br></>
+                  <a href={`${item.href}`}>{item.href}</a>               
+                </div> <br></br>
+                <div className='col s1'>
+              <button id={item.id} onClick={() => { return this.givePresent(item.id) }} 
+              className='btn-small'>
+              <i class="small material-icons">done</i>
+              </button>
+            </div>
+            {this.state.message}
+                </>
               );
             })
           ) : null
@@ -116,4 +156,12 @@ class PageFriend extends Component {
   }
 }
 
-export default PageFriend;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changePresent: (payload) => dispatch(changePresent(payload)),
+  };
+};
+
+
+
+export default connect(null, mapDispatchToProps)(PageFriend);

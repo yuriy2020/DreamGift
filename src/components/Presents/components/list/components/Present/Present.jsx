@@ -38,6 +38,8 @@ class Task extends React.Component {
     givePresent.map((item) => {
       if (item.status === false) {
         item.status = true
+      } else  {
+        item.status = false
       };
     });
     this.props.changePresent(givePresent);
