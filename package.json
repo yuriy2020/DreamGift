@@ -11,6 +11,7 @@
     "qs": "^6.9.3",
     "react": "^16.13.1",
     "react-calendar": "^3.0.1",
+    "react-day-picker": "^7.4.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3"
   }
 }

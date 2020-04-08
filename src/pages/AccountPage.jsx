@@ -12,6 +12,7 @@ import {
   userAvatar,
   addHeshtegs,
   changePresent,
+  userBirthdate
 } from '../redux/actions';
 
 import Presents from '../components/Presents/Presents';
@@ -28,6 +29,7 @@ class AccountPage extends Component {
     userEmail: this.props.userEmail,
     userInfo: this.props.userInfo,
     userAvatar: this.props.userAvatar,
+    userBirthdate: this.props.userBirthdate
   };
 
   componentDidMount() {
@@ -42,10 +44,13 @@ class AccountPage extends Component {
     const userMiddleName = localStorage.getItem('userMiddleName');
     const userEmail = localStorage.getItem('userEmail');
     const userInfo = localStorage.getItem('userInfo');
+    const userBirthdate = localStorage.getItem('userBirthdate');
+    this.props.userBirthdateFunc(userBirthdate)
     this.props.userNameFunc(userName);
     this.props.userMiddleNameFunc(userMiddleName);
     this.props.userFamilyNameFunc(userFamilyName);
     this.props.userEmailFunc(userEmail);
+    this.props.userBirthdateFunc(userBirthdate);
     this.props.userInfoFunc(userInfo);
     const presents = localStorage.getItem('presents');
     if (presents) {
@@ -63,6 +68,11 @@ class AccountPage extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    if (event.target.name === 'userBirthdate') {
+      this.setState({
+        userBirthdate: new Date(event.target.value).toDateString(),
+      })
+    }
   };
 
   changeReduxStateAndDB = (event) => {
@@ -74,26 +84,31 @@ class AccountPage extends Component {
       userEmail,
       userInfo,
       userAvatar,
+      userBirthdate
     } = this.state;
-    if (userName.length) {
+    if (userName && userName.length) {
       this.props.userNameFunc(userName);
       localStorage.setItem('userName', userName);
     }
-    if (userMiddleName.length) {
+    if (userMiddleName && userMiddleName.length) {
       this.props.userMiddleNameFunc(userMiddleName);
       localStorage.setItem('userMiddleName', userMiddleName);
     }
-    if (userFamilyName.length) {
+    if (userFamilyName && userFamilyName.length) {
       this.props.userFamilyNameFunc(userFamilyName);
       localStorage.setItem('userFamilyName', userFamilyName);
     }
-    if (userEmail.length) {
+    if (userEmail && userEmail.length) {
       this.props.userEmailFunc(userEmail);
       localStorage.setItem('userEmail', userEmail);
     }
-    if (userInfo.length) {
+    if (userInfo && userInfo.length) {
       this.props.userInfoFunc(userInfo);
       localStorage.setItem('userInfo', userInfo);
+    }
+    if (userBirthdate) {
+      this.props.userBirthdateFunc(userBirthdate);
+      localStorage.setItem('userBirthdate', userBirthdate);
     }
     this.props.userAvatarFunc(userAvatar);
     this.props.requestFetchToChangeInfo({
@@ -103,6 +118,7 @@ class AccountPage extends Component {
       userMiddleName,
       userEmail,
       userInfo,
+      userBirthdate,
     });
   };
 
@@ -151,6 +167,7 @@ class AccountPage extends Component {
                   {this.props.userName} {this.props.userMiddleName} {this.props.userFamilyName}
                 </h4>
                 <p>Login: {this.props.login}</p>
+                <p>Birthdate: {this.props.userBirthdate}</p>
                 <p>Email: {this.props.userEmail}</p>
                 <hr />
                 <p>{this.props.userInfo}</p>
@@ -209,6 +226,17 @@ class AccountPage extends Component {
                 </div>
               </div>
               <div className="row">
+                <div className="input-field col s10">
+                  <input
+                    id="birthdate"
+                    type="date"
+                    className="validate"
+                    name="userBirthdate"
+                    onChange={(event) => this.changeUserInfo(event)}
+                  />
+                  <label for="birthdate">Дата рождения</label>
+                </div>
+              <div className="row">
                 <div className="input-field col s12">
                   <input
                     id="about_user"
@@ -230,6 +258,7 @@ class AccountPage extends Component {
                     onChange={(event) => this.changeUserInfo(event)}
                   />
                   <label for="email">Email</label>
+                </div>
                 </div>
                 <div className="col s2">
                   <button className="btn waves-effect waves-light" type="submit">
@@ -257,6 +286,7 @@ const mapStateToProps = (state) => {
     userEmail: state.userEmail,
     userInfo: state.userInfo,
     userAvatar: state.userAvatar,
+    userBirthdate: state.userBirthdate
   };
 };
 
@@ -272,6 +302,7 @@ const mapDispatchToProps = (dispatch) => {
     userAvatarFunc: (payload) => dispatch(userAvatar(payload)),
     addHeshtegs: (payload) => dispatch(addHeshtegs(payload)),
     changePresent: (payload) => dispatch(changePresent(payload)),
+    userBirthdateFunc: (payload) => dispatch(userBirthdate(payload)),
   };
 };
 

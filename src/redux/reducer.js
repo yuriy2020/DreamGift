@@ -14,8 +14,10 @@ import {
   USER_INFO,
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
-  USER_DATES
+  USER_DATES,
+  USER_BIRTHDATE
 } from './action-types';
+import { act } from 'react-dom/test-utils';
 
 const initialUserState = {
   auth: false,
@@ -32,6 +34,7 @@ const initialUserState = {
   userAvatar:'',
   friends: [],
   userDates:[],
+  userBirthdate: '',
 };
 
 export const reducer = (state = initialUserState, action) => {
@@ -58,7 +61,8 @@ export const reducer = (state = initialUserState, action) => {
         userMiddleName: action.user.userMiddleName,
         userEmail: action.user.userEmail,
         userInfo: action.user.userInfo,
-        userAvatar: action.user.userAvatar
+        userAvatar: action.user.userAvatar,
+        userBirthdate: action.user.userBirthdate
       };
     case RECEIVE_FETCH_TOSIGNUP:
       return {
@@ -123,7 +127,12 @@ export const reducer = (state = initialUserState, action) => {
       case USER_DATES:
       return {
         ...state,
-        userDates: [...state.userDates, action.userDates],
+        userDates: action.userDates,
+      };
+      case USER_BIRTHDATE:
+      return {
+        ...state,
+        userBirthdate: action.userBirthdate
       };
     default:
       return state;

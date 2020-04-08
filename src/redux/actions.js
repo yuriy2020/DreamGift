@@ -17,8 +17,8 @@ import {
   REQUEST_FETCH_TOCHANGEINFO,
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
-  FRIEND_PAGE,
-  USER_DATES
+  USER_DATES,
+  USER_BIRTHDATE
 } from './action-types';
 
 export const isAuth = (payload) => {
@@ -60,6 +60,9 @@ export const receiveFetchToLogin = (data) => {
   }
   if (data.user.userInfo) {
     localStorage.setItem('userInfo', data.user.userInfo);
+  }
+  if (data.user.userBirthdate) {
+    localStorage.setItem('userBirthdate', new Date(data.user.userBirthdate).toDateString());
   }
   localStorage.setItem('presents', JSON.stringify(data.user.presents));
 
@@ -161,3 +164,9 @@ export const userDates = (payload) => {
   };
 };
 
+export const userBirthdate = (payload) => {
+  return {
+    type: USER_BIRTHDATE,
+    userBirthdate: payload,
+  };
+};

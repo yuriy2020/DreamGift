@@ -14,7 +14,6 @@ class Modal extends React.Component {
   }
 
   saveHeshtegs = async (event) => {
-    console.log(event.target.previousElementSibling.firstChild.children);
     const activeHeshtegs = event.target.previousElementSibling.firstChild.children;
     const other = this.state.other.split(/\s/);
     const hesh = this.state.other.length ? [...other] : [];
