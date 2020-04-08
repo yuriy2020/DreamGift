@@ -104,25 +104,48 @@ class PageFriend extends Component {
     });
   }
 
-  async givePresent(id) {
-    // const proverka = this.state.presents.filter((item) => item.id === id);
-    // if(proverka.id === id && proverka.status)
-    
+  async unGivePresent(id) {
+    const givePresent = this.state.presents.slice();
 
+    console.log(givePresent,'do');
+    
+   givePresent.map((item) => {
+    console.log(this.props.login, 'log', item.friend, 'fr');
+     
+    if (item.id === id && item.friend === this.props.login) {
+   
+   if (item.status === true){
+    item.status = false;
+    item.friend  = "" }
+    }
+
+
+    
+  return item
+  });
+  
+    this.props.changePresent(givePresent);
+    await fetch('/savepresents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ presents: givePresent, login: this.state.login })
+    });
+    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
+  }
+
+  async givePresent(id) {
     const givePresent = this.state.presents.slice();
 
     console.log(givePresent,'do');
     
    givePresent.map((item) => {
      
-      
     if (item.id === id) {
-   console.log('111');
+   
    if (item.status === false){
-      item.status = true }
-      else {item.status = false}
-      
-    } 
+    item.status = true;
+    item.friend  = this.props.login }
+   }
 
     
   return item
@@ -140,8 +163,19 @@ getStatus (item) {
   console.log(item.status, 'statuuuuuus');
   
 if (item.status === true) {
-  return (<>подарок выбран!</>)
-} else {return (<>azazazaza</>)}
+  return (<>подарок выбран пользователем {item.friend}
+     <div className='col s1'>
+              <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }} 
+              className='btn-small'>
+              <i class="small material-icons">done</i>
+              </button>
+            </div></>)
+} else {return (<>   <div className='col s1'>
+<button id={item.id} onClick={() => { return this.givePresent(item.id) }} 
+className='btn-small'>
+<i class="small material-icons">done</i>
+</button>
+</div></>)}
 }
 
   render() {
@@ -205,12 +239,7 @@ if (item.status === true) {
                   <strong><span>{item.value}</span></strong><br></br>
                   <a href={`${item.href}`}>{item.href}</a>               
                 </div> <br></br>
-                <div className='col s1'>
-              <button id={item.id} onClick={() => { return this.givePresent(item.id) }} 
-              className='btn-small'>
-              <i class="small material-icons">done</i>
-              </button>
-            </div>
+             
             {this.getStatus(item)}
                 </>
               );
@@ -229,6 +258,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const mapStateToProps = (state) => {
+  return {
+    login: state.login
+  };
+};
 
 
-export default connect(null, mapDispatchToProps)(PageFriend);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageFriend);
