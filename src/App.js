@@ -4,14 +4,13 @@ import { Route, Switch } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar'
-import AuthPage from './pages/AuthPage'
-import './App.css'
+import Navbar from './components/Navbar';
+import './App.css';
 import AccountPage from './pages/AccountPage';
 import Reseacher from './components/Reseacher/Reseacher';
 import Modal from './components/Modal/Modal'
 import { connect } from 'react-redux';
-import Amazon from '../src/components/Amazon/Amazon'
+import Amazon from '../src/components/Amazon/Amazon';
 import PageFriend from './components/PageFriend/PageFriend';
 
 class App extends React.Component {

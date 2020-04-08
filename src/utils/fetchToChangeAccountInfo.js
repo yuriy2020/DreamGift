@@ -4,7 +4,8 @@ export const fetchToChangeAccountInfo = async (
   userFamilyName,
   userMiddleName,
   userEmail,
-  userInfo
+  userInfo,
+  userBirthdate
 ) => {
   let response = await fetch('/changeinfo', {
     method: 'POST',
@@ -16,6 +17,7 @@ export const fetchToChangeAccountInfo = async (
       userMiddleName,
       userEmail,
       userInfo,
+      userBirthdate
     }),
   });
   let resp = await response.json();

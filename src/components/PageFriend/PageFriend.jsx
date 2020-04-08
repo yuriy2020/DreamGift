@@ -14,6 +14,7 @@ class PageFriend extends Component {
     accountHeshtegs: '',
     presents: [],
     status: '',
+    userBirthday: undefined
   };
 
   async searchFriend(id) {
@@ -44,7 +45,13 @@ class PageFriend extends Component {
         login: result.user.login,
         accountHeshtegs: result.user.heshtegs,
         presents: result.user.presents,
+        userBirthday: result.user.userBirthdate
       }));
+      if (this.state.userBirthday) {
+        this.setState({
+          userBirthday: new Date(this.state.userBirthday).toDateString(),
+        })
+      }
       localStorage.setItem('friendPhoto', this.state.userAvatar);
       const login = localStorage.getItem('login');
       if (login && this.state.login) {
@@ -103,7 +110,6 @@ class PageFriend extends Component {
   render() {
     let foto;
     const avatar = this.state.userAvatar;
-    console.log(avatar, 'avatar in render');
     foto =
       avatar && avatar !== 'undefined'
         ? `http://localhost:5000/images/${avatar}`
@@ -129,6 +135,7 @@ class PageFriend extends Component {
                 {this.state.userName} {this.state.userMiddleName} {this.state.userFamilyName}
               </h4>
               <p>Login: {this.state.login}</p>
+              <p>Birthdate: {this.state.userBirthday}</p>
               <p>Email: {this.state.userEmail}</p>
               <hr />
               <p>{this.state.userInfo}</p>

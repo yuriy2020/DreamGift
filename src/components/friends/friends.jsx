@@ -34,6 +34,8 @@ export default class Friends extends React.Component {
     this.setState({
       friendName: result.users,
     });
+    localStorage.setItem('allUsers', JSON.stringify(result.users))
+    
   }
 
   async onlyMyFriend() {
@@ -76,7 +78,6 @@ export default class Friends extends React.Component {
   }
 
   renderButton() {
-    console.log(this.state.onlyMyfriends, this.state.userName);
     const login = localStorage.getItem('login');
     let arrPeople = [];
     if (this.state.friendName) {
@@ -153,7 +154,6 @@ export default class Friends extends React.Component {
             {this.state.friendName && this.state.onlyMyfriends
               ? this.state.onlyMyfriends.map((item, index) => {
                   const user = this.state.friendName.find((user) => user.login === item);
-                  console.log(this.state.friendName, 'iteeeeeeeeeeeeeem');
                   const photo = user.userAvatar
                     ? `http://localhost:5000/images/${user.userAvatar}`
                     : 'http://localhost:5000/images/avatarka.png';

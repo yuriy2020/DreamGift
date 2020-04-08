@@ -38,7 +38,7 @@ function* fetchSagaChangeInfo(params) {
   try {
     // вызываем функцию фетча с параметрами через запятую
     const isChange = yield call(fetchToChangeAccountInfo, params.data.login, params.data.userName, params.data.userFamilyName, params.data.userMiddleName,
-      params.data.userEmail, params.data.userInfo);
+      params.data.userEmail, params.data.userInfo, params.data.userBirthdate);
     
     // ВАЖНО! кладем результат в action
     yield put(receiveFetchToChangeInfo(isChange));

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   userName: { type: String },
   userFamilyName: { type: String },
   userMiddleName: { type: String },
-  userEmail: { type: String },
+  userBirthdate: { type: Date },
   userInfo: { type: String },
   userAvatar:{type:String },
   friends: { type: Array }

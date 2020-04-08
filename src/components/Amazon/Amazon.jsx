@@ -38,8 +38,6 @@ class Amazon extends React.Component {
     this.setState({
       arrAmazon: result
     })
-    console.log(result);
-
   }
 
 
