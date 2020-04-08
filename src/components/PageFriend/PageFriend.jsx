@@ -16,7 +16,11 @@ class PageFriend extends Component {
     login: '',
     accountHeshtegs: '',
     presents: [],
+<<<<<<< HEAD
     message: ""
+=======
+    status: '',
+>>>>>>> b3093b051288f077dd7400dc86f18ef3b862fca6
   };
 
   async searchFriend(id) {
@@ -28,16 +32,13 @@ class PageFriend extends Component {
         body: JSON.stringify({ login: id }),
       });
       let result = await response.json();
-      return result
-      // console.log(result, 'resuult');
-    
+      return result;
     }
   }
 
   componentDidMount() {
-    this.searchFriend(this.props.id).then(result => {
-      console.log(result)
-      this.setState(prevState => ({
+    this.searchFriend(this.props.id).then((result) => {
+      this.setState((prevState) => ({
         ...prevState,
         isAvatar: '',
         edit: false,
@@ -50,7 +51,59 @@ class PageFriend extends Component {
         login: result.user.login,
         accountHeshtegs: result.user.heshtegs,
         presents: result.user.presents,
-      }),  localStorage.setItem('friendPhoto', this.state.userAvatar));
+      }));
+      localStorage.setItem('friendPhoto', this.state.userAvatar);
+      const login = localStorage.getItem('login');
+      if (login && this.state.login) {
+        const friends = localStorage.getItem('friends').split(',');
+        if (this.state.login !== login) {
+          if (friends && friends.includes(this.state.login) === true) {
+            this.setState({
+              status: 'friend',
+            });
+          } else {
+            this.setState({
+              status: 'notFriend',
+            });
+          }
+        }
+      }
+    });
+  }
+
+  renderButton() {
+    if (this.state.status === 'friend') {
+      return <button className="btn" onClick={() => this.deleteFriend(this.state.login)}>Удалить из друзей</button>;
+    }
+    if (this.state.status === 'notFriend') {
+      return <button className="btn" onClick={() => this.addFriend(this.state.login)}>Добавить в друзья</button>;
+    }
+    return <></>;
+  }
+
+  async addFriend(friend) {
+    const response = await fetch('/addFriend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ friend: friend }),
+    });
+    const json = await response.json();
+    localStorage.setItem('friends', json.friends);
+    this.setState({
+      status: 'friend'
+    })
+  }
+
+  async deleteFriend(login) {
+    const response = await fetch('/removeFriend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset = utf-8' },
+      body: JSON.stringify({ login }),
+    });
+    const json = await response.json();
+    localStorage.setItem('friends', json.newFriends);
+    this.setState({
+      status: 'notFriend'
     });
   }
 
@@ -85,10 +138,14 @@ class PageFriend extends Component {
   render() {
     let foto;
     const avatar = this.state.userAvatar;
-    console.log(avatar, 'avatar in render')
-    foto = (avatar && avatar !== 'undefined') ? `http://localhost:5000/images/${avatar}` : 'http://localhost:5000/images/avatarka.png';
+    console.log(avatar, 'avatar in render');
+    foto =
+      avatar && avatar !== 'undefined'
+        ? `http://localhost:5000/images/${avatar}`
+        : 'http://localhost:5000/images/avatarka.png';
     return (
       <>
+        {this.renderButton()}
         <div className="row">
           {/* userFoto */}
           <div className="col s6">
@@ -125,8 +182,8 @@ class PageFriend extends Component {
               );
             })
           ) : (
-              <></>
-            )}
+            <></>
+          )}
         </div>
         {/* Presents */}
         <div>
