@@ -1,5 +1,6 @@
 import React from 'react';
 import List from './components/list/list';
+
 import { connect } from 'react-redux';
 import { savePresent, changePresent } from '../../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,7 +22,7 @@ class Presents extends React.Component {
 
   async addPresent() {
     if (this.state.present.length) {
-      await this.props.savePresent({ value: this.state.present, id: uuidv4(), href: this.state.href, status: false });
+      await this.props.savePresent({ value: this.state.present, id: uuidv4(), href: this.state.href, status: false, friend: "" });
       await fetch('/savepresents', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset = utf-8' },

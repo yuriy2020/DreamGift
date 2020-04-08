@@ -68,7 +68,7 @@ class Amazon extends React.Component {
               <a href={item.detailPageURL} target='blank' title="Перейти на Amazon">
                 <img src={item.imageUrl} />
               </a>
-              <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
+              <p className='truncate'>{item.title}</p>
               <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
             </div>
           )
@@ -94,6 +94,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Amazon);
-
-
-// export default Amazon;
