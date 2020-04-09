@@ -165,8 +165,9 @@ export const userDates = (payload) => {
 };
 
 export const userBirthdate = (payload) => {
+  const date = payload ? new Date(payload).toDateString() : payload;
   return {
     type: USER_BIRTHDATE,
-    userBirthdate: payload,
+    userBirthdate: date,
   };
 };

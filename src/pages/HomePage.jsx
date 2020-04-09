@@ -2,10 +2,15 @@ import React from 'react';
 import Friends from '../components/friends/friends';
 import Calendar from '../components/Calendar/Calendar';
 import './css/HomePage.css';
+import { connect } from 'react-redux';
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
   
   render() {
+    if (!this.props.auth) {
+      this.props.history.push('/login');
+    };
+
     return (
       <div className="background">
         <div className="opacity">
@@ -22,3 +27,11 @@ export default class HomePage extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(HomePage);
