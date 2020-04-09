@@ -37,21 +37,32 @@ class Signup extends React.Component {
       this.props.changeModal(true);
     }
     return (
+
       <div onChange={this.handleChange}>
-        <input type="text" placeholder="login" name="login" />
-        <input type="email" placeholder="email" name="email" />
-        <input type="password" placeholder="password" name="password" />
-        <button
-          onClick={() => {
-            this.props.requestFetchToSignUp({
-              login: this.state.login,
-              email: this.state.email,
-              password: this.state.password
-            });
-          }}
-        >
-          Sign up
-        </button>
+        <div className='row center login '>
+          <div className='col s5 offset-s3 '>
+            <div className='card teal'>
+            <div class="card-content">
+
+            <input type="text" placeholder="login" name="login" />
+            <input type="email" placeholder="email" name="email" />
+            <input type="password" placeholder="password" name="password" />
+            <button className='btn '
+              onClick={() => {
+                this.props.requestFetchToSignUp({
+                  login: this.state.login,
+                  email: this.state.email,
+                  password: this.state.password
+                });
+              }}
+            >
+              Sign up
+            </button>
+            </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     );
   }
