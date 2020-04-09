@@ -1,0 +1,10 @@
+.opacity{
+    background-color: #eeeeeee6;
+    height: 90vh;
+}
+.background{
+    background-image: url('../../images/logo.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90vh;
+}

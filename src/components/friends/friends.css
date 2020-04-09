@@ -1,0 +1,25 @@
+
+.friend-card {
+  background:#fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.manyCards{
+  display:flex;
+}
+
+.friend-card img{
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  object-position: center
+}
+
+.friend-card button{
+  margin: 20px 0 ;
+}
