@@ -50,7 +50,7 @@ class Modal extends React.Component {
 
   render() {
     return (
-      <div id="modalWindow">
+      <div id="modalWindow" className='modalWindow'>
         <span>Добавь свои интересы</span>
         <div>
           <div>

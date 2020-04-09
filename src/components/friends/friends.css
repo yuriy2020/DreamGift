@@ -1,13 +1,25 @@
-#myfriendsContainer {
-  border: 1px solid rgb(65, 174, 207);
-  padding: 5%;
+
+.friend-card {
+  background:#fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 10px;
 }
 
-#myfriendsContainer p {
-  margin-left: 40%;
-  font-size: large;
+.manyCards{
+  display:flex;
 }
 
-#myfriendsContainer ul li {
-  margin-bottom: 10px;
+.friend-card img{
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  object-position: center
+}
+
+.friend-card button{
+  margin: 20px 0 ;
 }
