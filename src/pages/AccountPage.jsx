@@ -120,6 +120,7 @@ class AccountPage extends Component {
       userInfo,
       userBirthdate,
     });
+    this.toggleUserEdit();
   };
 
   render() {
@@ -226,17 +227,6 @@ class AccountPage extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s10">
-                  <input
-                    id="birthdate"
-                    type="date"
-                    className="validate"
-                    name="userBirthdate"
-                    onChange={(event) => this.changeUserInfo(event)}
-                  />
-                  <label for="birthdate">Дата рождения</label>
-                </div>
-              <div className="row">
                 <div className="input-field col s12">
                   <input
                     id="about_user"
@@ -249,7 +239,18 @@ class AccountPage extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s10">
+                <div className="input-field col s5">
+                  <input
+                    id="birthdate"
+                    type="date"
+                    className="validate"
+                    name="userBirthdate"
+                    onChange={(event) => this.changeUserInfo(event)}
+                  />
+                  <label for="birthdate">Дата рождения</label>
+                </div>
+              
+                <div className="input-field col s5">
                   <input
                     id="email"
                     type="email"
@@ -258,7 +259,7 @@ class AccountPage extends Component {
                     onChange={(event) => this.changeUserInfo(event)}
                   />
                   <label for="email">Email</label>
-                </div>
+                
                 </div>
                 <div className="col s2">
                   <button className="btn waves-effect waves-light" type="submit">
