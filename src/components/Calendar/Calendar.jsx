@@ -28,7 +28,7 @@ class Calendar extends React.Component {
       const all = JSON.parse(localStorage.getItem('allUsers'));
       const obj = {};
       const userObj = {};
-      if (friends) {
+      if (friends && all) {
         const friendsBirthdays = all.filter(
           (item) => friends.includes(item.login) && item.userBirthdate
         );
