@@ -22,3 +22,10 @@
 .btn{
 margin:5px
 }
+
+.heshtegs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}

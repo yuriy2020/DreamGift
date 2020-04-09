@@ -6,7 +6,7 @@ class List extends React.Component {
   render() {
     return (
       <ul>
-          {this.props.presents.length ? (
+          {this.props.presents && this.props.presents.length ? (
               this.props.presents.map((item) => {
                   return (<>
                       <Present

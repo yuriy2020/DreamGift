@@ -1,11 +1,9 @@
 import React from 'react';
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
-import './App.css';
 import AccountPage from './pages/AccountPage';
 import Reseacher from './components/Reseacher/Reseacher';
 import Modal from './components/Modal/Modal'
