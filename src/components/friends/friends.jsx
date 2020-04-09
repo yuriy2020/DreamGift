@@ -1,6 +1,7 @@
 import React from 'react';
 import './friends.css';
 import { connect } from 'react-redux';
+import { getLogin } from '../../redux/actions';
 
 class Friends extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class Friends extends React.Component {
   }
 
   componentDidMount() {
-    this.friend();
     this.onlyMyFriend();
+    this.friend();
   }
 
   login = (event) => {
@@ -50,12 +51,21 @@ class Friends extends React.Component {
       this.setState({
         onlyMyfriends: result.myFriend,
       });
+    } else {
+      const friends = localStorage.getItem('friends');
+      if (friends && friends.length) {
+        this.setState({
+          onlyMyfriends: [...friends],
+        });
+      }
     }
   }
 
   searchFromList() {
     let newarr = this.state.friendName.slice();
-    const res = newarr.filter((item) => item.login === this.state.login);
+    const res = newarr.filter(
+      (item) => item.login.toLowerCase() === this.state.login.toLowerCase()
+    );
     if (res.length > 0) {
       this.setState({
         userName: res[0].login,
@@ -150,7 +160,7 @@ class Friends extends React.Component {
 
           {this.renderButton()}
         </div>
-        <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
+        {/* <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
         <ul>
           {this.state.friendName
             ? this.state.friendName.map((item, index) => {
@@ -167,7 +177,7 @@ class Friends extends React.Component {
                 );
               })
             : null}
-        </ul>
+        </ul> */}
         <div id="myfriendsContainer">
           <h4 className="center "> Мои друзья:</h4>
           <div className="manyCards">
@@ -215,4 +225,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Friends);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getLogin: (payload) => dispatch(getLogin(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Friends);

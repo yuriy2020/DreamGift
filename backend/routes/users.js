@@ -108,11 +108,9 @@ router.post('/removeFriend', async (req, res) => {
 });
 
 router.post('/onlyMyFriend', async (req, res) => {
-  if (req.session.user){
-  let users = await User.findOne({ login: req.session.user.login });
+  let users = await User.findOne({ login: req.body.login });
   let myFriend = users.friends;
   res.json({ myFriend });
-  }
 });
 
 router.post('/page/:login', async (req, res) => {

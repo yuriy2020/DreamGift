@@ -12,7 +12,7 @@ class PageFriend extends Component {
     userEmail: undefined,
     userInfo: undefined,
     userAvatar: undefined,
-    login: '',
+    login: undefined,
     accountHeshtegs: '',
     presents: [],
     message: "Dobavlen",
@@ -72,6 +72,7 @@ class PageFriend extends Component {
         }
       }
     });
+     
   }
 
   renderButton() {
@@ -121,9 +122,6 @@ class PageFriend extends Component {
           item.friend = ""
         }
       }
-
-
-
       return item
     });
 
