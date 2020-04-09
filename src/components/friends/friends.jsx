@@ -85,21 +85,28 @@ export default class Friends extends React.Component {
       });
     };
     if (this.state.userName &&
-    this.state.userName !== login &&
-    this.state.onlyMyfriends &&
-    this.state.onlyMyfriends.indexOf(this.state.userName) !== -1
-  ) {
-    return(<span> Это ваш друг</span>);
-  } if (
+      this.state.userName !== login &&
+      this.state.onlyMyfriends &&
+      this.state.onlyMyfriends.indexOf(this.state.userName) !== -1
+    ) {
+      return (
+            <span> Это ваш друг</span>
+      );
+    } if (
       this.state.userName &&
       this.state.userName !== login &&
       arrPeople.includes(this.state.userName)
     ) {
-      return (<button onClick={() => this.addFriend(this.state.userName)}>Добавить</button>);
+      return (
+<div className='col s4'>
+  <button className='btn-small' onClick={() => this.addFriend(this.state.userName)}>Добавить</button>
+</div>
+      );
+
     } else if (this.state.userName === login) {
-      return(<span> Это вы</span>);
-    } 
-      return(<></>);
+      return (<span> Это вы</span>);
+    }
+    return (<></>);
   }
 
   async deleteFriend(login) {
@@ -118,14 +125,25 @@ export default class Friends extends React.Component {
   render() {
     return (
       <>
-        <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
-        <button className="btn" onClick={() => this.searchFromList()}>
-          Search
+        <div className='row'>
+          <div className='col s10'>
+            <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
+          </div>
+          <div className='col s2'>
+            <button className="btn" onClick={() => this.searchFromList()}>
+              Search
         </button>
-        <div>
+          </div>
+        </div>
+
+
+        <div className='row'>
+          <div className='col s4'>
+
           <a href={`/page/${this.state.userName}`} id={this.state.userName}>
             {this.state.userName}
           </a>
+          </div>
 
           {this.renderButton()}
         </div>
@@ -133,48 +151,60 @@ export default class Friends extends React.Component {
         <ul>
           {this.state.friendName
             ? this.state.friendName.map((item, index) => {
-                const photo = item.userAvatar
-                  ? `http://localhost:5000/images/${item.userAvatar}`
-                  : 'http://localhost:5000/images/avatarka.png';
-                return (
-                  <li>
-                    <a href={`/page/${item.login}`} id={item.login}>
-                      <img src={photo} alt="image" width="30px" height="30px" />
+              const photo = item.userAvatar
+                ? `http://localhost:5000/images/${item.userAvatar}`
+                : 'http://localhost:5000/images/avatarka.png';
+              return (
+                <li>
+                  <a href={`/page/${item.login}`} id={item.login}>
+                    <img src={photo} alt="image" width="30px" height="30px" />
                       Пользователь: {item.login}
-                    </a>
-                  </li>
-                );
-              })
+                  </a>
+                </li>
+              );
+            })
             : null}
         </ul>
         <div id="myfriendsContainer">
-          <p> Мои друзья:</p>
-          <ul>
+          <h4 className='center '> Мои друзья:</h4>
+          <div className='manyCards'>
             {this.state.friendName && this.state.onlyMyfriends
               ? this.state.onlyMyfriends.map((item, index) => {
-                  const user = this.state.friendName.find((user) => user.login === item);
-                  console.log(this.state.friendName, 'iteeeeeeeeeeeeeem');
-                  const photo = user.userAvatar
-                    ? `http://localhost:5000/images/${user.userAvatar}`
-                    : 'http://localhost:5000/images/avatarka.png';
-                  return (
-                    <li>
-                      <img src={photo} alt="image" width="30px" height="30px" />
-                      <a href={`/page/${item}`} id={item}>
-                        Пользователь: {item}
-                      </a>
-                      <button
+                const user = this.state.friendName.find((user) => user.login === item);
+                console.log(this.state.friendName, 'iteeeeeeeeeeeeeem');
+                const photo = user.userAvatar
+                  ? `http://localhost:5000/images/${user.userAvatar}`
+                  : 'http://localhost:5000/images/avatarka.png';
+                return (
+
+                  <div className='friend-card' >
+
+                    <div >
+                      <img src={photo} alt="image" />
+                    </div>
+
+                    <div>
+                      <button className='btn-small'
                         onClick={() => {
                           this.deleteFriend(item);
                         }}
                       >
-                        Удалить из друзей
+                        Удалить
                       </button>
-                    </li>
-                  );
-                })
+                    </div>
+                    <div >
+                      <a href={`/page/${item}`} id={item}>
+                        <strong className='black-text'>{item}</strong>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                );
+              })
               : null}
-          </ul>
+          </div>
         </div>
       </>
     );
