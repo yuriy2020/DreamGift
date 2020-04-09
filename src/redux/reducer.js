@@ -17,7 +17,7 @@ import {
   USER_DATES,
   USER_BIRTHDATE
 } from './action-types';
-import { act } from 'react-dom/test-utils';
+
 
 const initialUserState = {
   auth: false,

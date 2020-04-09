@@ -194,7 +194,7 @@ class PageFriend extends Component {
   }
 
   render() {
-    let { login, message } = this.state
+   
     let foto;
     const avatar = this.state.userAvatar;
     foto =
@@ -209,7 +209,7 @@ class PageFriend extends Component {
           <div className="col s6">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light img_crop">
-                <img className="activator" src={foto} alt="Photo" />
+                <img className="activator" src={foto} alt="" />
               </div>
             </div>
           </div>
