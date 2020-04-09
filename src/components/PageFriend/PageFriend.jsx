@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import '/home/evgeniy/finalProject/DreamGift/src/components/Presents/components/list/components/Present/Present.css';
 import { connect } from 'react-redux';
-import { changePresent } from '/home/evgeniy/finalProject/DreamGift/src/redux/actions';
+import { changePresent } from '../../redux/actions';
 
 class PageFriend extends Component {
   state = {
@@ -113,12 +112,8 @@ class PageFriend extends Component {
 
   async unGivePresent(id) {
     const givePresent = this.state.presents.slice();
-
-    console.log(givePresent,'do');
     
    givePresent.map((item) => {
-    console.log(this.props.login, 'log', item.friend, 'fr');
-     
     if (item.id === id && item.friend === this.props.login) {
    
    if (item.status === true){
@@ -137,14 +132,13 @@ class PageFriend extends Component {
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
       body: JSON.stringify({ presents: givePresent, login: this.state.login })
     });
-    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
+    this.setState({
+      presents: givePresent,
+    });
   }
 
   async givePresent(id) {
     const givePresent = this.state.presents.slice();
-
-    console.log(givePresent,'do');
-    
    givePresent.map((item) => {
      
     if (item.id === id) {
@@ -163,12 +157,12 @@ class PageFriend extends Component {
       headers: { 'Content-Type': 'application/json; charset = utf-8' },
       body: JSON.stringify({ presents: givePresent, login: this.state.login })
     });
-    // localStorage.setItem('presents', JSON.stringify(this.props.presents));
+    this.setState({
+      presents: givePresent,
+    });
   }
 
-getStatus (item) {
-  console.log(item.status, 'statuuuuuus');
-  
+getStatus (item) { 
 if (item.status === true) {
   return (<>подарок выбран пользователем {item.friend}
      <div className='col s1'>
