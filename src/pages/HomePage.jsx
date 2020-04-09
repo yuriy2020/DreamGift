@@ -5,12 +5,14 @@ import './css/HomePage.css';
 import { connect } from 'react-redux';
 
 class HomePage extends React.Component {
-  
   render() {
     if (!this.props.auth) {
-      this.props.history.push('/login');
-    };
-
+      return (
+        <div className="background">
+          <div className="opacity"></div>
+        </div>
+      );
+    }
     return (
       <div className="background">
         <div className="opacity">

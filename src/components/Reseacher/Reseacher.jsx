@@ -18,49 +18,46 @@ export default class Reseacher extends React.Component {
 
   componentDidMount() {
     this.category()
-
   }
 
-
-
   async getHeshtegs() {
-    // const response = await fetch(
-    //   `https://instagramdimashirokovv1.p.rapidapi.com/user/${this.state.friendName}`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'x-rapidapi-host': 'InstagramdimashirokovV1.p.rapidapi.com',
-    //       'x-rapidapi-key': '99d2bc2f27msh29e5bdde481eea8p1947abjsnb6872fabc5dd'
-    //     }
-    //   }
-    // );
-    // const json = await response.json();
-    // const text = json.edges.map((item) => {
-    //   if (item.node.edge_media_to_caption.edges.length) {
-    //     return item.node.edge_media_to_caption.edges[0].node.text;
-    //   }
-    //   return false;
-    // });
-    // text.filter((item) => item !== false);
-    // const all = [];
-    // text.map((item) => {
-    //   for (let i = 0; i < item.length - 1; i++) {
-    //     let word = '';
-    //     if (item[i] === '#') {
-    //       for (let j = i + 1; j < item.length; j++) {
-    //         if (item[j] === ' ' || item[j] === '#') {
-    //           break;
-    //         }
-    //         word += item[j];
-    //       }
-    //       all.push(word);
-    //     }
-    //   }
-    //   return item;
-    // });
+    const response = await fetch(
+      `https://instagramdimashirokovv1.p.rapidapi.com/user/${this.state.friendName}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'InstagramdimashirokovV1.p.rapidapi.com',
+          'x-rapidapi-key': '99d2bc2f27msh29e5bdde481eea8p1947abjsnb6872fabc5dd'
+        }
+      }
+    );
+    const json = await response.json();
+    const text = json.edges.map((item) => {
+      if (item.node.edge_media_to_caption.edges.length) {
+        return item.node.edge_media_to_caption.edges[0].node.text;
+      }
+      return false;
+    });
+    text.filter((item) => item !== false);
+    const all = [];
+    text.map((item) => {
+      for (let i = 0; i < item.length - 1; i++) {
+        let word = '';
+        if (item[i] === '#') {
+          for (let j = i + 1; j < item.length; j++) {
+            if (item[j] === ' ' || item[j] === '#') {
+              break;
+            }
+            word += item[j];
+          }
+          all.push(word);
+        }
+      }
+      return item;
+    });
 
 
-    const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
+    // const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
 
     this.setState({
       heshtegs: all
@@ -73,19 +70,19 @@ export default class Reseacher extends React.Component {
     });
   };
 
-  // renderHeshtegs = () => {
-  //   let heshtegs;
-  //   if (this.state.heshtegs.length) {
-  //     heshtegs = (
-  //       <div>
-  //         {this.state.heshtegs.map((item) => {
-  //           return <li>{item}</li>;
-  //         })}
-  //       </div>
-  //     );
-  //   }
-  //   return heshtegs;
-  // };
+  renderHeshtegs = () => {
+    let heshtegs;
+    if (this.state.heshtegs.length) {
+      heshtegs = (
+        <div>
+          {this.state.heshtegs.map((item) => {
+            return <li>{item}</li>;
+          })}
+        </div>
+      );
+    }
+    return heshtegs;
+  };
 
   takeText = (e) => {
     this.setState({
@@ -243,10 +240,6 @@ export default class Reseacher extends React.Component {
           }) : null
           }
         </ul>
-
-
-        {/* 
-        {this.renderHeshtegs()} */}
       </>
     );
   }

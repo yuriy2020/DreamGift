@@ -18,7 +18,6 @@ import {
   USER_BIRTHDATE
 } from './action-types';
 
-
 const initialUserState = {
   auth: false,
   login: '',
