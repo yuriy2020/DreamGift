@@ -1,3 +1,121 @@
-.login{
-margin-top: 200px
+.overlay {
+  margin-top: 5%;
+}
+
+.overlay .form {
+  margin-top: 15%;
+  width: 450px;
+  min-height: 500px;
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: 0 9px 50px hsla(0, 33%, 1%, 0.31);
+  padding: 2%;
+  background-image: linear-gradient(-225deg, rgb(235, 255, 255) 50%, rgb(248, 145, 145) 50%);
+}
+/* form Container */
+.overlay .form .con {
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+/* the header form form */
+.con header {
+  margin: 2% auto 10% auto;
+  text-align: center;
+}
+/* Login title form form */
+.con header h2 {
+  font-size: 250%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: #3e403f;
+}
+/*  A welcome message or an explanation of the login form */
+.con header p {
+  letter-spacing: 0.05em;
+}
+
+.input-item {
+  background: rgb(0, 0, 0);
+  color: #333;
+  padding: 14.5px 0px 15px 9px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+/* inputs form  */
+.field-set input .form-input {
+  width: 240px;
+  height: 50px;
+
+  margin-top: 2%;
+  padding: 15px;
+
+  font-size: 16px;
+  font-family: 'Abel', sans-serif;
+  color: rgb(6, 23, 61);
+
+  outline: none;
+  border: none;
+
+  border-radius: 0px 5px 5px 0px;
+  transition: 0.2s linear;
+}
+.field-set input #txt-input {
+  width: 250px;
+}
+
+.field-set input:focus {
+  transform: translateX(-2px);
+  border-radius: 5px;
+}
+
+.field-set button {
+  display: inline-block;
+  color: #252537;
+
+  width: 280px;
+  height: 50px;
+
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s linear;
+
+  margin: 7% auto;
+  letter-spacing: 0.05em;
+}
+
+/*     Sign Up button  */
+.log-in:hover {
+  background: rgb(138, 213, 216);
+}
+
+/* buttons hover */
+.field-set button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+}
+
+/* buttons hover Animation */
+.field-set button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
 }

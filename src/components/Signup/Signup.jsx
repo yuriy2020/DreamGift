@@ -38,29 +38,40 @@ class Signup extends React.Component {
     }
     return (
 
-      <div onChange={this.handleChange}>
-        <div className='row center login '>
-          <div className='col s5 offset-s3 '>
-            <div className='card teal'>
-            <div class="card-content">
-
-            <input type="text" placeholder="login" name="login" />
-            <input type="email" placeholder="email" name="email" />
-            <input type="password" placeholder="password" name="password" />
-            <button className='btn '
-              onClick={() => {
+<div onChange={this.handleChange} className="overlay">
+        <div className="form">
+          <div className="con">
+            <header className="head-form">
+              <h2>Sign up</h2>
+            </header>
+            <br></br>
+            <div className="field-set">
+              <input type="text" placeholder="login" name="login" className="form-input" required />
+              <br></br>
+              <input type="email" placeholder="email" name="email" className="form-input" required/>
+              <br></br>
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                className="form-input"
+                id="pwd"
+                required
+              />
+              <br></br>
+              <button
+                className="log-in"
+                onClick={() => {
                 this.props.requestFetchToSignUp({
                   login: this.state.login,
                   email: this.state.email,
                   password: this.state.password
                 });
-              }}
-            >
-              Sign up
-            </button>
+                }}
+              >
+                Sign up
+              </button>
             </div>
-            </div>
-
           </div>
         </div>
       </div>

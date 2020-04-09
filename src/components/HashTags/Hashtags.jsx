@@ -8,7 +8,7 @@ class Hashtags extends Component {
             <div>
                 <div>
                     {/* Hashtags */}
-                    {this.props.accountHeshtegs.length ? (
+                    {this.props.accountHeshtegs && this.props.accountHeshtegs.length ? (
                         this.props.accountHeshtegs.map((tag) => {
                             return (
                                 <div className="chip">

@@ -18,7 +18,7 @@ import {
   RECEIVE_FETCH_TOCHANGEINFO,
   USER_AVATAR,
   USER_DATES,
-  USER_BIRTHDATE
+  USER_BIRTHDATE,
 } from './action-types';
 
 export const isAuth = (payload) => {
@@ -36,42 +36,43 @@ export const getLogin = (payload) => {
 };
 
 export const requestFetchToLogin = (data) => {
+  console.log('feeeeeeeyck!!!');
+  
   return { type: REQUEST_FETCH_TOLOGIN, data };
 };
 
 export const receiveFetchToLogin = (data) => {
-  if (data.user.userAvatar) {
-    localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
+  if (data.user) {
+    if (data.user.userAvatar) {
+      localStorage.setItem('avatar', `/images/${data.user.userAvatar}`);
+    }
+    if (data.user.heshtegs) {
+      localStorage.setItem('heshtegs', data.user.heshtegs);
+    }
+    if (data.user.userName) {
+      localStorage.setItem('userName', data.user.userName);
+    }
+    if (data.user.userFamilyName) {
+      localStorage.setItem('userFamilyName', data.user.userFamilyName);
+    }
+    if (data.user.userMiddleName) {
+      localStorage.setItem('userMiddleName', data.user.userMiddleName);
+    }
+    if (data.user.userEmail) {
+      localStorage.setItem('userEmail', data.user.userEmail);
+    }
+    if (data.user.userInfo) {
+      localStorage.setItem('userInfo', data.user.userInfo);
+    }
+    if (data.user.userBirthdate) {
+      localStorage.setItem('userBirthdate', new Date(data.user.userBirthdate).toDateString());
+    }
+    localStorage.setItem('presents', JSON.stringify(data.user.presents));
   }
-  if (data.user.heshtegs) {
-    localStorage.setItem('heshtegs', data.user.heshtegs);
-  }
-  if (data.user.userName) {
-    localStorage.setItem('userName', data.user.userName);
-  }
-  if (data.user.userFamilyName) {
-    localStorage.setItem('userFamilyName', data.user.userFamilyName);
-  }
-  if (data.user.userMiddleName) {
-    localStorage.setItem('userMiddleName', data.user.userMiddleName);
-  }
-  if (data.user.userEmail) {
-    localStorage.setItem('userEmail', data.user.userEmail);
-  }
-  if (data.user.userInfo) {
-    localStorage.setItem('userInfo', data.user.userInfo);
-  }
-  if (data.user.userBirthdate) {
-    localStorage.setItem('userBirthdate', new Date(data.user.userBirthdate).toDateString());
-  }
-  localStorage.setItem('presents', JSON.stringify(data.user.presents));
-
   return {
     type: RECEIVE_FETCH_TOLOGIN,
     auth: data.auth,
     err: data.err,
-    accountHeshtegs: data.user.heshtegs,
-    presents: data.user.presents,
     user: data.user,
   };
 };
