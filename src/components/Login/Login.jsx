@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  isAuth,
-  getLogin,
-  requestFetchToLogin
-} from '../../redux/actions';
-import './Login.css'
+import { isAuth, getLogin, requestFetchToLogin } from '../../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,7 +15,7 @@ class Login extends React.Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -29,43 +25,53 @@ class Login extends React.Component {
     this.props.history.push('/');
   }
 
-  renderError() {
-    let err;
-    if (this.props.error) {
-      err = <span>Error: {this.props.error}</span>;
-    }
-    return err;
-  }
+  // renderError() {
+  //   let err;
+  //   if (this.props.error) {
+  //     err = <span>Error: {this.props.error}</span>;
+  //   }
+  //   return err;
+  // }
 
   render() {
     if (this.props.auth) {
       this.logIn();
     }
     return (
-      <div onChange={this.handleChange}>
-        {this.renderError()}
-        <div className='row center login '>
-          <div className='col s5 offset-s3 '>
-            <div className='card teal'>
-              <div class="card-content">
-                <input type="text" placeholder="login" name="login" />
-                <input type="password" placeholder="password" name="password" />
-                <button className='btn'
-                  onClick={() =>
-                    this.props.requestFetchToLogin({
-                      login: this.state.login,
-                      password: this.state.password
-                    })
-                  }
-                >
-                  Log in
-            </button>
-
-              </div>
+      <div onChange={this.handleChange} className="overlay">
+        <div className="form">
+          <div className="con">
+            <header className="head-form">
+              <h2>Log In</h2>
+              <p>login here using your username and password</p>
+            </header>
+            <br></br>
+            <div className="field-set">
+              <input type="text" placeholder="login" name="login" className="form-input" required />
+              <br></br>
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                className="form-input"
+                id="pwd"
+                required
+              />
+              <br></br>
+              <button
+                className="log-in"
+                onClick={() =>
+                  this.props.requestFetchToLogin({
+                    login: this.state.login,
+                    password: this.state.password,
+                  })
+                }
+              >
+                Log in
+              </button>
             </div>
           </div>
         </div>
-
       </div>
     );
   }
@@ -74,7 +80,7 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    error: state.error
+    error: state.error,
   };
 };
 
