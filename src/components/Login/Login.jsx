@@ -5,6 +5,7 @@ import {
   getLogin,
   requestFetchToLogin
 } from '../../redux/actions';
+import './Login.css'
 
 class Login extends React.Component {
   constructor(props) {
@@ -42,19 +43,29 @@ class Login extends React.Component {
     }
     return (
       <div onChange={this.handleChange}>
-      {this.renderError()}
-        <input type="text" placeholder="login" name="login" />
-        <input type="password" placeholder="password" name="password" />
-        <button
-          onClick={() =>
-            this.props.requestFetchToLogin({
-              login: this.state.login,
-              password: this.state.password
-            })
-          }
-        >
-          Log in
-        </button>
+        {this.renderError()}
+        <div className='row center login '>
+          <div className='col s5 offset-s3 '>
+            <div className='card teal'>
+              <div class="card-content">
+                <input type="text" placeholder="login" name="login" />
+                <input type="password" placeholder="password" name="password" />
+                <button className='btn'
+                  onClick={() =>
+                    this.props.requestFetchToLogin({
+                      login: this.state.login,
+                      password: this.state.password
+                    })
+                  }
+                >
+                  Log in
+            </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -112,20 +112,21 @@ class PageFriend extends Component {
 
   async unGivePresent(id) {
     const givePresent = this.state.presents.slice();
-    
-   givePresent.map((item) => {
-    if (item.id === id && item.friend === this.props.login) {
-   
-   if (item.status === true){
-    item.status = false;
-    item.friend  = "" }
-    }
+
+    givePresent.map((item) => {
+      if (item.id === id && item.friend === this.props.login) {
+
+        if (item.status === true) {
+          item.status = false;
+          item.friend = ""
+        }
+      }
 
 
-    
-  return item
-  });
-  
+
+      return item
+    });
+
     this.props.changePresent(givePresent);
     await fetch('/savepresents', {
       method: 'POST',
@@ -139,18 +140,19 @@ class PageFriend extends Component {
 
   async givePresent(id) {
     const givePresent = this.state.presents.slice();
-   givePresent.map((item) => {
-     
-    if (item.id === id) {
-   
-   if (item.status === false){
-    item.status = true;
-    item.friend  = this.props.login }
-   }
+    givePresent.map((item) => {
 
-    
-  return item
-  });
+      if (item.id === id) {
+
+        if (item.status === false) {
+          item.status = true;
+          item.friend = this.props.login
+        }
+      }
+
+
+      return item
+    });
     this.props.changePresent(givePresent);
     await fetch('/savepresents', {
       method: 'POST',
@@ -162,25 +164,30 @@ class PageFriend extends Component {
     });
   }
 
-getStatus (item) { 
-if (item.status === true) {
-  return (<>подарок выбран пользователем {item.friend}
-     <div className='col s1'>
-              <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }} 
-              className='btn-small'>
-              <i class="small material-icons">done</i>
-              </button>
-            </div></>)
-} else {return (<>   <div className='col s1'>
-<button id={item.id} onClick={() => { return this.givePresent(item.id) }} 
-className='btn-small'>
-<i class="small material-icons">done</i>
-</button>
-</div></>)}
-}
+  getStatus(item) {
+    if (item.status === true) {
+      return (<>
+     
+      Подарок выбран пользователем {item.friend}
+        
+        <div className='col s1'>
+          <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }}
+            className='btn-small' >
+            <i class="small material-icons">cancel_presentation</i>
+          </button>
+        </div></>)
+    } else {
+      return (<>   <div className='col s1'>
+        <button id={item.id} onClick={() => { return this.givePresent(item.id) }}
+          className='btn-small'>
+          <i class="small material-icons">done</i>
+        </button>
+      </div></>)
+    }
+  }
 
   render() {
-    let {login, message} = this.state
+    let { login, message } = this.state
     let foto;
     const avatar = this.state.userAvatar;
     foto =
@@ -199,22 +206,48 @@ className='btn-small'>
               </div>
             </div>
           </div>
-        </div>
-        {/* userInfo */}
-        <div className="col s6">
-          <div className="card-panel teal">
-            <span className="white-text">
-              <h4>
-                {this.state.userName} {this.state.userMiddleName} {this.state.userFamilyName}
-              </h4>
-              <p>Login: {this.state.login}</p>
-              <p>Birthdate: {this.state.userBirthday}</p>
-              <p>Email: {this.state.userEmail}</p>
-              <hr />
-              <p>{this.state.userInfo}</p>
-            </span>
+
+          {/* userInfo */}
+          <div className="col s6">
+            <div className="card-panel teal">
+              <span className="white-text">
+                <h4>
+                  {this.state.userName} {this.state.userMiddleName} {this.state.userFamilyName}
+                </h4>
+                <p>Login: {this.state.login}</p>
+                <p>Birthdate: {this.state.userBirthday}</p>
+                <p>Email: {this.state.userEmail}</p>
+                <hr />
+                <p>{this.state.userInfo}</p>
+              </span>
+            </div>
           </div>
+
+          {/* Presents */}
+          <div className='col s6'>
+            <div className="row">
+              <h5>Подарки, которые хотел бы получить {this.state.login}</h5>
+              {this.state.presents.length ? (
+                this.state.presents.map((item) => {
+                  return (<>
+                    <div className='col s6'>
+                      <strong><span>{item.value}</span></strong>
+                    </div>
+                    <div className='col s6'>
+                      <a href={`${item.href}`}>{item.href}</a>
+                    </div>
+
+                    {this.getStatus(item)}
+                  </>
+                  );
+                })
+              ) : null
+              }
+            </div>
+          </div>
+
         </div>
+
 
         {/* Hashtags */}
         <div>
@@ -227,26 +260,8 @@ className='btn-small'>
               );
             })
           ) : (
-            <></>
-          )}
-        </div>
-        {/* Presents */}
-        <div>
-          <h3>Wishlist</h3>
-          {this.state.presents.length ? (
-            this.state.presents.map((item) => {
-              return (<>
-                <div>
-                  <strong><span>{item.value}</span></strong><br></br>
-                  <a href={`${item.href}`}>{item.href}</a>               
-                </div> <br></br>
-             
-            {this.getStatus(item)}
-                </>
-              );
-            })
-          ) : null
-          }
+              <></>
+            )}
         </div>
       </>
     );
