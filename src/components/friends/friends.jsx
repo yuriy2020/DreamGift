@@ -95,7 +95,7 @@ class Friends extends React.Component {
     let arrPeople = [];
     if (this.state.friendName) {
       this.state.friendName.map((item) => {
-        arrPeople.push(item.login);
+        return arrPeople.push(item.login);
       });
     }
     if (
@@ -170,7 +170,7 @@ class Friends extends React.Component {
                 return (
                   <li>
                     <a href={`/page/${item.login}`} id={item.login}>
-                      <img src={photo} alt="image" width="30px" height="30px" />
+                      <img src={photo} alt="" width="30px" height="30px" />
                       Пользователь: {item.login}
                     </a>
                   </li>
@@ -190,7 +190,7 @@ class Friends extends React.Component {
                   return (
                     <div className="friend-card">
                       <div>
-                        <img src={photo} alt="image" />
+                        <img src={photo} alt="" />
                       </div>
 
                       <div>

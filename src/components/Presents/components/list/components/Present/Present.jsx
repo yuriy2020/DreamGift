@@ -37,9 +37,9 @@ class Task extends React.Component {
     const givePresent = this.props.presents.slice();
     givePresent.map((item) => {
       if (item.status === false) {
-        item.status = true
+        return item.status = true
       } else {
-        item.status = false
+        return item.status = false
       };
     });
     this.props.changePresent(givePresent);
@@ -70,11 +70,13 @@ class Task extends React.Component {
     const newPresents = this.props.presents.slice();
     newPresents.map((item) => {
       if (item.value === oldName) {
-        item.value = newName
+         item.value = newName
+
       };
-      if (item.href === oldName) {
-        item.href = newName
+       if (item.href === oldName) {
+         item.href = newName
       }
+      return null
     });
     this.props.changePresent(newPresents);
     await fetch('/savepresents', {
@@ -117,7 +119,9 @@ class Task extends React.Component {
           </li>
           <input type="text" name='newName' onChange={this.handleChange} placeholder={this.props.name} />
           <input type="text" name='newHref' onChange={this.handleChange} placeholder={this.props.href} />
-          <button id={this.props.id} onClick={() => { this.changePresent(this.props.name, this.state.newName); this.changePresent(this.props.href, this.state.newHref); this.returnList() }}>
+          <button id={this.props.id} onClick={() => { this.changePresent(this.props.name, this.state.newName) 
+             this.changePresent(this.props.href, this.state.newHref); this.returnList() }}
+             className="btn-small">
             Сохранить
           </button>
         </>
