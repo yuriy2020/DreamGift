@@ -1,7 +1,8 @@
 import React from 'react';
 import './friends.css';
+import { connect } from 'react-redux';
 
-export default class Friends extends React.Component {
+class Friends extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,20 +35,22 @@ export default class Friends extends React.Component {
     this.setState({
       friendName: result.users,
     });
-    localStorage.setItem('allUsers', JSON.stringify(result.users))
-    
+    localStorage.setItem('allUsers', JSON.stringify(result.users));
   }
 
   async onlyMyFriend() {
-    let response = await fetch('/onlyMyFriend', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset = utf-8' },
-    });
-    let result = await response.json();
-    localStorage.setItem('friends', result.myFriend);
-    this.setState({
-      onlyMyfriends: result.myFriend,
-    });
+    if (this.props.login) {
+      let response = await fetch('/onlyMyFriend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset = utf-8' },
+        body: JSON.stringify({ login: this.props.login }),
+      });
+      let result = await response.json();
+      localStorage.setItem('friends', result.myFriend);
+      this.setState({
+        onlyMyfriends: result.myFriend,
+      });
+    }
   }
 
   searchFromList() {
@@ -84,30 +87,31 @@ export default class Friends extends React.Component {
       this.state.friendName.map((item) => {
         arrPeople.push(item.login);
       });
-    };
-    if (this.state.userName &&
+    }
+    if (
+      this.state.userName &&
       this.state.userName !== login &&
       this.state.onlyMyfriends &&
       this.state.onlyMyfriends.indexOf(this.state.userName) !== -1
     ) {
-      return (
-            <span> Это ваш друг</span>
-      );
-    } if (
+      return <span> Это ваш друг</span>;
+    }
+    if (
       this.state.userName &&
       this.state.userName !== login &&
       arrPeople.includes(this.state.userName)
     ) {
       return (
-<div className='col s4'>
-  <button className='btn-small' onClick={() => this.addFriend(this.state.userName)}>Добавить</button>
-</div>
+        <div className="col s4">
+          <button className="btn-small" onClick={() => this.addFriend(this.state.userName)}>
+            Добавить
+          </button>
+        </div>
       );
-
     } else if (this.state.userName === login) {
-      return (<span> Это вы</span>);
+      return <span> Это вы</span>;
     }
-    return (<></>);
+    return <></>;
   }
 
   async deleteFriend(login) {
@@ -126,24 +130,22 @@ export default class Friends extends React.Component {
   render() {
     return (
       <>
-        <div className='row'>
-          <div className='col s10'>
+        <div className="row">
+          <div className="col s10">
             <input onChange={(e) => this.login(e)} name="login" placeholder="Введите логин"></input>
           </div>
-          <div className='col s2'>
+          <div className="col s2">
             <button className="btn" onClick={() => this.searchFromList()}>
               Search
-        </button>
+            </button>
           </div>
         </div>
 
-
-        <div className='row'>
-          <div className='col s4'>
-
-          <a href={`/page/${this.state.userName}`} id={this.state.userName}>
-            {this.state.userName}
-          </a>
+        <div className="row">
+          <div className="col s4">
+            <a href={`/page/${this.state.userName}`} id={this.state.userName}>
+              {this.state.userName}
+            </a>
           </div>
 
           {this.renderButton()}
@@ -152,57 +154,53 @@ export default class Friends extends React.Component {
         <ul>
           {this.state.friendName
             ? this.state.friendName.map((item, index) => {
-              const photo = item.userAvatar
-                ? `http://localhost:5000/images/${item.userAvatar}`
-                : 'http://localhost:5000/images/avatarka.png';
-              return (
-                <li>
-                  <a href={`/page/${item.login}`} id={item.login}>
-                    <img src={photo} alt="image" width="30px" height="30px" />
+                const photo = item.userAvatar
+                  ? `http://localhost:5000/images/${item.userAvatar}`
+                  : 'http://localhost:5000/images/avatarka.png';
+                return (
+                  <li>
+                    <a href={`/page/${item.login}`} id={item.login}>
+                      <img src={photo} alt="image" width="30px" height="30px" />
                       Пользователь: {item.login}
-                  </a>
-                </li>
-              );
-            })
+                    </a>
+                  </li>
+                );
+              })
             : null}
         </ul>
         <div id="myfriendsContainer">
-          <h4 className='center '> Мои друзья:</h4>
-          <div className='manyCards'>
+          <h4 className="center "> Мои друзья:</h4>
+          <div className="manyCards">
             {this.state.friendName && this.state.onlyMyfriends
               ? this.state.onlyMyfriends.map((item, index) => {
-                const user = this.state.friendName.find((user) => user.login === item);
-                const photo = user.userAvatar
-                  ? `http://localhost:5000/images/${user.userAvatar}`
-                  : 'http://localhost:5000/images/avatarka.png';
-                return (
+                  const user = this.state.friendName.find((user) => user.login === item);
+                  const photo = user.userAvatar
+                    ? `http://localhost:5000/images/${user.userAvatar}`
+                    : 'http://localhost:5000/images/avatarka.png';
+                  return (
+                    <div className="friend-card">
+                      <div>
+                        <img src={photo} alt="image" />
+                      </div>
 
-                  <div className='friend-card' >
-
-                    <div >
-                      <img src={photo} alt="image" />
+                      <div>
+                        <button
+                          className="btn-small"
+                          onClick={() => {
+                            this.deleteFriend(item);
+                          }}
+                        >
+                          Удалить
+                        </button>
+                      </div>
+                      <div>
+                        <a href={`/page/${item}`} id={item}>
+                          <strong className="black-text">{item}</strong>
+                        </a>
+                      </div>
                     </div>
-
-                    <div>
-                      <button className='btn-small'
-                        onClick={() => {
-                          this.deleteFriend(item);
-                        }}
-                      >
-                        Удалить
-                      </button>
-                    </div>
-                    <div >
-                      <a href={`/page/${item}`} id={item}>
-                        <strong className='black-text'>{item}</strong>
-                      </a>
-                    </div>
-                  </div>
-
-
-
-                );
-              })
+                  );
+                })
               : null}
           </div>
         </div>
@@ -210,3 +208,11 @@ export default class Friends extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    login: state.login,
+  };
+};
+
+export default connect(mapStateToProps)(Friends);
