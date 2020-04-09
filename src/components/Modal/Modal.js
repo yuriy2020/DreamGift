@@ -8,7 +8,7 @@ class Modal extends React.Component {
     super(props);
 
     this.state = {
-      heshtegs: ['toothbrush', 'dron', 'pillow', 'laptop', 'headphones', 'игрушки'],
+      heshtegs: ['toothbrush', 'dron', 'pillow', 'laptop', 'headphones', 'jewelry', 'toys', 'watches', 'makeup', 'decor', 'fitness'],
       other: ''
     };
   }
@@ -53,7 +53,7 @@ class Modal extends React.Component {
       <div id="modalWindow" className='modalWindow'>
         <span>Добавь свои интересы</span>
         <div>
-          <div>
+          <div className='heshtegs'>
             {this.state.heshtegs.map((item) => (
               <button className="btn blue lighten-3" onClick={this.changeStatus} value={item}>
                 {item}

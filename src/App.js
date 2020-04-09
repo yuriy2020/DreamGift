@@ -1,11 +1,9 @@
 import React from 'react';
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
-import './App.css';
 import AccountPage from './pages/AccountPage';
 import Reseacher from './components/Reseacher/Reseacher';
 import Modal from './components/Modal/Modal'
@@ -23,13 +21,14 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className='container'>
         <Navbar />
         {this.isModal()}
         <div>
           <Switch>
-            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/" render={(props) => <HomePage {...props} />} />
             <Route exact path="/signup" render={(props) => <Signup {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/reseach" component={Reseacher} />
@@ -45,7 +44,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isModalOpen: state.isModalOpen
+    isModalOpen: state.isModalOpen,
   };
 };
 

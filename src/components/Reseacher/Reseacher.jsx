@@ -18,53 +18,87 @@ export default class Reseacher extends React.Component {
 
   componentDidMount() {
     this.category()
-    
   }
-
-
 
   async getHeshtegs() {
-    // const response = await fetch(
-    //   `https://instagramdimashirokovv1.p.rapidapi.com/user/${this.state.friendName}`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'x-rapidapi-host': 'InstagramdimashirokovV1.p.rapidapi.com',
-    //       'x-rapidapi-key': '99d2bc2f27msh29e5bdde481eea8p1947abjsnb6872fabc5dd'
-    //     }
-    //   }
-    // );
-    // const json = await response.json();
-    // const text = json.edges.map((item) => {
-    //   if (item.node.edge_media_to_caption.edges.length) {
-    //     return item.node.edge_media_to_caption.edges[0].node.text;
-    //   }
-    //   return false;
-    // });
-    // text.filter((item) => item !== false);
-    // const all = [];
-    // text.map((item) => {
-    //   for (let i = 0; i < item.length - 1; i++) {
-    //     let word = '';
-    //     if (item[i] === '#') {
-    //       for (let j = i + 1; j < item.length; j++) {
-    //         if (item[j] === ' ' || item[j] === '#') {
-    //           break;
-    //         }
-    //         word += item[j];
-    //       }
-    //       all.push(word);
-    //     }
-    //   }
-    //   return item;
-    // });
-
-
-    const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
-    this.setState({
-      heshtegs: all
+    const response = await fetch(
+      `https://instagramdimashirokovv1.p.rapidapi.com/user/${this.state.friendName}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'InstagramdimashirokovV1.p.rapidapi.com',
+          'x-rapidapi-key': '99d2bc2f27msh29e5bdde481eea8p1947abjsnb6872fabc5dd'
+        }
+      }
+    );
+    const json = await response.json();
+    const text = json.edges.map((item) => {
+      if (item.node.edge_media_to_caption.edges.length) {
+        return item.node.edge_media_to_caption.edges[0].node.text;
+      }
+      return false;
     });
-  }
+    text.filter((item) => item !== false);
+    const all = [];
+    text.map((item) => {
+      for (let i = 0; i < item.length - 1; i++) {
+        let word = '';
+        if (item[i] === '#') {
+          for (let j = i + 1; j < item.length; j++) {
+            if (item[j] === ' ' || item[j] === '#') {
+              break;
+            }
+            word += item[j];
+          }
+          all.push(word);
+        }
+      }
+      return item;
+    });
+
+
+  // async getHeshtegs() {
+  //   // const response = await fetch(
+  //   //   `https://instagramdimashirokovv1.p.rapidapi.com/user/${this.state.friendName}`,
+  //   //   {
+  //   //     method: 'GET',
+  //   //     headers: {
+  //   //       'x-rapidapi-host': 'InstagramdimashirokovV1.p.rapidapi.com',
+  //   //       'x-rapidapi-key': '99d2bc2f27msh29e5bdde481eea8p1947abjsnb6872fabc5dd'
+  //   //     }
+  //   //   }
+  //   // );
+  //   // const json = await response.json();
+  //   // const text = json.edges.map((item) => {
+  //   //   if (item.node.edge_media_to_caption.edges.length) {
+  //   //     return item.node.edge_media_to_caption.edges[0].node.text;
+  //   //   }
+  //   //   return false;
+  //   // });
+  //   // text.filter((item) => item !== false);
+  //   // const all = [];
+  //   // text.map((item) => {
+  //   //   for (let i = 0; i < item.length - 1; i++) {
+  //   //     let word = '';
+  //   //     if (item[i] === '#') {
+  //   //       for (let j = i + 1; j < item.length; j++) {
+  //   //         if (item[j] === ' ' || item[j] === '#') {
+  //   //           break;
+  //   //         }
+  //   //         word += item[j];
+  //   //       }
+  //   //       all.push(word);
+  //   //     }
+  //   //   }
+  //   //   return item;
+  //   // });
+
+
+  //   const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
+  //   this.setState({
+  //     heshtegs: all
+  //   });
+  // }
 
   handleChange = (event) => {
     this.setState({
@@ -72,19 +106,19 @@ export default class Reseacher extends React.Component {
     });
   };
 
-  // renderHeshtegs = () => {
-  //   let heshtegs;
-  //   if (this.state.heshtegs.length) {
-  //     heshtegs = (
-  //       <div>
-  //         {this.state.heshtegs.map((item) => {
-  //           return <li>{item}</li>;
-  //         })}
-  //       </div>
-  //     );
-  //   }
-  //   return heshtegs;
-  // };
+  renderHeshtegs = () => {
+    let heshtegs;
+    if (this.state.heshtegs.length) {
+      heshtegs = (
+        <div>
+          {this.state.heshtegs.map((item) => {
+            return <li>{item}</li>;
+          })}
+        </div>
+      );
+    }
+    return heshtegs;
+  };
 
   takeText = (e) => {
     this.setState({
@@ -114,7 +148,7 @@ export default class Reseacher extends React.Component {
     this.setState(prevState => ({
       ...prevState,
       newTaskAli: newTasks[0].id
-    }),  async () => await this.productOfCategory(this.state.newTaskAli))
+    }), async () => await this.productOfCategory(this.state.newTaskAli))
   }
 
   async category() {
@@ -152,7 +186,7 @@ export default class Reseacher extends React.Component {
   }
 
   render() {
-    const { text, textAli, newTaskAli } = this.state
+
     return (
       <>
         <div>
@@ -186,7 +220,7 @@ export default class Reseacher extends React.Component {
         </div>
         <br></br>
         <ul>
-         
+
           {this.state.heshtegs ? this.state.heshtegs.map((item, index) => {
             return (
               <div>
@@ -218,31 +252,30 @@ export default class Reseacher extends React.Component {
         </ul> */}
 
         <div className="row">
-        {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
-          return (
-            <div className="col s3" style={{ marginTop: 10 }}>
-              <a href={item.detailPageURL} target='blank' title="Перейти на Amazon">
-                <img src={item.imageUrl} />
-              </a>
-              <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
-              <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
-            </div>
-          )
-        }) : null
-        }
-      </div>
+          {this.state.arrAmazon ? this.state.arrAmazon.map((item, index) => {
+            return (
+              <div className="col s3" style={{ marginTop: 10 }}>
+                <a href={item.detailPageURL} target='blank' title="Перейти на Amazon">
+                  <img src={item.imageUrl} alt="" />
+                </a>
+                <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
+                <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
+              </div>
+            )
+          }) : null
+          }
+        </div>
 
         <ul>
           {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {
-            return <li>{item.productElements.title.title}<img src={item.productElements.image.imgUrl} />{item.productElements.price.sell_price.formatedAmount}<a href={item.
-              action}>Перейти на товар</a></li>;
+            return <li>
+              {item.productElements.title.title}<img src={item.productElements.image.imgUrl} alt="" />
+              {item.productElements.price.sell_price.formatedAmount}
+              <a href={item.action}>Перейти на товар</a>
+            </li>;
           }) : null
           }
         </ul>
-
-
-        {/* 
-        {this.renderHeshtegs()} */}
       </>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './friends.css';
 import { connect } from 'react-redux';
+import { getLogin } from '../../redux/actions';
 
 class Friends extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class Friends extends React.Component {
   }
 
   componentDidMount() {
-    this.friend();
     this.onlyMyFriend();
+    this.friend();
   }
 
   login = (event) => {
@@ -50,12 +51,21 @@ class Friends extends React.Component {
       this.setState({
         onlyMyfriends: result.myFriend,
       });
+    } else {
+      const friends = localStorage.getItem('friends');
+      if (friends && friends.length) {
+        this.setState({
+          onlyMyfriends: [...friends],
+        });
+      }
     }
   }
 
   searchFromList() {
     let newarr = this.state.friendName.slice();
-    const res = newarr.filter((item) => item.login === this.state.login);
+    const res = newarr.filter(
+      (item) => item.login.toLowerCase() === this.state.login.toLowerCase()
+    );
     if (res.length > 0) {
       this.setState({
         userName: res[0].login,
@@ -85,7 +95,7 @@ class Friends extends React.Component {
     let arrPeople = [];
     if (this.state.friendName) {
       this.state.friendName.map((item) => {
-        arrPeople.push(item.login);
+        return arrPeople.push(item.login);
       });
     }
     if (
@@ -150,7 +160,7 @@ class Friends extends React.Component {
 
           {this.renderButton()}
         </div>
-        <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
+        {/* <p>!!!! Все друзья (их надо будет убрать потом) !!!!</p>
         <ul>
           {this.state.friendName
             ? this.state.friendName.map((item, index) => {
@@ -160,14 +170,14 @@ class Friends extends React.Component {
                 return (
                   <li>
                     <a href={`/page/${item.login}`} id={item.login}>
-                      <img src={photo} alt="image" width="30px" height="30px" />
+                      <img src={photo} alt="" width="30px" height="30px" />
                       Пользователь: {item.login}
                     </a>
                   </li>
                 );
               })
             : null}
-        </ul>
+        </ul> */}
         <div id="myfriendsContainer">
           <h4 className="center "> Мои друзья:</h4>
           <div className="manyCards">
@@ -180,7 +190,7 @@ class Friends extends React.Component {
                   return (
                     <div className="friend-card">
                       <div>
-                        <img src={photo} alt="image" />
+                        <img src={photo} alt="" />
                       </div>
 
                       <div>
@@ -215,4 +225,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Friends);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getLogin: (payload) => dispatch(getLogin(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Friends);

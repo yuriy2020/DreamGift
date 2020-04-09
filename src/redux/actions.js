@@ -36,8 +36,6 @@ export const getLogin = (payload) => {
 };
 
 export const requestFetchToLogin = (data) => {
-  console.log('feeeeeeeyck!!!');
-  
   return { type: REQUEST_FETCH_TOLOGIN, data };
 };
 

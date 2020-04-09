@@ -1,0 +1,38 @@
+.frindsWishes{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+
+    align-items: baseline
+}
+
+.lineStatus{
+    display: flex;
+    justify-content: space-evenly  ;
+}
+
+.linkAndName{
+    display: flex;
+    justify-content: space-between;
+}
+
+.listContainer {
+    margin: 15px 15px 15px 638px;
+}
+
+.lineStatus {
+    display: flex;
+    align-items: baseline;
+}
+.cancelButton {
+    margin-right: 15px;
+}
+
+.nameSurname {
+    margin: 0 5px;
+}
+
+.hashtagsContainer{
+    float: left;
+    width: 500px;
+}

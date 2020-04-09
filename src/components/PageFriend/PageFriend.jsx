@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changePresent } from '../../redux/actions';
+import './PageFriends.css'
 
 class PageFriend extends Component {
   state = {
@@ -12,7 +13,7 @@ class PageFriend extends Component {
     userEmail: undefined,
     userInfo: undefined,
     userAvatar: undefined,
-    login: '',
+    login: undefined,
     accountHeshtegs: '',
     presents: [],
     message: "Dobavlen",
@@ -72,6 +73,7 @@ class PageFriend extends Component {
         }
       }
     });
+     
   }
 
   renderButton() {
@@ -121,9 +123,6 @@ class PageFriend extends Component {
           item.friend = ""
         }
       }
-
-
-
       return item
     });
 
@@ -167,27 +166,32 @@ class PageFriend extends Component {
   getStatus(item) {
     if (item.status === true) {
       return (<>
-     
-      Подарок выбран пользователем {item.friend}
-        
-        <div className='col s1'>
-          <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }}
-            className='btn-small' >
-            <i class="small material-icons">cancel_presentation</i>
-          </button>
-        </div></>)
+
+        <div className='lineStatus'>
+            <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }}
+              className='btn-small cancelButton  red lighten-2 ' >
+              <i className="small material-icons ">cancel_presentation</i>
+            </button>
+
+            <span className="presentIsSelected">Подарок выбран пользователем {item.friend}</span>
+
+        </div>
+
+      </>)
     } else {
-      return (<>   <div className='col s1'>
-        <button id={item.id} onClick={() => { return this.givePresent(item.id) }}
-          className='btn-small'>
-          <i class="small material-icons">done</i>
-        </button>
-      </div></>)
+      return (<>
+        <div className='lineStatus'>
+          <button id={item.id} onClick={() => { return this.givePresent(item.id) }}
+            className='btn-small'>
+            <i className="small material-icons">done</i>
+          </button>
+        </div>
+
+      </>)
     }
   }
 
   render() {
-    let { login, message } = this.state
     let foto;
     const avatar = this.state.userAvatar;
     foto =
@@ -202,7 +206,7 @@ class PageFriend extends Component {
           <div className="col s6">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light img_crop">
-                <img className="activator" src={foto} alt="Photo" />
+                <img className="activator" src={foto} alt="img" />
               </div>
             </div>
           </div>
@@ -224,25 +228,39 @@ class PageFriend extends Component {
           </div>
 
           {/* Presents */}
-          <div className='col s6'>
-            <div className="row">
+          <div>
+            <div >
               <h5>Подарки, которые хотел бы получить {this.state.login}</h5>
+              <div className="listContainer">
               {this.state.presents.length ? (
                 this.state.presents.map((item) => {
-                  return (<>
-                    <div className='col s6'>
-                      <strong><span>{item.value}</span></strong>
-                    </div>
-                    <div className='col s6'>
-                      <a href={`${item.href}`}>{item.href}</a>
+                  return (
+                    <div className="frindsWishes">
+                      <div className="statusContainer">
+                        {this.getStatus(item)}
+
+                      </div>
+                      <div className='linkAndName'>
+                        <div className="nameSurname">
+                          <strong><span>{item.value}</span></strong>
+
+                        </div>
+                        <div className="nameSurname">
+                          <a href={`${item.href}`}>{item.href}</a>
+                        </div>
+
+                      </div>
+
+
                     </div>
 
-                    {this.getStatus(item)}
-                  </>
+
+               
+                 
                   );
-                })
+                })  
               ) : null
-              }
+              }</div>
             </div>
           </div>
 
@@ -250,7 +268,7 @@ class PageFriend extends Component {
 
 
         {/* Hashtags */}
-        <div>
+        <div className='hashtagsContainer'>
           {this.state.accountHeshtegs.length ? (
             this.state.accountHeshtegs.map((tag) => {
               return (
