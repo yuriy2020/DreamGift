@@ -55,7 +55,7 @@ class Friends extends React.Component {
       const friends = localStorage.getItem('friends');
       if (friends && friends.length) {
         this.setState({
-          onlyMyfriends: [...friends],
+          onlyMyfriends: friends.split(','),
         });
       }
     }
