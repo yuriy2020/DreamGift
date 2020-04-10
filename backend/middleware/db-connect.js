@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.connect(
   // "mongodb://localhost:27017/dreamgift"
-  "mongodb+srv://dreamgift:dreamgift@cluster0-9ukrl.azure.mongodb.net/DreamGift?retryWrites=true&w=majority"
+  process.env.DB_USER
   , {
   useNewUrlParser: true,
   useUnifiedTopology: true
