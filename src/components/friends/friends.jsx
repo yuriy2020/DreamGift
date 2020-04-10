@@ -185,8 +185,8 @@ class Friends extends React.Component {
               ? this.state.onlyMyfriends.map((item, index) => {
                   const user = this.state.friendName.find((user) => user.login === item);
                   const photo = user.userAvatar
-                    ? `http://localhost:5000/images/${user.userAvatar}`
-                    : 'http://localhost:5000/images/avatarka.png';
+                    ? `/images/${user.userAvatar}`
+                    : '/images/avatarka.png';
                   return (
                     <div className="friend-card">
                       <div>

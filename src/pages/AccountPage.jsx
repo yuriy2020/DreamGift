@@ -126,7 +126,7 @@ class AccountPage extends Component {
   render() {
     let foto;
     const avatar = localStorage.getItem('avatar');
-    foto = avatar ? avatar : 'http://localhost:5000/images/avatarka.png';
+    foto = avatar ? avatar : '/images/avatarka.png';
 
     return (
       <div>
@@ -138,7 +138,7 @@ class AccountPage extends Component {
                 <img
                   className="activator"
                   src={foto}
-                  alt="http://localhost:5000/images/present.png"
+                  alt="/images/present.png"
                 />
               </div>
               <div className="card-content">

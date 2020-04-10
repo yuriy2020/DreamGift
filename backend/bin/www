@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+require('dotenv').config()
 
+console.log('MONGO:',process.env.DB_USER)
 /**
  * Module dependencies.
  */
