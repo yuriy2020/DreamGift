@@ -13,7 +13,7 @@ class PageFriend extends Component {
     userEmail: undefined,
     userInfo: undefined,
     userAvatar: undefined,
-    login: '',
+    login: undefined,
     accountHeshtegs: '',
     presents: [],
     message: "Dobavlen",
@@ -73,6 +73,7 @@ class PageFriend extends Component {
         }
       }
     });
+     
   }
 
   renderButton() {
@@ -122,9 +123,6 @@ class PageFriend extends Component {
           item.friend = ""
         }
       }
-
-
-
       return item
     });
 
@@ -172,7 +170,7 @@ class PageFriend extends Component {
         <div className='lineStatus'>
             <button id={item.id} onClick={() => { return this.unGivePresent(item.id) }}
               className='btn-small cancelButton  red lighten-2 ' >
-              <i class="small material-icons ">cancel_presentation</i>
+              <i className="small material-icons ">cancel_presentation</i>
             </button>
 
             <span className="presentIsSelected">Подарок выбран пользователем {item.friend}</span>
@@ -185,7 +183,7 @@ class PageFriend extends Component {
         <div className='lineStatus'>
           <button id={item.id} onClick={() => { return this.givePresent(item.id) }}
             className='btn-small'>
-            <i class="small material-icons">done</i>
+            <i className="small material-icons">done</i>
           </button>
         </div>
 
@@ -194,7 +192,6 @@ class PageFriend extends Component {
   }
 
   render() {
-    let { login, message } = this.state
     let foto;
     const avatar = this.state.userAvatar;
     foto =
@@ -209,7 +206,7 @@ class PageFriend extends Component {
           <div className="col s6">
             <div className="card">
               <div className="card-image waves-effect waves-block waves-light img_crop">
-                <img className="activator" src={foto} alt="Photo" />
+                <img className="activator" src={foto} alt="img" />
               </div>
             </div>
           </div>
