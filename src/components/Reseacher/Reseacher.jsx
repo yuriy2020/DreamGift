@@ -55,7 +55,7 @@ export default class Reseacher extends React.Component {
       }
       return item;
     });
-
+  
 
   // async getHeshtegs() {
   //   // const response = await fetch(
@@ -95,10 +95,10 @@ export default class Reseacher extends React.Component {
 
 
   //   const all = ['лопата', 'фонарь', 'cапоги', 'Book', 'Dress']
-  //   this.setState({
-  //     heshtegs: all
-  //   });
-  // }
+    this.setState({
+      heshtegs: all
+    });
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -145,11 +145,14 @@ export default class Reseacher extends React.Component {
 
   async onlyCateg(name) {
     const newTasks = this.state.arrAliCat.filter((item) => item.name.includes(name) === true);
+    if(newTasks.length >= 1) {
+      if(newTasks[0].name === name)
     this.setState(prevState => ({
       ...prevState,
       newTaskAli: newTasks[0].id
     }), async () => await this.productOfCategory(this.state.newTaskAli))
   }
+}
 
   async category() {
     let response = await fetch("https://ali-express1.p.rapidapi.com/categories", {
@@ -259,14 +262,29 @@ export default class Reseacher extends React.Component {
                   <img src={item.imageUrl} alt="" />
                 </a>
                 <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.title}</p>
-                <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button>
+                {/* <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.title, item.detailPageURL) }}>Добавить в мои подарки</button> */}
               </div>
             )
           }) : null
           }
         </div>
 
-        <ul>
+
+        <div className="row">
+        {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {
+            return (
+              <div className="col s3" style={{ marginTop: 10 }}>
+                <a href={item.action} target='blank' title="Перейти на Ali">
+                  <img src={item.productElements.image.imgUrl} alt="" />
+                </a>
+                <p style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{item.productElements.title.title}</p>
+                {/* <button className="btn-small waves-effect waves-light" onClick={() => { this.addPresent(item.productElements.title.title, item.action) }}>Добавить в мои подарки</button> */}
+              </div>
+            )
+          }) : null
+          }
+        </div>
+        {/* <ul>
           {this.state.arrAliProd && this.state.arrAliProd.data ? this.state.arrAliProd.data.items.map((item, index) => {
             return <li>
               {item.productElements.title.title}<img src={item.productElements.image.imgUrl} alt="" />
@@ -275,7 +293,7 @@ export default class Reseacher extends React.Component {
             </li>;
           }) : null
           }
-        </ul>
+        </ul> */}
       </>
     );
   }

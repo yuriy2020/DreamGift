@@ -25,7 +25,7 @@ class Amazon extends React.Component {
 
   async AmazonSearch(t) {
 
-    let url = `https://amazon-price1.p.rapidapi.com/search?keywords=${t}&marketplace=ES`
+    let url = `https://amazon-price1.p.rapidapi.com/search?keywords=${t}&marketplace=COM`
     let response = await fetch(url, {
       "method": "GET",
       "headers": {
