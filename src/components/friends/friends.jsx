@@ -184,6 +184,7 @@ class Friends extends React.Component {
             {this.state.friendName && this.state.onlyMyfriends
               ? this.state.onlyMyfriends.map((item, index) => {
                   const user = this.state.friendName.find((user) => user.login === item);
+                  if (user) {
                   const photo = user.userAvatar
                     ? `/images/${user.userAvatar}`
                     : '/images/avatarka.png';
@@ -210,7 +211,7 @@ class Friends extends React.Component {
                       </div>
                     </div>
                   );
-                })
+                }})
               : null}
           </div>
         </div>
