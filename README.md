@@ -1,5 +1,12 @@
 
-This project is DREAM GIFT  made_by Sasha / Evgeniy / Yura  
+# DREAM_GIFT
+
+Web app for searching gifts for your friends based on their interests
+
+## Team
+-[Evgeniy Pavlov](https://github.com/Malevich930)
+-[Aleksandra Baryshnikova](https://github.com/lexie0428)
+-[Yuri Balalaev](https://github.com/yuriy2020)
 
 
 📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔📔 
