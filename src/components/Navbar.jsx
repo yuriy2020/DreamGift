@@ -38,7 +38,7 @@ class Navbar extends React.Component {
       return (
         <div className='row'>
           <nav className='col s12'>
-            <ul className='col s6 offset-s9'>
+          <ul className='col s6 offset-s7'>
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
       return (
         <div className='row'>
         <nav className='col s12'>
-          <ul className='col s6 offset-s9'>
+        <ul className='col s6 offset-s7'>
               <li>
               <Link to='/account'>{this.props.login}</Link>
               </li>
