@@ -196,8 +196,8 @@ class PageFriend extends Component {
     const avatar = this.state.userAvatar;
     foto =
       avatar && avatar !== 'undefined'
-        ? `/images/${avatar}`
-        : '/images/avatarka.png';
+        ? `http://localhost:5000/images/${avatar}`
+        : 'http://localhost:5000/images/avatarka.png';
     return (
       <>
         {this.renderButton()}
