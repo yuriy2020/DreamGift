@@ -24,7 +24,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-
     "build": "node ./backend/bin/www && npm install && npm run buildreact-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
