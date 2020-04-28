@@ -37,7 +37,7 @@ you can get MONGO_URI on https://www.mongodb.com/
 
 6. push `choose connection method` and choose `connect your application`
 
-7. copy string into your code
+7. copy string into your code and add the name and password
 
 `/backend/npm i`
 
