@@ -23,7 +23,7 @@ after the clone **You need choose developer branch**,
 
 `MONGO_URL=**your mongodb URL with username and password**`
 
-you can get MONGO_URI on https://www.mongodb.com/
+you can get MONGO_URL on https://www.mongodb.com/
 
 1. push `Start free` and sign up
 
