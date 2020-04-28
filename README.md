@@ -1,5 +1,15 @@
 
-This project is DREAM GIFT  made_by Sasha / Evgeniy / Yuriy
+# DREAM_GIFT
+
+Web app for searching gifts for your friends based on their interests
+
+## Screenshots
+![Gif](/public/DreamGift.gif)
+
+## Team
+- [Evgeniy Pavlov](https://github.com/Malevich930);
+- [Aleksandra Baryshnikova](https://github.com/lexie0428);
+- [Yuri Balalaev](https://github.com/yuriy2020).
 
 ## **Prerequisites**
 * Node v.12.16.1.
@@ -7,9 +17,11 @@ This project is DREAM GIFT  made_by Sasha / Evgeniy / Yuriy
 
 ## **Installation**
 
+**You need choose developer branch**
+
 after the clone, create the .env file in the backend folder
 
-`MONGO_URI=**your mongodb URI with username and password**`
+`MONGO_URL=**your mongodb URI with username and password**`
 
 you can get MONGO_URI on https://www.mongodb.com/
 
