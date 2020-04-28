@@ -17,9 +17,9 @@ Web app for searching gifts for your friends based on their interests
 
 ## **Installation**
 
-**You need choose developer branch**
+after the clone **You need choose developer branch**,
 
-after the clone, create the .env file in the backend folder
+ then create the .env file in the backend folder
 
 `MONGO_URL=**your mongodb URI with username and password**`
 
