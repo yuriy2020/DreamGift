@@ -21,7 +21,7 @@ after the clone **You need choose developer branch**,
 
  then create the .env file in the backend folder
 
-`MONGO_URL=**your mongodb URI with username and password**`
+`MONGO_URL=**your mongodb URL with username and password**`
 
 you can get MONGO_URI on https://www.mongodb.com/
 
@@ -37,7 +37,7 @@ you can get MONGO_URI on https://www.mongodb.com/
 
 6. push `choose connection method` and choose `connect your application`
 
-7. copy string into your code and add the name and password
+7. copy string into your code and replace the name and password
 
 `/backend/npm i`
 
