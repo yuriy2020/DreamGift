@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect("mongodb+srv://dreamgift:dreamgift@cluster0-9ukrl.azure.mongodb.net/<dbname>?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
