@@ -1,13 +1,7 @@
 
 # DREAM_GIFT
-<<<<<<< HEAD
 ## Web app for searching gifts for your friends based on their interests
 
-=======
-
-Web app for searching gifts for your friends based on their interests
-
->>>>>>> developer
 ## Screenshots
 ![Gif](/public/DreamGift.gif)
 
