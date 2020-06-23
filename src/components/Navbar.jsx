@@ -29,16 +29,16 @@ class Navbar extends React.Component {
     const json = await response.json();
     if (json.res === true) {
       this.props.isAuth(false);
-    }
+    };
     localStorage.clear();
   }
 
   render() {
     if (!this.props.auth) {
       return (
-        <div >
-          <nav className='row' >
-            <ul className='col s6 offset-s7'>
+        <div className='row'>
+          <nav className='col s12'>
+          <ul className='col s6 offset-s7'>
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -54,9 +54,9 @@ class Navbar extends React.Component {
       );
     } else {
       return (
-        <div >
-        <nav className='row'>
-          <ul className='col s6 offset-s7'>
+        <div className='row'>
+        <nav className='col s12'>
+        <ul className='col s6 offset-s7'>
               <li>
               <Link to='/account'>{this.props.login}</Link>
               </li>

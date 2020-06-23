@@ -15,7 +15,7 @@ class UserFoto extends Component {
     const formData = new FormData();
     formData.append('profileImg', e.target.files[0]);
  
-    axios.post(`/user/profile/edit/img/${this.props.login}`, formData, {
+    axios.post(`http://localhost:5000/user/profile/edit/img/${this.props.login}`, formData, {
     login: this.props.login
     }).then((res) => {
       const img = `/images/${res.data.filename.toLowerCase()}`;

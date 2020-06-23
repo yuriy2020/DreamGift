@@ -55,7 +55,7 @@ class Friends extends React.Component {
       const friends = localStorage.getItem('friends');
       if (friends && friends.length) {
         this.setState({
-          onlyMyfriends: [...friends],
+          onlyMyfriends: friends.split(','),
         });
       }
     }
@@ -186,8 +186,8 @@ class Friends extends React.Component {
                   const user = this.state.friendName.find((user) => user.login === item);
                   if (user) {
                   const photo = user.userAvatar
-                    ? `/images/${user.userAvatar}`
-                    : '/images/avatarka.png';
+                    ? `http://localhost:5000/images/${user.userAvatar}`
+                    : 'http://localhost:5000/images/avatarka.png';
                   return (
                     <div className="friend-card">
                       <div>

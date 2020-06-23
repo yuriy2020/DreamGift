@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect(
-  // "mongodb://localhost:27017/dreamgift"
-  process.env.DB_USER
-  , {
+mongoose.connect("mongodb+srv://dreamgift:dreamgift@cluster0-9ukrl.azure.mongodb.net/<dbname>?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
