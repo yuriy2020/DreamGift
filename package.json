@@ -8,7 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
-    "qs": "^6.9.3",
+    "qs": "^6.9.7",
     "react": "^16.13.1",
     "react-calendar": "^3.0.1",
     "react-day-picker": "^7.4.0",
